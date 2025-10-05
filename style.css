@@ -88,7 +88,7 @@ p {
 .tagline {
     font-weight: 500;
     font-size: 2.5rem;
-    width: 60%;
+    width: 75%;
     text-wrap: balance;
 }
 
@@ -151,12 +151,9 @@ p {
 
 .puzzle {
     position: absolute;
-    right: 13rem;
+    right: clamp(3rem, 8%, 6rem);
     top: 21rem;
-    width: 18rem;
-    transition:
-        opacity 0.1s ease-in-out,
-        transform 0.1s ease-in-out;
+    width: clamp(13rem, 20%, 18rem);
 }
 
 .panel {
@@ -189,11 +186,4 @@ p {
 
 .cent-str {
     color: #a6e3a1;
-}
-
-@media (max-width: 1450px) {
-    .puzzle {
-        opacity: 0;
-        transform: scale(0.8);
-    }
 }
