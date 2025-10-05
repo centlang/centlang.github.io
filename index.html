@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Cent Programming Language</title>
-        <link rel="stylesheet" href="style.css">
-        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+        <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Inter"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <header class="panel">
@@ -12,14 +15,16 @@
             <nav>
                 <a class="nav-link">Docs</a>
                 <a class="nav-link">News</a>
-                <a class="nav-link" href="https://github.com/centlang/cent">GitHub</a>
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
             </nav>
         </header>
         <main>
             <div class="hero">
                 <img class="logo" src="assets/logo.svg" />
                 <div class="panel tagline">
-                    A minimal systems programming language<br>you
+                    A minimal systems programming language<br />you
                     <span class="accent">learn fast</span> and
                     <span class="accent">run faster.</span>
                 </div>
@@ -27,7 +32,45 @@
                     <a class="button-primary button">Get started</a>
                     <a class="button-secondary button">Download</a>
                 </div>
-                <img class="puzzle" src="assets/puzzle.png"/>
+                <img class="puzzle" src="assets/puzzle.png" />
+            </div>
+            <div class="principles panel">
+                <div class="principles-left">
+                    <div class="principle">
+                        <h2 class="accent">Simple</h2>
+                        <p>
+                            No one likes wasting time debugging language quirks.
+                            Cent was designed to stay out of your way.
+                        </p>
+                    </div>
+                    <div class="principle">
+                        <h2 class="accent">Explicit</h2>
+                        <p>
+                            It should always be clear what your program will do.
+                            Cent is designed to never be ambiguous.
+                        </p>
+                    </div>
+                    <div class="principle">
+                        <h2 class="accent">Fast</h2>
+                        <p>
+                            In Cent, the most obvious way to write code is also
+                            the fastest.
+                        </p>
+                    </div>
+                    <div class="principle">
+                        <h2 class="accent">Modern</h2>
+                        <p>
+                            Cent includes modern programming features with
+                            virtually zero impact on performance.
+                        </p>
+                    </div>
+                </div>
+                <pre class="code-snippet">
+<span class="cent-stmt">with</span> <span class="cent-include">std</span><span class="cent-delim">::</span><span class="cent-include">io</span>;
+
+<span class="cent-kw">fn</span> <span class="cent-fn">main</span>() {
+    <span class="cent-include">io</span><span class="cent-delim">::</span><span class="cent-fn">println</span>(<span class="cent-str">&quot;Hello, world!&quot;</span>);
+}</pre>
             </div>
         </main>
         <footer>

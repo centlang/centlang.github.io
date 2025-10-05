@@ -4,6 +4,7 @@
     --accent: #51b1ff;
     --text: #ffffff;
     --muted: #a2a2a2;
+    --radius: 10px;
 }
 
 * {
@@ -57,15 +58,26 @@ nav {
     gap: 1.5rem;
 }
 
+h2 {
+    font-size: 3rem;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
 .nav-link {
     font-size: 1.25rem;
 }
 
 .hero {
-    padding: 13rem 0;
+    padding-top: 13rem;
+    padding-bottom: 10rem;
 }
 
-.logo, .tagline, .hero-buttons {
+.logo,
+.tagline,
+.hero-buttons {
     padding: 1.5rem 6rem;
 }
 
@@ -78,6 +90,31 @@ nav {
     font-size: 2.5rem;
 }
 
+.principles {
+    padding: 4rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5rem;
+}
+
+.principles-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    width: max(40%, 45rem);
+}
+
+.code-snippet {
+    font-size: 2rem;
+    background-color: var(--bg);
+    padding: 3rem 3rem;
+    border-radius: var(--radius);
+    width: max(30%, 45rem);
+}
+
 .accent {
     color: var(--accent);
     font-weight: 700;
@@ -85,7 +122,7 @@ nav {
 
 .button {
     font-weight: 300;
-    border-radius: 5px;
+    border-radius: var(--radius);
     font-size: 1.5rem;
     padding: 0.5rem 1.5rem;
     text-align: center;
@@ -115,7 +152,9 @@ nav {
     right: 13rem;
     top: 21rem;
     width: 18rem;
-    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+    transition:
+        opacity 0.1s ease-in-out,
+        transform 0.1s ease-in-out;
 }
 
 .panel {
@@ -124,6 +163,30 @@ nav {
 
 .muted {
     color: var(--muted);
+}
+
+.cent-stmt {
+    color: #cba6f7;
+}
+
+.cent-include {
+    color: #cba6f7;
+}
+
+.cent-delim {
+    color: #9399b2;
+}
+
+.cent-kw {
+    color: #cba6f7;
+}
+
+.cent-fn {
+    color: #89b4fa;
+}
+
+.cent-str {
+    color: #a6e3a1;
 }
 
 @media (max-width: 1450px) {
