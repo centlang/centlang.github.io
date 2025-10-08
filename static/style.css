@@ -62,12 +62,35 @@ pre {
     background-color: var(--panel);
     padding: 0.75rem 1rem;
     border-radius: var(--radius);
+    margin: 1rem 0;
 }
 
 code {
     background-color: var(--panel);
     padding: 0.2rem;
     border-radius: var(--radius);
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+ul,
+ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
 }
 
 .hero {
@@ -98,7 +121,7 @@ code {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 5rem;
+    gap: 4rem;
 }
 
 .principles-left {
@@ -106,7 +129,6 @@ code {
     flex-direction: column;
     justify-content: space-between;
     max-width: 50%;
-    gap: 1.5rem;
 }
 
 .code-snippet {
@@ -155,7 +177,7 @@ code {
     width: 11rem;
 }
 
-.panel {
+.panel, .toc {
     background-color: var(--panel);
 }
 
@@ -163,35 +185,26 @@ code {
     color: var(--muted);
 }
 
+.content-wrapper {
+    display: flex;
+}
+
+.toc {
+    position: sticky;
+    top: 0;
+    margin: 1rem;
+    max-height: calc(100vh - 1rem);
+    overflow: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.5rem;
+    padding-left: 0.5rem;
+    border-radius: var(--radius);
+}
+
 .content {
     max-width: 65ch;
-    margin: 1.5rem auto;
+    margin: 0 auto;
     padding: 1rem;
     line-height: 1.6;
-}
-
-.content h1,
-.content h2,
-.content h3 {
-    margin-top: 2rem;
-    margin-bottom: 1.25rem;
-    line-height: 1.25;
-}
-
-.content pre {
-    margin: 1rem 0;
-}
-
-.content p {
-    margin-bottom: 1rem;
-}
-
-.content ul,
-.content ol {
-    margin-left: 2rem;
-    margin-bottom: 1rem;
-}
-
-.content li {
-    margin-bottom: 0.5rem;
 }
