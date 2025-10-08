@@ -36,12 +36,12 @@ def nvim_to_html(code: str, lang: str) -> str:
     )
 
     html = open(tmp_output_path).read()
-    match = re.search(r"<pre.*?</pre>", html, flags=re.DOTALL)
+    match = re.search(r"<pre>(.*?)</pre>", html, flags=re.DOTALL)
 
     os.remove(tmp_input_path)
     os.remove(tmp_output_path)
 
-    return match.group(0) if match else f"<pre><code>{code}</code></pre>"
+    return f"<pre>{(match.group(1) if match else code).strip()}</pre>"
 
 def highlight_html(code: str) -> str:
     return re.sub(
