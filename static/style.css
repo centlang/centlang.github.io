@@ -4,7 +4,7 @@
     --accent: #51b1ff;
     --text: #ffffff;
     --muted: #a2a2a2;
-    --radius: 10px;
+    --radius: 3px;
 }
 
 * {
@@ -44,7 +44,7 @@ header {
     z-index: 1000;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 0.75rem 3rem;
 }
 
 footer {
@@ -58,16 +58,16 @@ nav {
     gap: 1.5rem;
 }
 
-h2 {
-    font-size: 3rem;
+pre {
+    background-color: var(--panel);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
 }
 
-p {
-    font-size: 1.5rem;
-}
-
-.nav-link {
-    font-size: 1.25rem;
+code {
+    background-color: var(--panel);
+    padding: 0.2rem;
+    border-radius: var(--radius);
 }
 
 .hero {
@@ -82,21 +82,21 @@ p {
 }
 
 .logo {
-    width: 40rem;
+    width: 30rem;
 }
 
 .tagline {
     font-weight: 500;
-    font-size: 2.5rem;
-    width: 75%;
+    font-size: 1.5rem;
+    width: 85%;
     text-wrap: balance;
 }
 
 .principles {
-    padding: 4rem 6rem;
+    padding: 3rem 6rem;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
     gap: 5rem;
 }
@@ -105,16 +105,16 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 3rem;
-    width: max(40%, 45rem);
+    max-width: 50%;
+    gap: 1.5rem;
 }
 
 .code-snippet {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    padding: 2rem;
     background-color: var(--bg);
-    padding: 3rem 3rem;
-    border-radius: var(--radius);
-    width: max(30%, 45rem);
+    flex-grow: 1;
+    max-width: 60rem;
 }
 
 .accent {
@@ -125,7 +125,6 @@ p {
 .button {
     font-weight: 300;
     border-radius: var(--radius);
-    font-size: 1.5rem;
     padding: 0.5rem 1.5rem;
     text-align: center;
 }
@@ -146,14 +145,14 @@ p {
 }
 
 .icon {
-    width: 1.75rem;
+    width: 1.25rem;
 }
 
 .puzzle {
     position: absolute;
     right: clamp(3rem, 8%, 6rem);
-    top: 21rem;
-    width: clamp(13rem, 20%, 18rem);
+    top: 20rem;
+    width: 11rem;
 }
 
 .panel {
@@ -164,26 +163,35 @@ p {
     color: var(--muted);
 }
 
-.cent-stmt {
-    color: #cba6f7;
+.content {
+    max-width: 65ch;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    line-height: 1.6;
 }
 
-.cent-include {
-    color: #cba6f7;
+.content h1,
+.content h2,
+.content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
 }
 
-.cent-delim {
-    color: #9399b2;
+.content pre {
+    margin: 1rem 0;
 }
 
-.cent-kw {
-    color: #cba6f7;
+.content p {
+    margin-bottom: 1rem;
 }
 
-.cent-fn {
-    color: #89b4fa;
+.content ul,
+.content ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
 }
 
-.cent-str {
-    color: #a6e3a1;
+.content li {
+    margin-bottom: 0.5rem;
 }
