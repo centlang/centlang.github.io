@@ -23,6 +23,10 @@ body {
     height: 100vh;
 }
 
+main {
+    margin-top: 3rem;
+}
+
 img {
     pointer-events: none;
     user-select: none;
@@ -38,7 +42,8 @@ a:hover {
 }
 
 header {
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     display: flex;
     z-index: 1000;
@@ -177,7 +182,8 @@ li {
     width: 11rem;
 }
 
-.panel, .toc {
+.panel,
+.toc {
     background-color: var(--panel);
 }
 
@@ -191,9 +197,10 @@ li {
 
 .toc {
     position: sticky;
-    top: 0;
-    margin: 1rem;
-    max-height: calc(100vh - 1rem);
+    top: 4rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    max-height: calc(100vh - 5rem);
     overflow: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
