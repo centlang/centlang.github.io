@@ -33,8 +33,7 @@ img {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color: var(--accent);
 }
 
 a:hover {
@@ -96,6 +95,15 @@ ol {
 
 li {
     margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.nav-link:hover {
+    text-decoration: underline;
 }
 
 .hero {
