@@ -97,6 +97,10 @@ li {
     margin-bottom: 0.5rem;
 }
 
+li::marker {
+    color: var(--muted);
+}
+
 .nav-link {
     text-decoration: none;
     color: var(--text);
