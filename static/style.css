@@ -215,3 +215,9 @@ li {
     padding: 1rem;
     line-height: 1.6;
 }
+
+@media (max-width: 900px) {
+    .toc {
+        display: none;
+    }
+}
