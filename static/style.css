@@ -224,6 +224,11 @@ li {
     line-height: 1.6;
 }
 
+.toc ul,
+.toc ol {
+    margin-top: 0.5rem;
+}
+
 @media (max-width: 900px) {
     .toc {
         display: none;
