@@ -34,10 +34,11 @@ img {
 
 a {
     color: var(--accent);
+    text-decoration: none;
 }
 
 a:hover {
-    opacity: 0.8;
+    text-decoration: underline;
 }
 
 header {
@@ -102,12 +103,7 @@ li::marker {
 }
 
 .nav-link {
-    text-decoration: none;
     color: var(--text);
-}
-
-.nav-link:hover {
-    text-decoration: underline;
 }
 
 .hero {
@@ -184,6 +180,7 @@ li::marker {
 }
 
 .icon {
+    vertical-align: middle;
     width: 1.25rem;
 }
 
