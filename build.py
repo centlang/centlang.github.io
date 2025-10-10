@@ -10,7 +10,9 @@ SRC_DIRS = ["docs/"]
 TEMPLATES_DIR = "templates/"
 BUILD_DIR = "build/"
 
-nvim = pynvim.attach("child", argv=["nvim", "--embed", "--headless", "-u", "NONE"])
+nvim = pynvim.attach(
+    "child", argv=["nvim", "--embed", "--headless", "-u", "NONE"]
+)
 
 nvim.command("syntax on")
 nvim.command("runtime! plugin/tohtml.lua")
@@ -69,15 +71,19 @@ def render_page(code: str, md: bool = False) -> str:
             path = os.path.join(TEMPLATES_DIR, f"{match.group(1)}.html")
 
             content = markdown.Markdown(extensions=["toc", "fenced_code"])
-            content_html = highlight_html(content.convert(re.sub(r"{%.*?%}", "", code)))
+            content_html = highlight_html(
+                content.convert(re.sub(r"{%.*?%}", "", code))
+            )
 
-            return render_template(open(path).read(), {"content": content_html, "toc": content.toc})
+            return render_template(
+                open(path).read(), {"content": content_html, "toc": content.toc}
+            )
 
     return render_template(code, {})
 
 def main():
     shutil.rmtree(BUILD_DIR, ignore_errors=True)
-    os.mkdir(BUILD_DIR)
+    os.makedirs(BUILD_DIR)
 
     shutil.copytree("static", os.path.join(BUILD_DIR, "static"))
 
@@ -86,26 +92,31 @@ def main():
 
     for dir in SRC_DIRS:
         output_dir = BUILD_DIR + dir
-        os.mkdir(output_dir)
+        os.makedirs(output_dir)
 
         for root, _, files in os.walk(dir):
             for file in files:
-                if not file.endswith((".md", ".html")):
+                md = file.endswith(".md")
+
+                if not md and not file.endswith(".html"):
                     continue
 
                 input = os.path.join(root, file)
+                relative = os.path.relpath(input, dir)
 
-                output = os.path.join(
-                    output_dir,
-                    os.path.relpath(input, dir).replace(".md", ".html"),
-                )
+                if md:
+                    output = os.path.join(
+                        output_dir, relative.replace(".md", ""), "index.html"
+                    )
+                else:
+                    output = os.path.join(output_dir, relative)
+
+                os.makedirs(os.path.dirname(output), exist_ok=True)
 
                 print(f"{input} -> {output}")
 
                 with open(output, "w") as output_file:
-                    output_file.write(
-                        render_page(open(input).read(), file.endswith(".md"))
-                    )
+                    output_file.write(render_page(open(input).read(), md))
 
 if __name__ == "__main__":
     main()
