@@ -1,14 +1,19 @@
 import tempfile
 import os
-import subprocess
 import re
 import shutil
 import markdown
 import html
+import pynvim
 
 SRC_DIRS = ["docs/"]
 TEMPLATES_DIR = "templates/"
 BUILD_DIR = "build/"
+
+nvim = pynvim.attach("child", argv=["nvim", "--embed", "--headless", "-u", "NONE"])
+
+nvim.command("syntax on")
+nvim.command("runtime! plugin/tohtml.lua")
 
 def nvim_to_html(code: str, lang: str) -> str:
     with tempfile.NamedTemporaryFile("w", delete=False) as tmp_input:
@@ -19,25 +24,11 @@ def nvim_to_html(code: str, lang: str) -> str:
     with tempfile.NamedTemporaryFile(delete=False) as tmp_output:
         tmp_output_path = tmp_output.name
 
-    subprocess.run(
-        [
-            "nvim",
-            "--headless",
-            "-i",
-            "NONE",
-            "-u",
-            "NONE",
-            f"+e {tmp_input_path}",
-            "+runtime! plugin/tohtml.lua",
-            "+syntax on",
-            f"+set ft={lang}",
-            "+TOhtml",
-            f"+w! {tmp_output_path}",
-            "+qa",
-        ],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    nvim.command(f"e {tmp_input_path}")
+    nvim.command(f"set ft={lang}")
+    nvim.command("TOhtml")
+    nvim.command(f"w! {tmp_output_path}")
+    nvim.command("bd!")
 
     html = open(tmp_output_path).read()
     match = re.search(r"<pre>(.*?)</pre>", html, flags=re.DOTALL)
