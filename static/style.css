@@ -161,12 +161,13 @@ li::marker {
     font-weight: 300;
     border-radius: var(--radius);
     padding: 0.5rem 1.5rem;
-    text-align: center;
+    display: inline-flex;
+    align-items: center;
 }
 
 .button-primary {
     background-color: var(--accent);
-    color: #000000;
+    color: var(--bg);
 }
 
 .button-secondary {
