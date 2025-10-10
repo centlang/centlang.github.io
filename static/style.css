@@ -222,6 +222,7 @@ pre {
 }
 
 .content {
+    width: 100%;
     max-width: 65ch;
     margin: 0 auto;
     padding: 1rem;
