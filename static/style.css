@@ -4,6 +4,7 @@
     --accent: #51b1ff;
     --text: #ffffff;
     --muted: #a2a2a2;
+    --muted-border: #222242;
     --radius: 3px;
 }
 
@@ -64,14 +65,12 @@ nav {
 }
 
 pre {
-    background-color: var(--panel);
     padding: 0.75rem 1rem;
     border-radius: var(--radius);
     margin: 1rem 0;
 }
 
 code {
-    background-color: var(--panel);
     padding: 0.2rem;
     border-radius: var(--radius);
 }
@@ -193,7 +192,10 @@ li::marker {
 }
 
 .panel,
-.toc {
+.toc,
+code,
+pre {
+    border: 1px solid var(--muted-border);
     background-color: var(--panel);
 }
 
