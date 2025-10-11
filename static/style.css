@@ -80,7 +80,8 @@ code {
     border-radius: var(--radius);
 }
 
-pre, code {
+pre,
+code {
     font-family: inherit;
 }
 
@@ -132,7 +133,7 @@ li::marker {
 .tagline {
     font-weight: 500;
     font-size: 1.5rem;
-    width: 82%;
+    width: 75%;
     text-wrap: balance;
 }
 
@@ -196,7 +197,7 @@ li::marker {
 
 .puzzle {
     position: absolute;
-    right: clamp(3rem, 8%, 6rem);
+    right: 6rem;
     top: 21rem;
     width: 10rem;
 }
