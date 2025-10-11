@@ -213,6 +213,8 @@ pre {
 
 .content-wrapper {
     display: flex;
+    justify-content: start;
+    gap: 6rem;
 }
 
 .toc {
@@ -224,15 +226,13 @@ pre {
     overflow: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    padding-right: 1.5rem;
+    padding-right: 4rem;
     padding-left: 0.5rem;
     border-radius: var(--radius);
 }
 
 .content {
-    width: 100%;
-    max-width: 65ch;
-    margin: 0 auto;
+    width: 50%;
     padding: 1rem;
     line-height: 1.6;
 }
@@ -245,5 +245,9 @@ pre {
 @media (max-width: 900px) {
     .toc {
         display: none;
+    }
+
+    .content {
+        width: 100%;
     }
 }
