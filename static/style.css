@@ -149,7 +149,8 @@ li::marker {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 50%;
+    min-width: 40%;
+    flex: 1;
 }
 
 .code-snippet {
@@ -196,8 +197,8 @@ li::marker {
 .puzzle {
     position: absolute;
     right: clamp(3rem, 8%, 6rem);
-    top: 20rem;
-    width: 11rem;
+    top: 21rem;
+    width: 10rem;
 }
 
 .panel,
