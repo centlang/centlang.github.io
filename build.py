@@ -6,7 +6,8 @@ import markdown
 import html
 import pynvim
 
-SRC_DIRS = ["docs/", "play/"]
+SRC_DIR = "src/"
+STATIC_DIR = "static/"
 TEMPLATES_DIR = "templates/"
 BUILD_DIR = "build/"
 
@@ -86,38 +87,31 @@ def main():
     shutil.rmtree(BUILD_DIR, ignore_errors=True)
     os.makedirs(BUILD_DIR)
 
-    shutil.copytree("static", os.path.join(BUILD_DIR, "static"))
+    shutil.copytree(STATIC_DIR, os.path.join(BUILD_DIR, "static"))
 
-    with open(os.path.join(BUILD_DIR, "index.html"), "w") as file:
-        file.write(render_page(open("index.html").read()))
+    for root, _, files in os.walk(SRC_DIR):
+        for file in files:
+            md = file.endswith(".md")
 
-    for dir in SRC_DIRS:
-        output_dir = BUILD_DIR + dir
-        os.makedirs(output_dir)
+            if not md and not file.endswith(".html"):
+                continue
 
-        for root, _, files in os.walk(dir):
-            for file in files:
-                md = file.endswith(".md")
+            input = os.path.join(root, file)
+            relative = os.path.relpath(input, SRC_DIR)
 
-                if not md and not file.endswith(".html"):
-                    continue
+            if md:
+                output = os.path.join(
+                    BUILD_DIR, relative.replace(".md", ""), "index.html"
+                )
+            else:
+                output = os.path.join(BUILD_DIR, relative)
 
-                input = os.path.join(root, file)
-                relative = os.path.relpath(input, dir)
+            os.makedirs(os.path.dirname(output), exist_ok=True)
 
-                if md:
-                    output = os.path.join(
-                        output_dir, relative.replace(".md", ""), "index.html"
-                    )
-                else:
-                    output = os.path.join(output_dir, relative)
+            print(f"{input} -> {output}")
 
-                os.makedirs(os.path.dirname(output), exist_ok=True)
-
-                print(f"{input} -> {output}")
-
-                with open(output, "w") as output_file:
-                    output_file.write(render_page(open(input).read(), md))
+            with open(output, "w") as output_file:
+                output_file.write(render_page(open(input).read(), md))
 
 if __name__ == "__main__":
     main()
