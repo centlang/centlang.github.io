@@ -30,7 +30,7 @@ def nvim_to_html(code: str, lang: str) -> str:
     nvim.command(f"set ft={lang}")
     nvim.command("TOhtml")
     nvim.command(f"w! {tmp_output_path}")
-    nvim.command("bd!")
+    nvim.command("%bd!")
 
     html = open(tmp_output_path).read()
     match = re.search(r"<pre>(.*?)</pre>", html, flags=re.DOTALL)
