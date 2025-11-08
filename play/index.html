@@ -1,0 +1,20 @@
+{% extends default %}
+
+<div class="editor-wrapper">
+    <div class="lines" id="lines">1</div>
+    <textarea
+        class="editor"
+        id="editor"
+        autocapitalize="none"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+    >
+with std::io;
+
+fn main() {
+    io::println("Hello, world!");
+}</textarea
+    >
+</div>
+<script src="/static/editor.js"></script>

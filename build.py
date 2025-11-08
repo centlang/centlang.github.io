@@ -6,7 +6,7 @@ import markdown
 import html
 import pynvim
 
-SRC_DIRS = ["docs/"]
+SRC_DIRS = ["docs/", "play/"]
 TEMPLATES_DIR = "templates/"
 BUILD_DIR = "build/"
 

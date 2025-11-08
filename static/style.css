@@ -69,10 +69,15 @@ nav {
 }
 
 pre {
-    padding: 0.75rem 1rem;
     border-radius: var(--radius);
     margin: 1rem 0;
     overflow-x: auto;
+}
+
+pre,
+.lines,
+.editor {
+    padding: 0.75rem 1rem;
 }
 
 code {
@@ -81,8 +86,12 @@ code {
 }
 
 pre,
-code {
+code,
+.editor,
+.lines {
     font-family: inherit;
+    color: inherit;
+    line-height: inherit;
 }
 
 h1,
@@ -205,7 +214,8 @@ li::marker {
 .panel,
 .toc,
 code,
-pre {
+pre,
+.editor-wrapper {
     border: 1px solid var(--muted-border);
     background-color: var(--panel);
 }
@@ -239,6 +249,35 @@ pre {
     padding: 1rem;
     margin-right: 6rem;
     line-height: 1.6;
+}
+
+.editor-wrapper {
+    margin: 1rem 2rem;
+    display: flex;
+    height: calc(100vh - 8rem);
+}
+
+.lines {
+    text-align: right;
+    user-select: none;
+    padding-left: 2rem;
+    color: var(--muted);
+    white-space: pre;
+    overflow: hidden;
+}
+
+.editor {
+    width: 100%;
+    outline: none;
+    resize: none;
+    background-color: var(--panel);
+    border: none;
+    padding-left: 0;
+}
+
+.lines,
+.editor {
+    font-size: 1.25rem;
 }
 
 .toc ul,
