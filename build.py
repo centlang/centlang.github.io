@@ -71,6 +71,7 @@ def render_page(code: str, md: bool = False) -> str:
             path = os.path.join(TEMPLATES_DIR, f"{match.group(1)}.html")
 
             content = markdown.Markdown(extensions=["toc", "fenced_code"])
+
             content_html = highlight_html(
                 content.convert(re.sub(r"{%.*?%}", "", code))
             )
