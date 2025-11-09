@@ -215,7 +215,8 @@ li::marker {
 .toc,
 code,
 pre,
-.editor-wrapper {
+.editor-wrapper,
+.output {
     border: 1px solid var(--muted-border);
     background-color: var(--panel);
 }
@@ -251,10 +252,31 @@ pre,
     line-height: 1.6;
 }
 
-.editor-wrapper {
-    margin: 1rem 2rem;
+.playground-wrapper {
+    margin: 1rem;
+    margin-top: 0;
     display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     height: calc(100vh - 8rem);
+}
+
+.editor-wrapper,
+.output {
+    border-radius: var(--radius);
+    flex-grow: 1;
+}
+
+.editor-wrapper {
+    display: flex;
+}
+
+.output {
+    padding: 1rem 2rem;
+    height: 100%;
+    white-space: pre;
+    overflow: auto;
+    margin: 0;
 }
 
 .lines {
@@ -268,15 +290,20 @@ pre,
 
 .editor {
     width: 100%;
+    height: 50vh;
     outline: none;
-    resize: none;
+    resize: vertical;
     background-color: var(--panel);
     border: none;
     padding-left: 0;
+    overflow: auto;
+    white-space: nowrap;
+    max-height: calc(100vh - 12rem);
 }
 
 .lines,
-.editor {
+.editor,
+.output {
     font-size: 1.25rem;
 }
 

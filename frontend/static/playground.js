@@ -1,7 +1,13 @@
 const editor = document.getElementById("editor");
+const editorWrapper = document.getElementById("editor-wrapper");
 const lines = document.getElementById("lines");
 
 editor.addEventListener("input", updateLineNumbers);
+
+new ResizeObserver(() => {
+    editorWrapper.style.height = editor.style.height;
+    lines.style.height = editor.style.height;
+}).observe(editor);
 
 editor.addEventListener("scroll", () => {
     lines.scrollTop = editor.scrollTop;
