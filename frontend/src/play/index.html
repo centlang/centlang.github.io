@@ -1,6 +1,18 @@
 {% extends default %}
 
 <div class="playground-wrapper">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <select>
+                <option>Debug</option>
+                <option>Release</option>
+            </select>
+            <select>
+                <option>centc v0.001</option>
+            </select>
+        </div>
+        <button>Run</button>
+    </div>
     <div class="editor-wrapper" id="editor-wrapper">
         <div class="lines" id="lines">1</div>
         <textarea
