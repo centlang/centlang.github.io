@@ -28,6 +28,10 @@ body {
     height: 100vh;
 }
 
+select {
+    outline: none;
+}
+
 main {
     margin-top: 4rem;
 }
@@ -87,6 +91,8 @@ code {
 
 pre,
 code,
+button,
+select,
 .editor,
 .lines {
     font-family: inherit;
@@ -215,6 +221,8 @@ li::marker {
 .toc,
 code,
 pre,
+button,
+select,
 .editor-wrapper,
 .output {
     border: 1px solid var(--muted-border);
@@ -261,6 +269,22 @@ pre,
     height: calc(100vh - 8rem);
 }
 
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toolbar-left {
+    display: flex;
+    gap: 1rem;
+}
+
+.toolbar button,
+.toolbar select {
+    padding: 0 1rem;
+    border-radius: var(--radius);
+}
+
 .editor-wrapper,
 .output {
     border-radius: var(--radius);
@@ -303,7 +327,9 @@ pre,
 
 .lines,
 .editor,
-.output {
+.output,
+.toolbar button,
+.toolbar select {
     font-size: 1.25rem;
 }
 
