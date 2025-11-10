@@ -11,7 +11,7 @@
                 <option>centc v0.001</option>
             </select>
         </div>
-        <button>Run</button>
+        <button>{{ t.run }}</button>
     </div>
     <div class="editor-wrapper" id="editor-wrapper">
         <div class="lines" id="lines">1</div>
@@ -30,6 +30,6 @@ fn main() {
 }</textarea
         >
     </div>
-    <span class="output"></span>
+    <span class="output">{{ t.output }}</span>
 </div>
 <script src="/static/playground.js"></script>

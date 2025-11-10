@@ -2,6 +2,7 @@ import tempfile
 import os
 import re
 import shutil
+import json
 import markdown
 import html
 import pynvim
@@ -10,6 +11,8 @@ SRC_DIR = "src/"
 STATIC_DIR = "static/"
 TEMPLATES_DIR = "templates/"
 BUILD_DIR = "build/"
+
+TRANSLATIONS = json.load(open("translations.json"))
 
 nvim = pynvim.attach(
     "child", argv=["nvim", "--embed", "--headless", "-u", "NONE"]
@@ -50,9 +53,15 @@ def highlight_html(code: str) -> str:
     )
 
 def render_template(code: str, context: dict) -> str:
-    code = re.sub(
-        r"{{\s*(\w+)\s*}}", lambda m: context.get(m.group(1), ""), code
-    )
+    def get_var(match):
+        result = context
+
+        for value in match.group(1).split("."):
+            result = result[value]
+
+        return str(result)
+
+    code = re.sub(r"{{\s*([\w.-]+)\s*}}", get_var, code)
 
     match = re.match(r"{%\s*extends (\w+)\s*%}", code)
 
@@ -64,7 +73,12 @@ def render_template(code: str, context: dict) -> str:
 
     return code
 
-def render_page(code: str, md: bool = False) -> str:
+def render_page(
+    code: str, context: dict | None = None, md: bool = False
+) -> str:
+    if context is None:
+        context = {}
+
     if md:
         match = re.match(r"{%\s*extends (\w+)\s*%}", code)
 
@@ -78,18 +92,16 @@ def render_page(code: str, md: bool = False) -> str:
             )
 
             return render_template(
-                open(path).read(), {"content": content_html, "toc": content.toc}
+                open(path).read(),
+                context | {"content": content_html, "toc": content.toc},
             )
 
-    return render_template(code, {})
+    return render_template(code, context)
 
-def main():
-    shutil.rmtree(BUILD_DIR, ignore_errors=True)
-    os.makedirs(BUILD_DIR)
+def build_files(src_dir: str, build_dir: str, language: str):
+    for root, dirs, files in os.walk(src_dir):
+        dirs[:] = [d for d in dirs if d not in TRANSLATIONS]
 
-    shutil.copytree(STATIC_DIR, os.path.join(BUILD_DIR, "static"))
-
-    for root, _, files in os.walk(SRC_DIR):
         for file in files:
             md = file.endswith(".md")
 
@@ -97,21 +109,60 @@ def main():
                 continue
 
             input = os.path.join(root, file)
-            relative = os.path.relpath(input, SRC_DIR)
+            relative = os.path.relpath(input, src_dir)
 
             if md:
                 output = os.path.join(
-                    BUILD_DIR, relative.replace(".md", ""), "index.html"
+                    build_dir, relative.replace(".md", ""), "index.html"
                 )
             else:
-                output = os.path.join(BUILD_DIR, relative)
+                output = os.path.join(build_dir, relative)
+
+            if os.path.exists(output):
+                continue
 
             os.makedirs(os.path.dirname(output), exist_ok=True)
+
+            if language != "default":
+                print(f"[{language}]", end=" ")
 
             print(f"{input} -> {output}")
 
             with open(output, "w") as output_file:
-                output_file.write(render_page(open(input).read(), md))
+                output_file.write(
+                    render_page(
+                        open(input).read(),
+                        context={
+                            "t": TRANSLATIONS[language],
+                            "page": {
+                                "base": (
+                                    f"/{language}"
+                                    if language != "default"
+                                    else ""
+                                )
+                            },
+                        },
+                        md=md,
+                    )
+                )
+
+def main():
+    shutil.rmtree(BUILD_DIR, ignore_errors=True)
+    os.makedirs(BUILD_DIR)
+
+    shutil.copytree(STATIC_DIR, os.path.join(BUILD_DIR, "static"))
+
+    for language in TRANSLATIONS:
+        if language == "default":
+            build_files(SRC_DIR, BUILD_DIR, language)
+        else:
+            build_files(
+                os.path.join(SRC_DIR, language),
+                os.path.join(BUILD_DIR, language),
+                language,
+            )
+
+            build_files(SRC_DIR, os.path.join(BUILD_DIR, language), language)
 
 if __name__ == "__main__":
     main()

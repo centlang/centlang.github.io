@@ -3,48 +3,37 @@
 <div class="hero">
     <img class="logo" src="/static/logo.svg" />
     <div class="panel">
-        <div class="tagline">
-            The systems programming language you
-            <span class="accent">learn fast</span> and
-            <span class="accent">run faster.</span>
-        </div>
+        <div class="tagline">{{ t.tagline }}</div>
     </div>
     <div class="hero-buttons">
-        <a class="button-primary button" href="/docs/get-started/"
-            >Get started</a
+        <a
+            class="button-primary button"
+            href="{{ page.base }}/docs/get-started/"
+            >{{ t.get-started }}</a
         >
-        <a class="button-secondary button" href="/download/">Download</a>
+        <a class="button-secondary button" href="{{ page.base }}/download/"
+            >{{ t.download }}</a
+        >
     </div>
     <img class="puzzle" src="/static/puzzle.png" />
 </div>
 <div class="principles panel">
     <div class="principles-left">
         <div class="principle">
-            <h1 class="accent">Simple</h1>
-            <p>
-                No one likes wasting time debugging language quirks. Cent was
-                designed to stay out of your way.
-            </p>
+            <h1 class="accent">{{ t.principles.simple.title }}</h1>
+            <p>{{ t.principles.simple.content }}</p>
         </div>
         <div class="principle">
-            <h1 class="accent">Explicit</h1>
-            <p>
-                It should always be clear what your program will do. Cent is
-                designed to never be ambiguous.
-            </p>
+            <h1 class="accent">{{ t.principles.explicit.title }}</h1>
+            <p>{{ t.principles.explicit.content }}</p>
         </div>
         <div class="principle">
-            <h1 class="accent">Fast</h1>
-            <p>
-                In Cent, the most obvious way to write code is also the fastest.
-            </p>
+            <h1 class="accent">{{ t.principles.fast.title }}</h1>
+            <p>{{ t.principles.fast.content }}</p>
         </div>
         <div class="principle">
-            <h1 class="accent">Modern</h1>
-            <p>
-                Cent includes modern programming features with virtually zero
-                impact on performance.
-            </p>
+            <h1 class="accent">{{ t.principles.modern.title }}</h1>
+            <p>{{ t.principles.modern.content }}</p>
         </div>
     </div>
     <pre class="code-snippet">

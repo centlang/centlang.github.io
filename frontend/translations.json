@@ -1,0 +1,30 @@
+{
+    "default": {
+        "title": "Cent Programming Language",
+        "docs": "Docs",
+        "news": "News",
+        "tagline": "The systems programming language you <span class=\"accent\">learn fast</span> and <span class=\"accent\">run faster.</span>",
+        "get-started": "Get started",
+        "download": "Download",
+        "principles": {
+            "simple": {
+                "title": "Simple",
+                "content": "No one likes wasting time debugging language quirks. Cent was designed to stay out of your way."
+            },
+            "explicit": {
+                "title": "Explicit",
+                "content": "It should always be clear what your program will do. Cent is designed to never be ambiguous."
+            },
+            "fast": {
+                "title": "Fast",
+                "content": "In Cent, the most obvious way to write code is also the fastest."
+            },
+            "modern": {
+                "title": "Modern",
+                "content": "Cent includes modern programming features with virtually zero impact on performance."
+            }
+        },
+        "run": "Run",
+        "output": "Output"
+    }
+}

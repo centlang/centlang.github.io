@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=0.6" />
-        <title>Cent Programming Language</title>
+        <title>{{ t.title }}</title>
         <link rel="stylesheet" href="/static/style.css" />
         <link rel="stylesheet" href="/static/syntax.css" />
         <link
@@ -13,12 +13,16 @@
     </head>
     <body>
         <header class="panel">
-            <a href="/">
+            <a href="{{ page.base }}/">
                 <img class="icon" src="/static/icon.svg" />
             </a>
             <nav>
-                <a class="nav-link" href="/docs/">Docs</a>
-                <a class="nav-link" href="/news/">News</a>
+                <a class="nav-link" href="{{ page.base }}/docs/"
+                    >{{ t.docs }}</a
+                >
+                <a class="nav-link" href="{{ page.base }}/news/"
+                    >{{ t.news }}</a
+                >
                 <a class="nav-link" href="https://github.com/centlang/cent"
                     >GitHub</a
                 >
