@@ -165,16 +165,12 @@ li::marker {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 40%;
-    flex: 1;
 }
 
 .code-snippet {
     font-size: 1.5rem;
     padding: 2rem;
     background-color: var(--bg);
-    flex-grow: 1;
-    max-width: 60rem;
 }
 
 .accent {
@@ -222,9 +218,7 @@ li::marker {
 code,
 pre,
 button,
-select,
-.editor-wrapper,
-.output {
+select {
     border: 1px solid var(--muted-border);
     background-color: var(--panel);
 }
