@@ -39,4 +39,5 @@ function updateLineNumbers() {
     lines.textContent = numbers;
 }
 
+editor.value = new URL(document.URL).searchParams.get("code");
 updateLineNumbers();
