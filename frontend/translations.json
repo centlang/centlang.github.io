@@ -7,6 +7,7 @@
         "tagline": "The systems programming language you <span class=\"accent\">learn fast</span> and <span class=\"accent\">run faster.</span>",
         "get-started": "Get started",
         "download": "Download",
+        "run-in-playground": "Run in playground >",
         "principles": {
             "simple": {
                 "title": "Simple",

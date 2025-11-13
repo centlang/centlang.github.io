@@ -36,10 +36,19 @@
             <p>{{ t.principles.modern.content }}</p>
         </div>
     </div>
-    <pre class="code-snippet">
+    <div class="code-snippet-wrapper">
+        <pre class="code-snippet" id="code-snippet">
 <span class="Statement">with</span> <span class="Include">std</span><span class="Delimiter">::</span><span class="Include">io</span>;
 
 <span class="Keyword">fn</span> <span class="Function">main</span>() {
     <span class="Include">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
 }</pre>
+        <a
+            class="run-in-playground"
+            id="run-in-playground"
+            data-base="{{ page.base }}"
+            >{{ t.run-in-playground }}</a
+        >
+    </div>
 </div>
+<script src="/static/index.js"></script>
