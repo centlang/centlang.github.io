@@ -1,1 +1,2 @@
-build
+/frontend/build
+**/__pycache__

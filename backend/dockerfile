@@ -1,0 +1,9 @@
+FROM alpine:latest
+
+RUN apk add --no-cache gcc musl-dev
+
+ADD https://github.com/centlang/cent/releases/download/0.1/cent-linux-x86_64.tar.xz /tmp/cent-0.1.tar.xz
+RUN tar -xJf /tmp/cent-0.1.tar.xz -C /usr/local
+
+WORKDIR /play
+ENTRYPOINT ["centc"]

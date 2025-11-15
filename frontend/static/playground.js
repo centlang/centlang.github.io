@@ -1,6 +1,14 @@
+const API_URL = "/api";
+
 const editor = document.getElementById("editor");
 const editorWrapper = document.getElementById("editor-wrapper");
 const lines = document.getElementById("lines");
+
+const stdout = document.getElementById("stdout");
+const stderr = document.getElementById("stderr");
+const system = document.getElementById("system");
+
+const compilationMode = document.getElementById("compilation-mode");
 
 editor.addEventListener("input", updateLineNumbers);
 
@@ -37,6 +45,39 @@ function updateLineNumbers() {
     }
 
     lines.textContent = numbers;
+}
+
+async function runCode() {
+    try {
+        stderr.textContent = "";
+        stdout.textContent = "Running...";
+        system.textContent = "";
+
+        const response = await fetch(`${API_URL}/run`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                code: editor.value,
+                mode: compilationMode.value,
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.detail);
+        }
+
+        stderr.textContent = result.stderr;
+        stdout.textContent = result.stdout;
+        system.textContent = `Program returned ${result.exit}`;
+    } catch (error) {
+        stderr.textContent = "";
+        stdout.textContent = "";
+        system.textContent = `Failed to run code: ${error.message}`;
+    }
 }
 
 editor.value = new URL(document.URL).searchParams.get("code") ?? editor.value;
