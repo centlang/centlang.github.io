@@ -1,3 +1,9 @@
+const DEFAULT_CODE = `with std::io;
+
+fn main() {
+    io::println("Hello, world!");
+}`;
+
 const API_URL = "/api";
 
 const editor = document.getElementById("editor");
@@ -10,7 +16,10 @@ const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
 
-editor.addEventListener("input", updateLineNumbers);
+editor.addEventListener("input", () => {
+    updateLineNumbers();
+    localStorage.setItem("code", editor.value);
+});
 
 new ResizeObserver(() => {
     editorWrapper.style.height = editor.style.height;
@@ -80,5 +89,9 @@ async function runCode() {
     }
 }
 
-editor.value = new URL(document.URL).searchParams.get("code") ?? editor.value;
+editor.value =
+    new URL(document.URL).searchParams.get("code") ??
+    localStorage.getItem("code") ??
+    DEFAULT_CODE;
+
 updateLineNumbers();
