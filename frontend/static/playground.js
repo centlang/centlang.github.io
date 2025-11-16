@@ -6,8 +6,9 @@ fn main() {
 
 const API_URL = "/api";
 
-const editor = document.getElementById("editor");
-const editorWrapper = document.getElementById("editor-wrapper");
+const editorTextarea = document.getElementById("editor-textarea");
+const editorPre = document.getElementById("editor-pre");
+
 const lines = document.getElementById("lines");
 
 const stdout = document.getElementById("stdout");
@@ -16,21 +17,19 @@ const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
 
-editor.addEventListener("input", () => {
+editorTextarea.addEventListener("input", () => {
     updateLineNumbers();
-    localStorage.setItem("code", editor.value);
+    updateHighlight();
+    localStorage.setItem("code", editorTextarea.value);
 });
 
-new ResizeObserver(() => {
-    editorWrapper.style.height = `${editor.offsetHeight}px`;
-    lines.style.height = `${editor.offsetHeight}px`;
-}).observe(editor);
-
-editor.addEventListener("scroll", () => {
-    lines.scrollTop = editor.scrollTop;
+editorTextarea.addEventListener("scroll", () => {
+    lines.scrollTop = editorTextarea.scrollTop;
+    editorPre.scrollTop = editorTextarea.scrollTop;
+    editorPre.scrollLeft = editorTextarea.scrollLeft;
 });
 
-editor.addEventListener("keydown", function (e) {
+editorTextarea.addEventListener("keydown", function (e) {
     if (e.key === "Tab") {
         e.preventDefault();
 
@@ -42,11 +41,13 @@ editor.addEventListener("keydown", function (e) {
 
         this.selectionEnd = start + 4;
         this.selectionStart = this.selectionEnd;
+
+        updateHighlight();
     }
 });
 
 function updateLineNumbers() {
-    const length = editor.value.split("\n").length;
+    const length = editorTextarea.value.split("\n").length;
     let numbers = "";
 
     for (let i = 1; i <= length; ++i) {
@@ -54,6 +55,10 @@ function updateLineNumbers() {
     }
 
     lines.textContent = numbers;
+}
+
+function updateHighlight() {
+    editorPre.innerHTML = highlightCent(editorTextarea.value);
 }
 
 function escapeHtml(input) {
@@ -138,7 +143,7 @@ function ansiToHtml(input) {
     while (match !== null) {
         result += `<span style="${ansiStateToStyle(state)}">${escapeHtml(input.substring(lastIndex, match.index))}</span>`;
 
-        for (let c of match[1].split(";").map(Number)) {
+        for (const c of match[1].split(";").map(Number)) {
             switch (c) {
                 case 0:
                     state = Object.assign({}, RESET_STATE);
@@ -195,7 +200,7 @@ async function runCode() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                code: editor.value,
+                code: editorTextarea.value,
                 mode: compilationMode.value,
             }),
         });
@@ -216,9 +221,68 @@ async function runCode() {
     }
 }
 
-editor.value =
+function highlightCent(input) {
+    const TOKENS = [
+        { className: "Comment", regex: /\/\/.*/y },
+        { className: "String", regex: /"(?:\\.|[^"\\])*"/y },
+        { className: "Number", regex: /\b[0-9][0-9_]*\b/y },
+        { className: "Number", regex: /\b0x[0-9a-fA-F_]*\b/y },
+        { className: "Number", regex: /\b0b[01_]*\b/y },
+        { className: "Number", regex: /\b0o[0-7_]*\b/y },
+        { className: "Number", regex: /\b[0-9][0-9_]*\.[0-9_]\+\b/y },
+        {
+            className: "Keyword",
+            regex: /\b(pub|fn|type|union|enum|in|let|mut|const)\b/y,
+        },
+        { className: "Keyword", regex: /\b(extern|distinct|untagged)\b/y },
+        {
+            className: "Statement",
+            regex: /\b(if|else|switch|return|break|continue|unreachable|while|for)\b/y,
+        },
+        { className: "Statement", regex: /\bwith\b/y },
+        { className: "Boolean", regex: /\b(true|false)\b/y },
+        { className: "Constant", regex: /\b(null|undefined)\b/y },
+        {
+            className: "Type",
+            regex: /\b(i8|i16|i32|i64|isize|u8|u16|u32|u64|usize|f32|f64|bool|never)\b/y,
+        },
+        {
+            className: "Operator",
+            regex: /(?:\+|-|\*|\/|%|!|&|\||\^|<|>|=)=?|\|\||&&/y,
+        },
+    ];
+
+    let result = "";
+    let index = 0;
+
+    while (index < input.length) {
+        let matched = false;
+
+        for (const t of TOKENS) {
+            t.regex.lastIndex = index;
+            const match = t.regex.exec(input);
+
+            if (match !== null) {
+                result += `<span class="${t.className}">${escapeHtml(match[0])}</span>`;
+                index = t.regex.lastIndex;
+                matched = true;
+                break;
+            }
+        }
+
+        if (!matched) {
+            result += escapeHtml(input[index]);
+            ++index;
+        }
+    }
+
+    return result;
+}
+
+editorTextarea.value =
     new URL(document.URL).searchParams.get("code") ??
     localStorage.getItem("code") ??
     DEFAULT_CODE;
 
+updateHighlight();
 updateLineNumbers();

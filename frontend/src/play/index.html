@@ -13,16 +13,19 @@
         </div>
         <button onclick="runCode();">{{ t.run }}</button>
     </div>
-    <div class="editor-wrapper panel" id="editor-wrapper">
+    <div class="editor-wrapper panel">
         <div class="lines" id="lines">1</div>
-        <textarea
-            class="editor"
-            id="editor"
-            autocapitalize="none"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-        ></textarea>
+        <div class="editor">
+            <textarea
+                class="editor-textarea"
+                id="editor-textarea"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                spellcheck="false"
+            ></textarea>
+            <pre class="editor-pre" id="editor-pre"></pre>
+        </div>
     </div>
     <div class="output-wrapper panel">
         <div>
