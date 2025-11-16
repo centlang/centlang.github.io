@@ -42,6 +42,7 @@ async def run_code(request: RunRequest):
             f"{tmp_dir}:/play:rw",
             "centc",
             "--run",
+            "--color",
             "/play/main.cn",
             *extra_flags,
         ],
