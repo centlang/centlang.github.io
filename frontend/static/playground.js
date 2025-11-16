@@ -58,7 +58,7 @@ function updateLineNumbers() {
 }
 
 function updateHighlight() {
-    editorPre.innerHTML = highlightCent(editorTextarea.value);
+    editorPre.innerHTML = highlightCent(editorTextarea.value) + " ";
 }
 
 function escapeHtml(input) {
