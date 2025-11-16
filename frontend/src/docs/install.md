@@ -4,7 +4,7 @@
 
 <div class="note">
     If you want to install Cent from source, go to
-    <a href="/docs/install/source">Installing from Source</a>.
+    <a href="/docs/install/source/">Installing from Source</a>.
 </div>
 
 ## Linux

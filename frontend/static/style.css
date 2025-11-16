@@ -130,7 +130,7 @@ p {
 
 ul,
 ol {
-    margin-left: 2rem;
+    margin-left: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -248,6 +248,7 @@ li::marker {
 
 .panel,
 .toc,
+.next,
 code,
 pre,
 button,
@@ -274,12 +275,9 @@ select {
     max-height: calc(100vh - 5rem);
     min-height: calc(100vh - 10rem);
     overflow: auto;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-right: 4rem;
-    padding-left: 0.5rem;
+    padding: 1rem 2rem;
     border-radius: var(--radius);
-    width: 30rem;
+    width: 25rem;
 }
 
 .content {
@@ -392,7 +390,8 @@ select {
 }
 
 .warning,
-.note {
+.note,
+.next {
     border-radius: var(--radius);
     padding: 0.75rem 1rem;
 }
@@ -420,6 +419,20 @@ select {
 
 .note::before {
     content: "NOTE!";
+}
+
+.next {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.next:hover {
+    text-decoration: none;
+}
+
+.next::after {
+    content: ">>>";
 }
 
 @media (max-width: 900px) {
