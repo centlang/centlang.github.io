@@ -26,6 +26,11 @@ jobs:
           sudo apt-get install -y neovim
           pip install -r requirements.txt
 
+      - name: Install cent.vim
+        run: |
+          git clone https://github.com/centlang/cent.vim \
+            ~/.config/nvim/pack/vendor/start/cent.vim
+
       - name: Build
         working-directory: ./frontend
         run: python build.py

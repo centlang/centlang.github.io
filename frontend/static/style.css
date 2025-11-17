@@ -287,6 +287,10 @@ select {
     line-height: 1.6;
 }
 
+.content h1 {
+    color: var(--accent);
+}
+
 .playground-wrapper {
     margin: 1rem;
     margin-top: 0;

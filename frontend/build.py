@@ -15,7 +15,7 @@ BUILD_DIR = "build/"
 TRANSLATIONS = json.load(open("translations.json"))
 
 nvim = pynvim.attach(
-    "child", argv=["nvim", "--embed", "--headless", "-u", "NONE"]
+    "child", argv=["nvim", "--embed", "--headless"]
 )
 
 nvim.command("syntax on")
