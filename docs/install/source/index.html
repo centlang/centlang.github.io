@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Cent Programming Language</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/docs/"
+                    >Docs</a
+                >
+                <a class="nav-link" href="/play/"
+                    >Playground</a
+                >
+                <a class="nav-link" href="/news/"
+                    >News</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="content-wrapper">
+    <div class="toc">
+<ul>
+<li><a href="#installing-from-source">Installing from Source</a><ul>
+<li><a href="#linux">Linux</a><ul>
+<li><a href="#1-install-build-dependencies">1. Install build dependencies</a></li>
+<li><a href="#2-clone">2. Clone</a></li>
+<li><a href="#3-build-and-install">3. Build and install</a></li>
+<li><a href="#4-verify">4. Verify</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <div class="content"><h1 id="installing-from-source">Installing from Source</h1>
+<h2 id="linux">Linux</h2>
+<h3 id="1-install-build-dependencies">1. Install build dependencies</h3>
+<p>Void Linux:</p>
+<pre>$ sudo xbps-install <span class="Special">-Syu</span> cmake ninja gcc git</pre>
+<p>Debian/Ubuntu:</p>
+<pre>$ sudo apt-get install <span class="Special">-y</span> build-essential cmake ninja-build git</pre>
+<p>Arch Linux:</p>
+<pre>$ sudo pacman <span class="Special">-Syu</span> cmake ninja gcc git</pre>
+<h3 id="2-clone">2. Clone</h3>
+<p>Clone the repository:</p>
+<pre>$ git clone https://github.com/centlang/cent &amp;&amp; <span class="Statement">cd</span> cent</pre>
+<h3 id="3-build-and-install">3. Build and install</h3>
+<p>Build:</p>
+<pre>$ <span class="Statement">mkdir</span> build &amp;&amp; <span class="Statement">cd</span> build
+$ cmake .. <span class="Special">-DCMAKE_BUILD_TYPE</span><span class="Operator">=</span>Release <span class="Special">-GNinja</span>
+$ ninja</pre>
+<p>Install:</p>
+<pre>$ sudo ninja install</pre>
+<h3 id="4-verify">4. Verify</h3>
+<p>Verify the installation:</p>
+<pre>$ centc <span class="Special">--version</span>
+Cent v0.<span class="Constant">1</span></pre></div>
+</div>
+</main>
+        <footer>
+            <p class="muted">© 2025 lnkrr</p>
+        </footer>
+    </body>
+</html>

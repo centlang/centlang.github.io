@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Cent Programming Language</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/docs/"
+                    >Docs</a
+                >
+                <a class="nav-link" href="/play/"
+                    >Playground</a
+                >
+                <a class="nav-link" href="/news/"
+                    >News</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="playground-wrapper">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <select id="compilation-mode">
+                <option value="debug">Debug</option>
+                <option value="release">Release</option>
+            </select>
+            <select>
+                <option>centc v0.1</option>
+            </select>
+        </div>
+        <button onclick="runCode();">Run</button>
+    </div>
+    <div class="editor-wrapper panel">
+        <div class="lines" id="lines">1</div>
+        <div class="editor">
+            <textarea
+                class="editor-textarea"
+                id="editor-textarea"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                spellcheck="false"
+            ></textarea>
+            <pre class="editor-pre" id="editor-pre"></pre>
+        </div>
+    </div>
+    <div class="output-wrapper panel">
+        <div>
+            <p id="stderr"></p>
+            <p id="stdout">Output</p>
+        </div>
+        <p class="muted" id="system"></p>
+    </div>
+</div>
+<script src="/static/playground.js"></script>
+</main>
+        <footer>
+            <p class="muted">© 2025 lnkrr</p>
+        </footer>
+    </body>
+</html>

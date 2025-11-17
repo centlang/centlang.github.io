@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Cent Programming Language</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/docs/"
+                    >Docs</a
+                >
+                <a class="nav-link" href="/play/"
+                    >Playground</a
+                >
+                <a class="nav-link" href="/news/"
+                    >News</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="hero">
+    <img class="logo" src="/static/logo.svg" />
+    <div class="panel">
+        <div class="tagline">The systems programming language you <span class="accent">learn fast</span> and <span class="accent">run faster.</span></div>
+    </div>
+    <div class="hero-buttons">
+        <a
+            class="button-primary button"
+            href="/docs/get-started/"
+            >Get started</a
+        >
+        <a class="button-secondary button" href="/docs/install/"
+            >Download</a
+        >
+    </div>
+    <img class="puzzle" src="/static/puzzle.png" />
+</div>
+<div class="principles panel">
+    <div class="principles-left">
+        <div>
+            <h1 class="accent">Simple</h1>
+            <p>No one likes wasting time debugging language quirks. Cent was designed to stay out of your way.</p>
+        </div>
+        <div>
+            <h1 class="accent">Explicit</h1>
+            <p>It should always be clear what your program will do. Cent is designed to never be ambiguous.</p>
+        </div>
+        <div>
+            <h1 class="accent">Fast</h1>
+            <p>In Cent, the most obvious way to write code is also the fastest.</p>
+        </div>
+        <div>
+            <h1 class="accent">Modern</h1>
+            <p>Cent includes modern programming features with virtually zero impact on performance.</p>
+        </div>
+    </div>
+    <div class="code-snippet-wrapper">
+        <pre class="code-snippet" id="code-snippet">
+<span class="Statement">with</span> <span class="Include">std</span><span class="Delimiter">::</span><span class="Include">io</span>;
+
+<span class="Keyword">fn</span> <span class="Function">main</span>() {
+    <span class="Include">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
+}</pre>
+        <a
+            class="run-in-playground"
+            id="run-in-playground"
+            data-base=""
+            >Run in playground ></a
+        >
+    </div>
+</div>
+<script src="/static/index.js"></script>
+</main>
+        <footer>
+            <p class="muted">© 2025 lnkrr</p>
+        </footer>
+    </body>
+</html>
