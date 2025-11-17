@@ -14,9 +14,9 @@
     --ansi-magenta: #f5c2e7;
     --ansi-cyan: #94e2d5;
     --ansi-white: #bac2de;
-    --warning-bg: #5e4413;
+    --warning-bg: #2b2213;
     --warning-border: #aa823b;
-    --note-bg: #121653;
+    --note-bg: #0c0e2b;
     --note-border: #294bae;
 }
 
@@ -275,9 +275,10 @@ select {
     max-height: calc(100vh - 5rem);
     min-height: calc(100vh - 10rem);
     overflow: auto;
-    padding: 1rem 2rem;
+    padding: 1rem;
+    padding-right: 2rem;
     border-radius: var(--radius);
-    width: 25rem;
+    min-width: 18rem;
 }
 
 .content {
@@ -287,8 +288,13 @@ select {
     line-height: 1.6;
 }
 
-.content h1 {
-    color: var(--accent);
+.content h1 a::before,
+.content h2 a::before,
+.content h3 a::before,
+.content h4 a::before,
+.content h5 a::before,
+.content h6 a::before {
+    content: "# ";
 }
 
 .playground-wrapper {
@@ -393,6 +399,10 @@ select {
     margin-top: 0.5rem;
 }
 
+.toc li {
+    list-style-type: none;
+}
+
 .warning,
 .note,
 .next {
@@ -439,7 +449,7 @@ select {
     content: ">>>";
 }
 
-@media (max-width: 900px) {
+@media (max-width: 950px) {
     .toc {
         display: none;
     }

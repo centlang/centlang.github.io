@@ -1,11 +1,17 @@
-import tempfile
 import os
 import re
 import shutil
 import json
-import markdown
 import html
 import pynvim
+
+from tempfile import NamedTemporaryFile
+
+from markdown import Markdown
+from markdown.extensions import Extension
+from markdown.treeprocessors import Treeprocessor
+
+from xml.etree import ElementTree
 
 SRC_DIR = "src/"
 STATIC_DIR = "static/"
@@ -14,20 +20,18 @@ BUILD_DIR = "build/"
 
 TRANSLATIONS = json.load(open("translations.json"))
 
-nvim = pynvim.attach(
-    "child", argv=["nvim", "--embed", "--headless"]
-)
+nvim = pynvim.attach("child", argv=["nvim", "--embed", "--headless"])
 
 nvim.command("syntax on")
 nvim.command("runtime! plugin/tohtml.lua")
 
 def nvim_to_html(code: str, lang: str) -> str:
-    with tempfile.NamedTemporaryFile("w", delete=False) as tmp_input:
+    with NamedTemporaryFile("w", delete=False) as tmp_input:
         tmp_input_path = tmp_input.name
         tmp_input.write(code)
         tmp_input.flush()
 
-    with tempfile.NamedTemporaryFile(delete=False) as tmp_output:
+    with NamedTemporaryFile(delete=False) as tmp_output:
         tmp_output_path = tmp_output.name
 
     nvim.command(f"e {tmp_input_path}")
@@ -43,6 +47,27 @@ def nvim_to_html(code: str, lang: str) -> str:
     os.remove(tmp_output_path)
 
     return f"<pre>{(match.group(1) if match else code).strip()}</pre>"
+
+def slugify(value: str) -> str:
+    return re.sub(r"[\W_]+", "-", value.lower()).strip("-")
+
+class HeaderLinker(Treeprocessor):
+    def run(self, root: ElementTree.Element) -> None:
+        for elem in root.iter():
+            if elem.tag in ["h1", "h2", "h3", "h4", "h5", "h6"]:
+                text = elem.text or ""
+                id = slugify(text)
+
+                elem.clear()
+
+                link = ElementTree.SubElement(elem, "a", href=f"#{id}")
+                link.text = text
+
+                elem.set("id", id)
+
+class HeaderLinkExtension(Extension):
+    def extendMarkdown(self, md: Markdown) -> None:
+        md.treeprocessors.register(HeaderLinker(md), "headerlinker", 100)
 
 def highlight_html(code: str) -> str:
     return re.sub(
@@ -73,9 +98,7 @@ def render_template(code: str, context: dict) -> str:
 
     return code
 
-def render_page(
-    code: str, context: dict | None = None, md: bool = False
-) -> str:
+def render_page(code: str, context: dict | None = None, md: bool = False) -> str:
     if context is None:
         context = {}
 
@@ -85,11 +108,9 @@ def render_page(
         if match:
             path = os.path.join(TEMPLATES_DIR, f"{match.group(1)}.html")
 
-            content = markdown.Markdown(extensions=["toc", "fenced_code"])
+            content = Markdown(extensions=["toc", "fenced_code", HeaderLinkExtension()])
 
-            content_html = highlight_html(
-                content.convert(re.sub(r"{%.*?%}", "", code))
-            )
+            content_html = highlight_html(content.convert(re.sub(r"{%.*?%}", "", code)))
 
             return render_template(
                 open(path).read(),
@@ -136,9 +157,7 @@ def build_files(src_dir: str, build_dir: str, language: str):
                             "t": TRANSLATIONS[language],
                             "page": {
                                 "base": (
-                                    f"/{language}"
-                                    if language != "default"
-                                    else ""
+                                    f"/{language}" if language != "default" else ""
                                 )
                             },
                         },
