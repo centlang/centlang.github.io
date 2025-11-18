@@ -137,3 +137,74 @@ The `rune` type represents a Unicode code point.
 
 "What about the string type?" you may ask. In Cent, strings are actually just
 arrays of bytes. We'll talk about them later.
+
+## Functions
+
+Functions are defined by using the `fn` keyword. The `main` function is the
+entry point of the program. Functions can be used _before_ they're defined.
+
+```cent
+with std::io;
+
+fn main() {
+    hello_world();
+}
+
+fn hello_world() {
+    io::println("Hello, world!");
+}
+```
+
+You can specify the return type after the parentheses. If no return type is
+specified, the function is assumed to return nothing. To return a value from a
+function, use the `return` statement:
+
+```cent
+fn get_magic_number() i32 {
+    return 42;
+}
+```
+
+Functions can take parameters.
+
+```cent
+fn main() {
+    let a = add(3, 4); // a = 7
+}
+
+fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+```
+
+### Default parameters
+
+You can define _default_ parameters. If arguments aren't provided, the default
+values are used.
+
+```cent
+fn main() {
+    let ten = add(3, 7);
+    let nine = add(3, 3, 3);
+    let one = add(1, -1, 1, 0);
+}
+
+fn add(a: i32, b: i32, c: i32 = 0, d: i32 = 0) i32 {
+    return a + b + c + d;
+}
+```
+
+### Inner functions
+
+Functions can be defined inside other functions. Inner functions are only
+visible within the function where they are defined.
+
+```cent
+fn main() {
+    fn square(x: i32) i32 {
+        return x * x;
+    }
+
+    let a = square(7); // a = 49
+}
+```
