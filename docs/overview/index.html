@@ -38,6 +38,18 @@
 <li><a href="#language-overview">Language Overview</a><ul>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#hello-world">Hello, world!</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#primitive-types">Primitive types</a><ul>
+<li><a href="#integer-types">Integer types</a></li>
+<li><a href="#size-types">Size types</a></li>
+<li><a href="#floating-point-types">Floating-point types</a></li>
+<li><a href="#the-bool-type">The bool type</a></li>
+<li><a href="#the-rune-type">The rune type</a></li>
+<li><a href="#strings">Strings</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -61,14 +73,57 @@ new file named <code>main.cn</code> with the following content:</p>
 <span class="Statement">fn</span> main() {
     io::println(<span class="String">&quot;Hello, world!&quot;</span>);
 }</pre>
-<p>Now, enter these commands to compile and run the program:</p>
+<p>Now, run these commands to compile and execute the program:</p>
 <pre>$ centc main.cn
 $ ./main
 Hello, world!</pre>
 <p>You can also use the <code>--run</code> option to automatically run the compiled
 executable:</p>
 <pre>$ centc main.cn <span class="Special">--run</span>
-Hello, world!</pre></div>
+Hello, world!</pre>
+<h2 id="variables"><a href="#variables">Variables</a></h2>
+<p>The <code>let</code> statement creates an <em>immutable</em> variable.</p>
+<pre><span class="Statement">let</span> language <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre>
+<p>To create a <em>mutable</em> variable, use the <code>mut</code> keyword.</p>
+<pre><span class="Statement">mut</span> score <span class="Operator">=</span> <span class="Constant">0</span>;
+score <span class="Operator">=</span> <span class="Constant">10</span>;</pre>
+<p>Cent is statically typed, so you cannot change the type of a variable.</p>
+<pre><span class="Statement">mut</span> score <span class="Operator">=</span> <span class="Constant">10</span>;
+score <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre>
+<h2 id="comments"><a href="#comments">Comments</a></h2>
+<p>You can use comments to explain certain parts of your code. Comments start with
+<code>//</code>.</p>
+<pre><span class="Statement">let</span> variable <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// this is a variable</span></pre>
+<h2 id="constants"><a href="#constants">Constants</a></h2>
+<p>To create a constant, use the <code>const</code> keyword. Constants are computed at compile
+time.</p>
+<pre><span class="Statement">const</span> PI <span class="Operator">=</span> <span class="Constant">3.14</span>;
+<span class="Statement">const</span> GOLDEN_RATIO <span class="Operator">=</span> <span class="Constant">1.618</span>;
+<span class="Statement">const</span> SECONDS_IN_A_DAY <span class="Operator">=</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">24</span>;</pre>
+<p>It is a convention to name constants all uppercase with underscores between
+words.</p>
+<h2 id="primitive-types"><a href="#primitive-types">Primitive types</a></h2>
+<h3 id="integer-types"><a href="#integer-types">Integer types</a></h3>
+<p>Integer types start with either <code>i</code> or <code>u</code>. Integer types starting with <code>u</code> are
+<em>unsigned</em>, meaning they can't be negative. After that, the size in bits is
+specified:</p>
+<pre><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
+<span class="Type">u8</span> <span class="Type">u16</span> <span class="Type">u32</span> <span class="Type">u64</span> <span class="Comment">// unsigned</span></pre>
+<p>Unsigned integer types can represent larger positive values than their signed
+counterparts.</p>
+<h3 id="size-types"><a href="#size-types">Size types</a></h3>
+<p>You can use <code>usize</code> and <code>isize</code>. They have the size of the pointer type on the
+current architecture and are commonly used for indexing.</p>
+<h3 id="floating-point-types"><a href="#floating-point-types">Floating-point types</a></h3>
+<p>Floating-point types are used to store numbers with decimal points. In Cent,
+there are two such types: <code>f32</code> and <code>f64</code>.</p>
+<h3 id="the-bool-type"><a href="#the-bool-type">The <code>bool</code> type</a></h3>
+<p>A <code>bool</code> value is either <code>true</code> or <code>false</code>.</p>
+<h3 id="the-rune-type"><a href="#the-rune-type">The <code>rune</code> type</a></h3>
+<p>The <code>rune</code> type represents a Unicode code point.</p>
+<h3 id="strings"><a href="#strings">Strings</a></h3>
+<p>"What about the string type?" you may ask. In Cent, strings are actually just
+arrays of bytes. We'll talk about them later.</p></div>
 </div>
 </main>
         <footer>
