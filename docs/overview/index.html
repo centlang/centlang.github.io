@@ -50,6 +50,11 @@
 <li><a href="#strings">Strings?</a></li>
 </ul>
 </li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#default-parameters">Default parameters</a></li>
+<li><a href="#inner-functions">Inner functions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -127,7 +132,55 @@ there are two such types: <code>f32</code> and <code>f64</code>.</p>
 <p>The <code>rune</code> type represents a Unicode code point.</p>
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
 <p>"What about the string type?" you may ask. In Cent, strings are actually just
-arrays of bytes. We'll talk about them later.</p></div>
+arrays of bytes. We'll talk about them later.</p>
+<h2 id="functions"><a href="#functions">Functions</a></h2>
+<p>Functions are defined by using the <code>fn</code> keyword. The <code>main</code> function is the
+entry point of the program. Functions can be used <em>before</em> they're defined.</p>
+<pre><span class="Statement">with</span> std::io;
+
+<span class="Statement">fn</span> main() {
+    hello_world();
+}
+
+<span class="Statement">fn</span> hello_world() {
+    io::println(<span class="String">&quot;Hello, world!&quot;</span>);
+}</pre>
+<p>You can specify the return type after the parentheses. If no return type is
+specified, the function is assumed to return nothing. To return a value from a
+function, use the <code>return</code> statement:</p>
+<pre><span class="Statement">fn</span> get_magic_number() <span class="Type">i32</span> {
+    <span class="Statement">return</span> <span class="Constant">42</span>;
+}</pre>
+<p>Functions can take parameters.</p>
+<pre><span class="Statement">fn</span> main() {
+    <span class="Statement">let</span> a <span class="Operator">=</span> add(<span class="Constant">3</span>, <span class="Constant">4</span>); <span class="Comment">// a = 7</span>
+}
+
+<span class="Statement">fn</span> add(a: <span class="Type">i32</span>, b: <span class="Type">i32</span>) <span class="Type">i32</span> {
+    <span class="Statement">return</span> a <span class="Operator">+</span> b;
+}</pre>
+<h3 id="default-parameters"><a href="#default-parameters">Default parameters</a></h3>
+<p>You can define <em>default</em> parameters. If arguments aren't provided, the default
+values are used.</p>
+<pre><span class="Statement">fn</span> main() {
+    <span class="Statement">let</span> ten <span class="Operator">=</span> add(<span class="Constant">3</span>, <span class="Constant">7</span>);
+    <span class="Statement">let</span> nine <span class="Operator">=</span> add(<span class="Constant">3</span>, <span class="Constant">3</span>, <span class="Constant">3</span>);
+    <span class="Statement">let</span> one <span class="Operator">=</span> add(<span class="Constant">1</span>, <span class="Operator">-</span><span class="Constant">1</span>, <span class="Constant">1</span>, <span class="Constant">0</span>);
+}
+
+<span class="Statement">fn</span> add(a: <span class="Type">i32</span>, b: <span class="Type">i32</span>, c: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>, d: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>) <span class="Type">i32</span> {
+    <span class="Statement">return</span> a <span class="Operator">+</span> b <span class="Operator">+</span> c <span class="Operator">+</span> d;
+}</pre>
+<h3 id="inner-functions"><a href="#inner-functions">Inner functions</a></h3>
+<p>Functions can be defined inside other functions. Inner functions are only
+visible within the function where they are defined.</p>
+<pre><span class="Statement">fn</span> main() {
+    <span class="Statement">fn</span> square(x: <span class="Type">i32</span>) <span class="Type">i32</span> {
+        <span class="Statement">return</span> x <span class="Operator">*</span> x;
+    }
+
+    <span class="Statement">let</span> a <span class="Operator">=</span> square(<span class="Constant">7</span>); <span class="Comment">// a = 49</span>
+}</pre></div>
 </div>
 </main>
         <footer>
