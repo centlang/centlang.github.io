@@ -57,6 +57,18 @@ mut score = 0;
 score = 10;
 ```
 
+A variable's type can be specified explicitly:
+
+```cent
+mut score: i32 = 0;
+```
+
+Variables are zero-initialized if no value is given.
+
+```cent
+mut score: i32;
+```
+
 Cent is statically typed, so you cannot change the type of a variable.
 
 ```cent
@@ -121,7 +133,7 @@ A `bool` value is either `true` or `false`.
 
 The `rune` type represents a Unicode code point.
 
-### Strings
+### Strings?
 
 "What about the string type?" you may ask. In Cent, strings are actually just
 arrays of bytes. We'll talk about them later.
