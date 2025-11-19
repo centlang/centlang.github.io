@@ -55,6 +55,11 @@
 <li><a href="#inner-functions">Inner functions</a></li>
 </ul>
 </li>
+<li><a href="#control-flow">Control flow</a><ul>
+<li><a href="#if-statements">if statements</a></li>
+<li><a href="#switch-statements">switch statements</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -180,6 +185,61 @@ visible within the function where they are defined.</p>
     }
 
     <span class="Statement">let</span> a <span class="Operator">=</span> square(<span class="Constant">7</span>); <span class="Comment">// a = 49</span>
+}</pre>
+<h2 id="control-flow"><a href="#control-flow">Control flow</a></h2>
+<h3 id="if-statements"><a href="#if-statements"><code>if</code> statements</a></h3>
+<p>Use the <code>if</code> statement to branch your code depending on a condition.</p>
+<pre><span class="Statement">with</span> std::io;
+
+<span class="Statement">fn</span> main() {
+    print_is_even(<span class="Constant">3</span>); <span class="Comment">// x is odd</span>
+    print_is_even(<span class="Constant">4</span>); <span class="Comment">// x is even</span>
+}
+
+<span class="Statement">fn</span> print_is_even(x: <span class="Type">i32</span>) {
+    <span class="Statement">if</span> x <span class="Operator">%</span> <span class="Constant">2</span> <span class="Operator">==</span> <span class="Constant">0</span> {
+        io::println(<span class="String">&quot;x is even!&quot;</span>);
+    } <span class="Statement">else</span> {
+        io::println(<span class="String">&quot;x is odd!&quot;</span>);
+    }
+}</pre>
+<p>You can use <code>else if</code> to check additional conditions.</p>
+<pre><span class="Statement">with</span> std::io;
+
+<span class="Statement">fn</span> greet(hour: <span class="Type">u8</span>) {
+    <span class="Statement">if</span> hour <span class="Operator">&lt;</span> <span class="Constant">12</span> {
+        io::println(<span class="String">&quot;Good morning!&quot;</span>);
+    } <span class="Statement">else</span> <span class="Statement">if</span> hour <span class="Operator">&lt;</span> <span class="Constant">18</span> {
+        io::println(<span class="String">&quot;Hello!&quot;</span>);
+    } <span class="Statement">else</span> {
+        io::println(<span class="String">&quot;Good evening!&quot;</span>);
+    }
+}</pre>
+<h3 id="switch-statements"><a href="#switch-statements"><code>switch</code> statements</a></h3>
+<p>The <code>switch</code> statement allows you to compare a value against several possible
+cases:</p>
+<pre><span class="Statement">with</span> std::io;
+
+<span class="Statement">fn</span> day_of_week(day: <span class="Type">u8</span>) {
+    <span class="Statement">switch</span> day {
+        <span class="Constant">1</span> { io::println(<span class="String">&quot;Monday&quot;</span>); }
+        <span class="Constant">2</span> { io::println(<span class="String">&quot;Tuesday&quot;</span>); }
+        <span class="Constant">3</span> { io::println(<span class="String">&quot;Wednesday&quot;</span>); }
+        <span class="Constant">4</span> { io::println(<span class="String">&quot;Thursday&quot;</span>); }
+        <span class="Constant">5</span> { io::println(<span class="String">&quot;Friday&quot;</span>); }
+        <span class="Constant">6</span> { io::println(<span class="String">&quot;Saturday&quot;</span>); }
+        <span class="Constant">7</span> { io::println(<span class="String">&quot;Sunday&quot;</span>); }
+        <span class="Statement">else</span> { io::println(<span class="String">&quot;Invalid day of week!&quot;</span>); }
+    }
+}</pre>
+<p>You can match multiple values in a single case.</p>
+<pre><span class="Statement">with</span> std::io;
+
+<span class="Statement">fn</span> is_weekend(day: <span class="Type">u8</span>) {
+    <span class="Statement">switch</span> day {
+        <span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>, <span class="Constant">5</span> { io::println(<span class="String">&quot;Weekday&quot;</span>); }
+        <span class="Constant">6</span>, <span class="Constant">7</span> { io::println(<span class="String">&quot;Weekend!&quot;</span>); }
+    }
 }</pre></div>
 </div>
 </main>
