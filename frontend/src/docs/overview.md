@@ -208,3 +208,77 @@ fn main() {
     let a = square(7); // a = 49
 }
 ```
+
+## Control flow
+
+### `if` statements
+
+Use the `if` statement to branch your code depending on a condition.
+
+```cent
+with std::io;
+
+fn main() {
+    print_is_even(3); // x is odd
+    print_is_even(4); // x is even
+}
+
+fn print_is_even(x: i32) {
+    if x % 2 == 0 {
+        io::println("x is even!");
+    } else {
+        io::println("x is odd!");
+    }
+}
+```
+
+You can use `else if` to check additional conditions.
+
+```cent
+with std::io;
+
+fn greet(hour: u8) {
+    if hour < 12 {
+        io::println("Good morning!");
+    } else if hour < 18 {
+        io::println("Hello!");
+    } else {
+        io::println("Good evening!");
+    }
+}
+```
+
+### `switch` statements
+
+The `switch` statement allows you to compare a value against several possible
+cases:
+
+```cent
+with std::io;
+
+fn day_of_week(day: u8) {
+    switch day {
+        1 { io::println("Monday"); }
+        2 { io::println("Tuesday"); }
+        3 { io::println("Wednesday"); }
+        4 { io::println("Thursday"); }
+        5 { io::println("Friday"); }
+        6 { io::println("Saturday"); }
+        7 { io::println("Sunday"); }
+        else { io::println("Invalid day of week!"); }
+    }
+}
+```
+
+You can match multiple values in a single case.
+
+```cent
+with std::io;
+
+fn is_weekend(day: u8) {
+    switch day {
+        1, 2, 3, 4, 5 { io::println("Weekday"); }
+        6, 7 { io::println("Weekend!"); }
+    }
+}
+```
