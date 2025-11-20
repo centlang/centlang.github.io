@@ -11,6 +11,7 @@ const editorPre = document.getElementById("editor-pre");
 
 const lines = document.getElementById("lines");
 
+const loading = document.getElementById("loading");
 const stdout = document.getElementById("stdout");
 const stderr = document.getElementById("stderr");
 const system = document.getElementById("system");
@@ -190,8 +191,9 @@ function ansiToHtml(input) {
 
 async function runCode() {
     try {
+        loading.style.display = "block";
         stderr.textContent = "";
-        stdout.textContent = "Running...";
+        stdout.textContent = "";
         system.textContent = "";
 
         const response = await fetch(`${API_URL}/run`, {
@@ -211,10 +213,12 @@ async function runCode() {
             throw new Error(result.detail);
         }
 
+        loading.style.display = "none";
         stderr.innerHTML = ansiToHtml(result.stderr).trim();
         stdout.innerHTML = ansiToHtml(result.stdout).trim();
         system.textContent = `Program returned ${result.exit}`;
     } catch (error) {
+        loading.style.display = "none";
         stderr.innerHTML = "";
         stdout.innerHTML = "";
         system.textContent = `Failed to run code: ${error.message}`;
