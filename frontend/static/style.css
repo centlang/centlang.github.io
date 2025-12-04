@@ -248,7 +248,6 @@ li::marker {
 
 .panel,
 .toc,
-.next,
 code,
 pre,
 button,
@@ -404,8 +403,7 @@ select {
 }
 
 .warning,
-.note,
-.next {
+.note {
     border-radius: var(--radius);
     padding: 0.75rem 1rem;
 }
@@ -433,20 +431,6 @@ select {
 
 .note::before {
     content: "NOTE!";
-}
-
-.next {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
-}
-
-.next:hover {
-    text-decoration: none;
-}
-
-.next::after {
-    content: ">>>";
 }
 
 .loading {

@@ -5,7 +5,7 @@
         "playground": "Playground",
         "news": "News",
         "tagline": "The systems programming language you <span class=\"accent\">learn fast</span> and <span class=\"accent\">run faster.</span>",
-        "get-started": "Get started",
+        "overview": "Overview",
         "download": "Download",
         "run-in-playground": "Run in playground >",
         "principles": {

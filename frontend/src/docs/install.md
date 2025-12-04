@@ -31,3 +31,7 @@ Verify the installation:
 $ centc --version
 Cent v0.1
 ```
+
+## Next steps
+
+When you're ready, go to the [Language Overview](/docs/overview/) to learn more about the language.
