@@ -460,19 +460,7 @@ select {
     }
 }
 
-.Statement {
-    color: #cba6f7;
-}
-
-.Include {
-    color: #cba6f7;
-}
-
-.Delimiter {
-    color: #9399b2;
-}
-
-.Keyword {
+.Repeat {
     color: #cba6f7;
 }
 
@@ -480,21 +468,8 @@ select {
     color: #89b4fa;
 }
 
-.String {
-    color: #a6e3a1;
-}
-
-.Constant {
-    color: #fab387;
-}
-
-.Operator {
-    color: #89dceb;
-}
-
-.Comment {
-    color: #9399b2;
-    font-style: italic;
+.Structure {
+    color: #f9e2af;
 }
 
 .Number {
@@ -505,6 +480,56 @@ select {
     color: #f9e2af;
 }
 
+.Keyword {
+    color: #cba6f7;
+}
+
+.Constant {
+    color: #fab387;
+}
+
+.PreProc {
+    color: #f5c2e7;
+}
+
+.Include {
+    color: #cba6f7;
+}
+
 .Boolean {
     color: #fab387;
+}
+
+.Comment {
+    font-style: italic;
+    color: #9399b2;
+}
+
+.Delimiter {
+    color: #9399b2;
+}
+
+.Operator {
+    color: #89dceb;
+}
+
+.Identifier {
+    color: #f2cdcd;
+}
+
+.Special {
+    color: #f5c2e7;
+}
+
+.Character {
+    color: #94e2d5;
+}
+
+.String {
+    color: #a6e3a1;
+}
+
+.Conditional {
+    font-style: italic;
+    color: #cba6f7;
 }
