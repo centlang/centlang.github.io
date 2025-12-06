@@ -496,6 +496,10 @@ select {
     color: #cba6f7;
 }
 
+.Statement {
+    color: #cba6f7
+}
+
 .Boolean {
     color: #fab387;
 }
