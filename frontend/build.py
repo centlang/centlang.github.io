@@ -98,7 +98,9 @@ def render_template(code: str, context: dict) -> str:
 
     return code
 
-def render_page(code: str, context: dict | None = None, md: bool = False) -> str:
+def render_page(
+    code: str, context: dict | None = None, md: bool = False
+) -> str:
     if context is None:
         context = {}
 
@@ -108,9 +110,13 @@ def render_page(code: str, context: dict | None = None, md: bool = False) -> str
         if match:
             path = os.path.join(TEMPLATES_DIR, f"{match.group(1)}.html")
 
-            content = Markdown(extensions=["toc", "fenced_code", HeaderLinkExtension()])
+            content = Markdown(
+                extensions=["toc", "fenced_code", HeaderLinkExtension()]
+            )
 
-            content_html = highlight_html(content.convert(re.sub(r"{%.*?%}", "", code)))
+            content_html = highlight_html(
+                content.convert(re.sub(r"{%.*?%}", "", code))
+            )
 
             return render_template(
                 open(path).read(),
@@ -157,7 +163,9 @@ def build_files(src_dir: str, build_dir: str, language: str):
                             "t": TRANSLATIONS[language],
                             "page": {
                                 "base": (
-                                    f"/{language}" if language != "default" else ""
+                                    f"/{language}"
+                                    if language != "default"
+                                    else ""
                                 )
                             },
                         },
@@ -170,6 +178,11 @@ def main():
     os.makedirs(BUILD_DIR)
 
     shutil.copytree(STATIC_DIR, os.path.join(BUILD_DIR, "static"))
+
+    shutil.copyfile(
+        os.path.join(STATIC_DIR, "favicon.ico"),
+        os.path.join(BUILD_DIR, "favicon.ico"),
+    )
 
     for language in TRANSLATIONS:
         if language == "default":
