@@ -13,7 +13,9 @@
 
 Download the latest Cent release for your architecture:
 
-- [Linux x86_64](https://github.com/centlang/cent/releases/latest/download/cent-linux-x86_64.tar.xz)
+- [x86_64](https://github.com/centlang/cent/releases/latest/download/cent-linux-x86_64.tar.xz)
+- [aarch64](https://github.com/centlang/cent/releases/latest/download/cent-linux-aarch64.tar.xz)
+- [riscv64](https://github.com/centlang/cent/releases/latest/download/cent-linux-riscv64.tar.xz)
 
 ### 2. Install
 
