@@ -96,14 +96,14 @@ Hello, world!</pre>
 <pre><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre>
 <p>To create a <em>mutable</em> variable, use the <code>mut</code> keyword.</p>
 <pre><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
-score <span class="Operator">=</span> <span class="Constant">10</span>;</pre>
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;</pre>
 <p>A variable's type can be specified explicitly:</p>
 <pre><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre>
 <p>Variables are zero-initialized if no value is given.</p>
 <pre><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre>
 <p>Cent is statically typed, so you cannot change the type of a variable.</p>
 <pre><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
-score <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre>
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre>
 <h2 id="comments"><a href="#comments">Comments</a></h2>
 <p>You can use comments to explain certain parts of your code. Comments start with
 <code>//</code>.</p>
