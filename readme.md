@@ -2,6 +2,8 @@
 
 Website for Cent programming language, built completely from scratch.
 
+![Preview](assets/preview.png)
+
 ## Running locally
 
 Requirements:
