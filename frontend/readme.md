@@ -1,4 +1,4 @@
-# Structure
+# Frontend Structure
 
 ## Templates
 
