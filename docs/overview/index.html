@@ -76,72 +76,72 @@
 <p>This tutorial assumes you are familiar with basic programming concepts and have
 used another programming language before.</p>
 <h2 id="hello-world"><a href="#hello-world">Hello, world!</a></h2>
-<p>We'll write a simple program that prints <code>Hello, world!</code> to the screen. Create a
-new file named <code>main.cn</code> with the following content:</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<p>We'll write a simple program that prints <code translate="no">Hello, world!</code> to the screen. Create a
+new file named <code translate="no">main.cn</code> with the following content:</p>
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
 }</pre>
 <p>Now, run these commands to compile and execute the program:</p>
-<pre>$ centc main.cn
+<pre translate="no">$ centc main.cn
 $ ./main
 Hello, world!</pre>
-<p>You can also use the <code>--run</code> option to automatically run the compiled
+<p>You can also use the <code translate="no">--run</code> option to automatically run the compiled
 executable:</p>
-<pre>$ centc main.cn <span class="Special">--run</span>
+<pre translate="no">$ centc main.cn <span class="Special">--run</span>
 Hello, world!</pre>
 <h2 id="variables"><a href="#variables">Variables</a></h2>
-<p>The <code>let</code> statement creates an <em>immutable</em> variable.</p>
-<pre><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre>
-<p>To create a <em>mutable</em> variable, use the <code>mut</code> keyword.</p>
-<pre><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+<p>The <code translate="no">let</code> statement creates an <em>immutable</em> variable.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre>
+<p>To create a <em>mutable</em> variable, use the <code translate="no">mut</code> keyword.</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;</pre>
 <p>A variable's type can be specified explicitly:</p>
-<pre><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre>
 <p>Variables are zero-initialized if no value is given.</p>
-<pre><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre>
 <p>Cent is statically typed, so you cannot change the type of a variable.</p>
-<pre><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre>
 <h2 id="comments"><a href="#comments">Comments</a></h2>
 <p>You can use comments to explain certain parts of your code. Comments start with
-<code>//</code>.</p>
-<pre><span class="Statement">let</span> <span class="Identifier">variable</span> <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// this is a variable</span></pre>
+<code translate="no">//</code>.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">variable</span> <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// this is a variable</span></pre>
 <h2 id="constants"><a href="#constants">Constants</a></h2>
-<p>To create a constant, use the <code>const</code> keyword. Constants are computed at compile
+<p>To create a constant, use the <code translate="no">const</code> keyword. Constants are computed at compile
 time.</p>
-<pre><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
+<pre translate="no"><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
 <span class="Statement">const</span> <span class="Identifier">GOLDEN_RATIO</span> <span class="Operator">=</span> <span class="Constant">1.618</span>;
 <span class="Statement">const</span> <span class="Identifier">SECONDS_IN_A_DAY</span> <span class="Operator">=</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">24</span>;</pre>
 <p>It is a convention to name constants all uppercase with underscores between
 words.</p>
 <h2 id="primitive-types"><a href="#primitive-types">Primitive types</a></h2>
 <h3 id="integer-types"><a href="#integer-types">Integer types</a></h3>
-<p>Integer types start with either <code>i</code> or <code>u</code>. Integer types starting with <code>u</code> are
+<p>Integer types start with either <code translate="no">i</code> or <code translate="no">u</code>. Integer types starting with <code translate="no">u</code> are
 <em>unsigned</em>, meaning they can't be negative. After that, the size in bits is
 specified:</p>
-<pre><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
+<pre translate="no"><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
 <span class="Type">u8</span> <span class="Type">u16</span> <span class="Type">u32</span> <span class="Type">u64</span> <span class="Comment">// unsigned</span></pre>
 <p>Unsigned integer types can represent larger positive values than their signed
 counterparts.</p>
 <h3 id="size-types"><a href="#size-types">Size types</a></h3>
-<p>You can use <code>usize</code> and <code>isize</code>. They have the size of the pointer type on the
+<p>You can use <code translate="no">usize</code> and <code translate="no">isize</code>. They have the size of the pointer type on the
 current architecture and are commonly used for indexing.</p>
 <h3 id="floating-point-types"><a href="#floating-point-types">Floating-point types</a></h3>
 <p>Floating-point types are used to store numbers with decimal points. In Cent,
-there are two such types: <code>f32</code> and <code>f64</code>.</p>
-<h3 id="the-bool-type"><a href="#the-bool-type">The <code>bool</code> type</a></h3>
-<p>A <code>bool</code> value is either <code>true</code> or <code>false</code>.</p>
-<h3 id="the-rune-type"><a href="#the-rune-type">The <code>rune</code> type</a></h3>
-<p>The <code>rune</code> type represents a Unicode code point.</p>
+there are two such types: <code translate="no">f32</code> and <code translate="no">f64</code>.</p>
+<h3 id="the-bool-type"><a href="#the-bool-type">The <code translate="no">bool</code> type</a></h3>
+<p>A <code translate="no">bool</code> value is either <code translate="no">true</code> or <code translate="no">false</code>.</p>
+<h3 id="the-rune-type"><a href="#the-rune-type">The <code translate="no">rune</code> type</a></h3>
+<p>The <code translate="no">rune</code> type represents a Unicode code point.</p>
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
 <p>"What about the string type?" you may ask. In Cent, strings are actually just
 arrays of bytes. We'll talk about them later.</p>
 <h2 id="functions"><a href="#functions">Functions</a></h2>
-<p>Functions are defined by using the <code>fn</code> keyword. The <code>main</code> function is the
+<p>Functions are defined by using the <code translate="no">fn</code> keyword. The <code translate="no">main</code> function is the
 entry point of the program. Functions can be used <em>before</em> they're defined.</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Function">hello_world</span>();
@@ -152,12 +152,12 @@ entry point of the program. Functions can be used <em>before</em> they're define
 }</pre>
 <p>You can specify the return type after the parentheses. If no return type is
 specified, the function is assumed to return nothing. To return a value from a
-function, use the <code>return</code> statement:</p>
-<pre><span class="Statement">fn</span> <span class="Function">get_magic_number</span>() <span class="Type">i32</span> {
+function, use the <code translate="no">return</code> statement:</p>
+<pre translate="no"><span class="Statement">fn</span> <span class="Function">get_magic_number</span>() <span class="Type">i32</span> {
     <span class="Statement">return</span> <span class="Constant">42</span>;
 }</pre>
 <p>Functions can take parameters.</p>
-<pre><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">4</span>); <span class="Comment">// a = 7</span>
 }
 
@@ -167,7 +167,7 @@ function, use the <code>return</code> statement:</p>
 <h3 id="default-parameters"><a href="#default-parameters">Default parameters</a></h3>
 <p>You can define <em>default</em> parameters. If arguments aren't provided, the default
 values are used.</p>
-<pre><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">let</span> <span class="Identifier">ten</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">7</span>);
     <span class="Statement">let</span> <span class="Identifier">nine</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">3</span>, <span class="Constant">3</span>);
     <span class="Statement">let</span> <span class="Identifier">one</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">1</span>, <span class="Operator">-</span><span class="Constant">1</span>, <span class="Constant">1</span>, <span class="Constant">0</span>);
@@ -179,7 +179,7 @@ values are used.</p>
 <h3 id="inner-functions"><a href="#inner-functions">Inner functions</a></h3>
 <p>Functions can be defined inside other functions. Inner functions are only
 visible within the function where they are defined.</p>
-<pre><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">fn</span> <span class="Function">square</span>(<span class="Identifier">x</span>: <span class="Type">i32</span>) <span class="Type">i32</span> {
         <span class="Statement">return</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span>;
     }
@@ -187,9 +187,9 @@ visible within the function where they are defined.</p>
     <span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Function">square</span>(<span class="Constant">7</span>); <span class="Comment">// a = 49</span>
 }</pre>
 <h2 id="control-flow"><a href="#control-flow">Control flow</a></h2>
-<h3 id="if-statements"><a href="#if-statements"><code>if</code> statements</a></h3>
-<p>Use the <code>if</code> statement to branch your code depending on a condition.</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<h3 id="if-statements"><a href="#if-statements"><code translate="no">if</code> statements</a></h3>
+<p>Use the <code translate="no">if</code> statement to branch your code depending on a condition.</p>
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Function">print_is_even</span>(<span class="Constant">3</span>); <span class="Comment">// x is odd</span>
@@ -203,8 +203,8 @@ visible within the function where they are defined.</p>
         <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;x is odd!&quot;</span>);
     }
 }</pre>
-<p>You can use <code>else if</code> to check additional conditions.</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<p>You can use <code translate="no">else if</code> to check additional conditions.</p>
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">greet</span>(<span class="Identifier">hour</span>: <span class="Type">u8</span>) {
     <span class="Statement">if</span> <span class="Identifier">hour</span> <span class="Operator">&lt;</span> <span class="Constant">12</span> {
@@ -215,10 +215,10 @@ visible within the function where they are defined.</p>
         <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Good evening!&quot;</span>);
     }
 }</pre>
-<h3 id="switch-statements"><a href="#switch-statements"><code>switch</code> statements</a></h3>
-<p>The <code>switch</code> statement allows you to compare a value against several possible
+<h3 id="switch-statements"><a href="#switch-statements"><code translate="no">switch</code> statements</a></h3>
+<p>The <code translate="no">switch</code> statement allows you to compare a value against several possible
 cases:</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">day_of_week</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
     <span class="Statement">switch</span> <span class="Identifier">day</span> {
@@ -233,7 +233,7 @@ cases:</p>
     }
 }</pre>
 <p>You can match multiple values in a single case.</p>
-<pre><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">is_weekend</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
     <span class="Statement">switch</span> <span class="Identifier">day</span> {

@@ -52,24 +52,24 @@
 <h2 id="linux"><a href="#linux">Linux</a></h2>
 <h3 id="1-install-build-dependencies"><a href="#1-install-build-dependencies">1. Install build dependencies</a></h3>
 <p>Void Linux:</p>
-<pre>$ sudo xbps-install <span class="Special">-Syu</span> cmake ninja gcc git</pre>
+<pre translate="no">$ sudo xbps-install <span class="Special">-Syu</span> cmake ninja gcc git</pre>
 <p>Debian/Ubuntu:</p>
-<pre>$ sudo apt-get install <span class="Special">-y</span> build-essential cmake ninja-build git</pre>
+<pre translate="no">$ sudo apt-get install <span class="Special">-y</span> build-essential cmake ninja-build git</pre>
 <p>Arch Linux:</p>
-<pre>$ sudo pacman <span class="Special">-Syu</span> cmake ninja gcc git</pre>
+<pre translate="no">$ sudo pacman <span class="Special">-Syu</span> cmake ninja gcc git</pre>
 <h3 id="2-clone"><a href="#2-clone">2. Clone</a></h3>
 <p>Clone the repository:</p>
-<pre>$ git clone https://github.com/centlang/cent &amp;&amp; <span class="Statement">cd</span> cent</pre>
+<pre translate="no">$ git clone https://github.com/centlang/cent &amp;&amp; <span class="Statement">cd</span> cent</pre>
 <h3 id="3-build-and-install"><a href="#3-build-and-install">3. Build and install</a></h3>
 <p>Build:</p>
-<pre>$ <span class="Statement">mkdir</span> build &amp;&amp; <span class="Statement">cd</span> build
+<pre translate="no">$ <span class="Statement">mkdir</span> build &amp;&amp; <span class="Statement">cd</span> build
 $ cmake .. <span class="Special">-DCMAKE_BUILD_TYPE</span><span class="Operator">=</span>Release <span class="Special">-GNinja</span>
 $ ninja</pre>
 <p>Install:</p>
-<pre>$ sudo ninja install</pre>
+<pre translate="no">$ sudo ninja install</pre>
 <h3 id="4-verify"><a href="#4-verify">4. Verify</a></h3>
 <p>Verify the installation:</p>
-<pre>$ centc <span class="Special">--version</span>
+<pre translate="no">$ centc <span class="Special">--version</span>
 Cent v0.<span class="Constant">1</span></pre></div>
 </div>
 </main>
