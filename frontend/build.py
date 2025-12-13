@@ -46,7 +46,7 @@ def nvim_to_html(code: str, lang: str) -> str:
     os.remove(tmp_input_path)
     os.remove(tmp_output_path)
 
-    return f"<pre>{(match.group(1) if match else code).strip()}</pre>"
+    return f'<pre translate="no">{(match.group(1) if match else code).strip()}</pre>'
 
 def slugify(value: str) -> str:
     return re.sub(r"[\W_]+", "-", value.lower()).strip("-")
@@ -65,9 +65,27 @@ class HeaderLinker(Treeprocessor):
 
                 elem.set("id", id)
 
+class DisableTranslate(Treeprocessor):
+    def run(self, root: ElementTree.Element) -> None:
+        for elem in root.iter():
+            text = elem.text or ""
+
+            elem.text = re.sub(
+                r"`([^`]+)`",
+                lambda m: f'<code translate="no">{m.group(1)}</code>',
+                text,
+                flags=re.DOTALL,
+            )
+
 class HeaderLinkExtension(Extension):
     def extendMarkdown(self, md: Markdown) -> None:
         md.treeprocessors.register(HeaderLinker(md), "headerlinker", 100)
+
+class DisableTranslateExtension(Extension):
+    def extendMarkdown(self, md: Markdown) -> None:
+        md.treeprocessors.register(
+            DisableTranslate(md), "disabletranslate", 100
+        )
 
 def highlight_html(code: str) -> str:
     return re.sub(
@@ -111,7 +129,12 @@ def render_page(
             path = os.path.join(TEMPLATES_DIR, f"{match.group(1)}.html")
 
             content = Markdown(
-                extensions=["toc", "fenced_code", HeaderLinkExtension()]
+                extensions=[
+                    "toc",
+                    "fenced_code",
+                    HeaderLinkExtension(),
+                    DisableTranslateExtension(),
+                ]
             )
 
             content_html = highlight_html(
