@@ -6,12 +6,6 @@
 
 ### 1. Install build dependencies
 
-Void Linux:
-
-```sh
-$ sudo xbps-install -Syu cmake ninja gcc git
-```
-
 Debian/Ubuntu:
 
 ```sh
@@ -22,6 +16,12 @@ Arch Linux:
 
 ```sh
 $ sudo pacman -Syu cmake ninja gcc git
+```
+
+Void Linux:
+
+```sh
+$ sudo xbps-install -Syu cmake ninja gcc git
 ```
 
 ### 2. Clone
