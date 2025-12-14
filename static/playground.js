@@ -229,6 +229,7 @@ function highlightCent(input) {
     const TOKENS = [
         { className: "Comment", regex: /\/\/.*/y },
         { className: "String", regex: /"(?:\\.|[^"\\])*"/y },
+        { className: "Character", regex: /'(?:\\.|[^'\\])*'/y },
         { className: "Number", regex: /\b[0-9][0-9_]*\b/y },
         { className: "Number", regex: /\b0x[0-9a-fA-F_]*\b/y },
         { className: "Number", regex: /\b0b[01_]*\b/y },
