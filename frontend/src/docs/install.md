@@ -19,10 +19,23 @@ Download the latest Cent release for your architecture:
 
 ### 2. Install
 
-Extract the archive you just downloaded to `/usr/local/`:
+Extract the archive to `~/cent`:
 
 ```sh
-$ sudo tar -xJf cent-linux-x86_64.tar.xz -C /usr/local/
+$ mkdir -p ~/cent
+$ tar -xJf cent-linux-x86_64.tar.xz -C ~/cent
+```
+
+Add `~/cent/bin` to your `$PATH` by adding this line to your `~/.bashrc` (for Bash):
+
+```sh
+export PATH="$PATH:$HOME/cent/bin"
+```
+
+Apply the changes:
+
+```sh
+$ source ~/.bashrc
 ```
 
 ### 3. Verify

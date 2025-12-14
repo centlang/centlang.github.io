@@ -9,8 +9,7 @@ as well.
 Variables use the `{{ <variable name> }}` syntax:
 
 ```html
-{{ content }}
-{{ page.base }}
+{{ content }} {{ page.base }}
 ```
 
 ## Adding content
