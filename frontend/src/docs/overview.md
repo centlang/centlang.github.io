@@ -282,3 +282,58 @@ fn is_weekend(day: u8) {
     }
 }
 ```
+
+### `while` loops
+
+A `while` loop will run as long as the condition is `true`.
+
+```cent
+fn main() {
+    mut i = 0;
+
+    while i < 10 {
+        i += 1;
+    }
+
+    // i = 10
+}
+```
+
+You can use `while true` to create an infinite loop. To exit a loop, use the `break` keyword.
+
+```cent
+fn main() {
+    mut i = 0;
+
+    while true {
+        if i == 100 {
+            break;
+        }
+
+        i += 2;
+    }
+
+    // i = 100
+}
+```
+
+To skip an iteration, use the `continue` keyword:
+
+```cent
+fn main() {
+    mut i = 0;
+    mut sum = 0;
+
+    while i < 10 {
+        i += 1;
+
+        if i % 2 == 0 {
+            continue;
+        }
+
+        sum += i;
+    }
+
+    // sum = 25
+}
+```
