@@ -48,6 +48,8 @@
 <li><a href="#the-rune-type">The rune type</a></li>
 <li><a href="#array-types">Array types</a></li>
 <li><a href="#slice-types">Slice types</a></li>
+<li><a href="#optional-types">Optional types</a></li>
+<li><a href="#pointer-types">Pointer types</a></li>
 <li><a href="#strings">Strings?</a></li>
 </ul>
 </li>
@@ -148,7 +150,8 @@ there are two such types: <code translate="no">f32</code> and <code translate="n
 <p>The <code translate="no">rune</code> type represents a Unicode code point and is 4 bytes long.</p>
 <pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Identifier">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre>
 <h3 id="array-types"><a href="#array-types">Array types</a></h3>
-<p>Arrays hold multiple values of the same type:</p>
+<p>Array types are created by using the <code translate="no">[N]T</code> syntax. Arrays hold multiple values
+of the same type:</p>
 <pre translate="no"><span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Constant">4</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>};
 <span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>}; <span class="Comment">// array length can be deduced</span></pre>
 <p>Arrays can be of <em>variable length</em>.</p>
@@ -161,13 +164,44 @@ there are two such types: <code translate="no">f32</code> and <code translate="n
 <span class="Identifier">n</span> <span class="Operator">=</span> <span class="Constant">1024</span>;
 <span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Identifier">n</span>]<span class="Type">u8</span>;</pre>
 <h3 id="slice-types"><a href="#slice-types">Slice types</a></h3>
-<p>Slice types represent a view into a sequence of elements. They consist of a
-pointer and a length.</p>
+<p>Slice types are created by using the <code translate="no">[]T</code> syntax. Slices represent a view into
+a sequence of elements. They consist of a pointer and a length.</p>
 <pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
 <span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
 
 <span class="Statement">let</span> <span class="Identifier">len</span> <span class="Operator">=</span> <span class="Identifier">slice</span>.<span class="Identifier">len</span>;
 <span class="Statement">let</span> <span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">slice</span>[<span class="Constant">0</span>];</pre>
+<p>Slices can be mutable:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Statement">mut</span> <span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
+
+<span class="Identifier">slice</span>[<span class="Constant">10</span>] <span class="Operator">=</span> <span class="Constant">42</span>;</pre>
+<h3 id="optional-types"><a href="#optional-types">Optional types</a></h3>
+<p>Optional values can either be <code translate="no">null</code> or contain a value. To create an optional
+type, use the <code translate="no">?T</code> syntax:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>; <span class="Comment">// optional != null</span>
+
+<span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">null</span>; <span class="Comment">// optional == null</span></pre>
+<p>To access the contained value without any checks, use the <code translate="no">.!</code> syntax:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>;
+<span class="Statement">let</span> <span class="Identifier">value</span> <span class="Operator">=</span> <span class="Identifier">optional</span>.<span class="Operator">!</span>;</pre>
+<h3 id="pointer-types"><a href="#pointer-types">Pointer types</a></h3>
+<p>Pointers reference a value in memory. To create a pointer type, use the <code translate="no">*T</code>
+syntax.</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>; <span class="Comment">// *ptr = 42</span>
+<span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// *ptr = 422</span></pre>
+<p>Pointers can be mutable:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Statement">mut</span> <span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>;
+<span class="Operator">*</span><span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// x = 422</span></pre>
+<div class="note">
+    In Cent, pointers can't be `null`. If you need a nullable pointer, use an
+    <em>optional pointer type</em>. An optional pointer has the same size as a
+    regular pointer.
+</div>
+
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
 <p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
 <pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
@@ -273,18 +307,23 @@ cases:</p>
 }</pre>
 <h3 id="while-loops"><a href="#while-loops"><code translate="no">while</code> loops</a></h3>
 <p>A <code translate="no">while</code> loop will run as long as the condition is <code translate="no">true</code>.</p>
-<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 
     <span class="Statement">while</span> <span class="Identifier">i</span> <span class="Operator">&lt;</span> <span class="Constant">10</span> {
         <span class="Identifier">i</span> <span class="Operator">+=</span> <span class="Constant">1</span>;
     }
 
-    <span class="Comment">// i = 10</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>); <span class="Comment">// 10</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
 }</pre>
 <p>You can use <code translate="no">while true</code> to create an infinite loop. To exit a loop, use the
 <code translate="no">break</code> keyword.</p>
-<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 
     <span class="Statement">while</span> <span class="Constant">true</span> {
@@ -295,10 +334,13 @@ cases:</p>
         <span class="Identifier">i</span> <span class="Operator">+=</span> <span class="Constant">2</span>;
     }
 
-    <span class="Comment">// i = 100</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>); <span class="Comment">// 100</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
 }</pre>
 <p>To skip an iteration, use the <code translate="no">continue</code> keyword:</p>
-<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
     <span class="Statement">mut</span> <span class="Identifier">sum</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 
@@ -312,7 +354,8 @@ cases:</p>
         <span class="Identifier">sum</span> <span class="Operator">+=</span> <span class="Identifier">i</span>;
     }
 
-    <span class="Comment">// sum = 25</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">sum</span>); <span class="Comment">// 25</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
 }</pre>
 <h3 id="for-loops"><a href="#for-loops"><code translate="no">for</code> loops</a></h3>
 <p><code translate="no">for</code> loops allow you to iterate through a range or a sequence.</p>
