@@ -76,6 +76,21 @@ mut score = 10;
 score = 4.5; // invalid!
 ```
 
+You can, however, _shadow_ a variable, meaning to create a new variable with the
+same name:
+
+```cent
+mut score = 10;
+mut score = 4.5;
+score = 7.3;
+```
+
+```cent
+mut score = 10;
+let score = score; // score is no longer mutable
+score = 7; // invalid!
+```
+
 ## Comments
 
 You can use comments to explain certain parts of your code. Comments start with
