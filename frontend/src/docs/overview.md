@@ -203,6 +203,25 @@ let slice: []mut u8 = data;
 slice[10] = 42;
 ```
 
+### Optional types
+
+Optional values can either be `null` or contain a value. To create an optional
+type, use the `?T` syntax:
+
+```cent
+mut optional: ?i32 = 32; // optional != null
+
+optional = 42;
+optional = null; // optional == null
+```
+
+To access the contained value without any checks, use the `.!` syntax:
+
+```cent
+mut optional: ?i32 = 32;
+let value = optional.!;
+```
+
 ### Strings?
 
 In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
