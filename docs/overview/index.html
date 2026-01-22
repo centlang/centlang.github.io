@@ -41,24 +41,24 @@
 <li><a href="#variables">Variables</a></li>
 <li><a href="#comments">Comments</a></li>
 <li><a href="#constants">Constants</a></li>
-<li><a href="#primitive-types">Primitive types</a><ul>
+<li><a href="#data-types">Data types</a><ul>
 <li><a href="#integer-types">Integer types</a></li>
-<li><a href="#size-types">Size types</a></li>
 <li><a href="#floating-point-types">Floating-point types</a></li>
 <li><a href="#the-bool-type">The bool type</a></li>
 <li><a href="#the-rune-type">The rune type</a></li>
 <li><a href="#strings">Strings?</a></li>
 </ul>
 </li>
+<li><a href="#with-statements">with statements</a></li>
 <li><a href="#functions">Functions</a><ul>
 <li><a href="#default-parameters">Default parameters</a></li>
-<li><a href="#inner-functions">Inner functions</a></li>
 </ul>
 </li>
 <li><a href="#control-flow">Control flow</a><ul>
 <li><a href="#if-statements">if statements</a></li>
 <li><a href="#switch-statements">switch statements</a></li>
 <li><a href="#while-loops">while loops</a></li>
+<li><a href="#for-loops">for loops</a></li>
 </ul>
 </li>
 </ul>
@@ -105,6 +105,14 @@ Hello, world!</pre>
 <p>Cent is statically typed, so you cannot change the type of a variable.</p>
 <pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre>
+<p>You can, however, <em>shadow</em> a variable, meaning to create a new variable with the
+same name:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>;
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7.3</span>;</pre>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<span class="Statement">let</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Identifier">score</span>; <span class="Comment">// score is no longer mutable</span>
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7</span>; <span class="Comment">// invalid!</span></pre>
 <h2 id="comments"><a href="#comments">Comments</a></h2>
 <p>You can use comments to explain certain parts of your code. Comments start with
 <code translate="no">//</code>.</p>
@@ -115,33 +123,41 @@ time.</p>
 <pre translate="no"><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
 <span class="Statement">const</span> <span class="Identifier">GOLDEN_RATIO</span> <span class="Operator">=</span> <span class="Constant">1.618</span>;
 <span class="Statement">const</span> <span class="Identifier">SECONDS_IN_A_DAY</span> <span class="Operator">=</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">24</span>;</pre>
-<p>It is a convention to name constants all uppercase with underscores between
-words.</p>
-<h2 id="primitive-types"><a href="#primitive-types">Primitive types</a></h2>
+<h2 id="data-types"><a href="#data-types">Data types</a></h2>
 <h3 id="integer-types"><a href="#integer-types">Integer types</a></h3>
 <p>Integer types start with either <code translate="no">i</code> or <code translate="no">u</code>. Integer types starting with <code translate="no">u</code> are
-<em>unsigned</em>, meaning they can't be negative. After that, the size in bits is
-specified:</p>
+<em>unsigned</em>. After that, the size in bits is specified:</p>
 <pre translate="no"><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
 <span class="Type">u8</span> <span class="Type">u16</span> <span class="Type">u32</span> <span class="Type">u64</span> <span class="Comment">// unsigned</span></pre>
-<p>Unsigned integer types can represent larger positive values than their signed
-counterparts.</p>
-<h3 id="size-types"><a href="#size-types">Size types</a></h3>
-<p>You can use <code translate="no">usize</code> and <code translate="no">isize</code>. They have the size of the pointer type on the
-current architecture and are commonly used for indexing.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">u64</span> <span class="Operator">=</span> <span class="Constant">3</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">i8</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Constant">128</span>;</pre>
+<p>There are special <code translate="no">usize</code> and <code translate="no">isize</code> types. They have the size of the pointer
+type and are usually used for indexing.</p>
 <h3 id="floating-point-types"><a href="#floating-point-types">Floating-point types</a></h3>
 <p>Floating-point types are used to store numbers with decimal points. In Cent,
 there are two such types: <code translate="no">f32</code> and <code translate="no">f64</code>.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">f32</span> <span class="Operator">=</span> <span class="Constant">3.5</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">f64</span> <span class="Operator">=</span> <span class="Constant">1.2345678</span>;</pre>
 <h3 id="the-bool-type"><a href="#the-bool-type">The <code translate="no">bool</code> type</a></h3>
-<p>A <code translate="no">bool</code> value is either <code translate="no">true</code> or <code translate="no">false</code>.</p>
+<p>A <code translate="no">bool</code> value is either <code translate="no">true</code> or <code translate="no">false</code>:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">raining</span>: <span class="Type">bool</span> <span class="Operator">=</span> <span class="Constant">false</span>;
+<span class="Identifier">raining</span> <span class="Operator">=</span> <span class="Constant">true</span>;</pre>
 <h3 id="the-rune-type"><a href="#the-rune-type">The <code translate="no">rune</code> type</a></h3>
-<p>The <code translate="no">rune</code> type represents a Unicode code point.</p>
+<p>The <code translate="no">rune</code> type represents a Unicode code point and is 4 bytes long.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Identifier">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre>
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
-<p>"What about the string type?" you may ask. In Cent, strings are actually just
-arrays of bytes. We'll talk about them later.</p>
+<p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
+<span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>}</pre>
+<h2 id="with-statements"><a href="#with-statements"><code translate="no">with</code> statements</a></h2>
+<p>You can use the <code translate="no">with</code> statement to import an external module.</p>
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">fs</span>;
+
+<span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">posix</span> <span class="Operator">as</span> <span class="Identifier">os</span>; <span class="Comment">// import under a different name</span></pre>
 <h2 id="functions"><a href="#functions">Functions</a></h2>
 <p>Functions are defined by using the <code translate="no">fn</code> keyword. The <code translate="no">main</code> function is the
-entry point of the program. Functions can be used <em>before</em> they're defined.</p>
+entry point of the program. Functions can be used before they're defined.</p>
 <pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
@@ -176,16 +192,6 @@ values are used.</p>
 
 <span class="Statement">fn</span> <span class="Function">add</span>(<span class="Identifier">a</span>: <span class="Type">i32</span>, <span class="Identifier">b</span>: <span class="Type">i32</span>, <span class="Identifier">c</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>, <span class="Identifier">d</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>) <span class="Type">i32</span> {
     <span class="Statement">return</span> <span class="Identifier">a</span> <span class="Operator">+</span> <span class="Identifier">b</span> <span class="Operator">+</span> <span class="Identifier">c</span> <span class="Operator">+</span> <span class="Identifier">d</span>;
-}</pre>
-<h3 id="inner-functions"><a href="#inner-functions">Inner functions</a></h3>
-<p>Functions can be defined inside other functions. Inner functions are only
-visible within the function where they are defined.</p>
-<pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
-    <span class="Statement">fn</span> <span class="Function">square</span>(<span class="Identifier">x</span>: <span class="Type">i32</span>) <span class="Type">i32</span> {
-        <span class="Statement">return</span> <span class="Identifier">x</span> <span class="Operator">*</span> <span class="Identifier">x</span>;
-    }
-
-    <span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Function">square</span>(<span class="Constant">7</span>); <span class="Comment">// a = 49</span>
 }</pre>
 <h2 id="control-flow"><a href="#control-flow">Control flow</a></h2>
 <h3 id="if-statements"><a href="#if-statements"><code translate="no">if</code> statements</a></h3>
@@ -253,7 +259,8 @@ cases:</p>
 
     <span class="Comment">// i = 10</span>
 }</pre>
-<p>You can use <code translate="no">while true</code> to create an infinite loop. To exit a loop, use the <code translate="no">break</code> keyword.</p>
+<p>You can use <code translate="no">while true</code> to create an infinite loop. To exit a loop, use the
+<code translate="no">break</code> keyword.</p>
 <pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 
@@ -283,6 +290,26 @@ cases:</p>
     }
 
     <span class="Comment">// sum = 25</span>
+}</pre>
+<h3 id="for-loops"><a href="#for-loops"><code translate="no">for</code> loops</a></h3>
+<p><code translate="no">for</code> loops allow you to iterate through a range or a sequence.</p>
+<p><em>Exclusive</em> ranges are created by using the <code translate="no">x..y</code> syntax:</p>
+<pre translate="no">with std::io;
+
+fn main() {
+    for i in 1..10 {
+        io::print_int(i);
+        io::print_rune('\n');
+    }
+}</pre>
+<p>To create an <em>inclusive</em> range, use the <code translate="no">x..=y</code> syntax:</p>
+<pre translate="no">with std::io;
+
+fn main() {
+    for i in 1..=10 {
+        io::print_int(i);
+        io::print_rune('\n');
+    }
 }</pre></div>
 </div>
 </main>
