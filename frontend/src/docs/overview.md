@@ -158,13 +158,35 @@ The `rune` type represents a Unicode code point and is 4 bytes long.
 let the_letter_h: rune = 'h';
 ```
 
+### Array types
+
+Arrays hold multiple values of the same type:
+
+```cent
+let data = [4]u8{0xff, 0xff, 0xff, 0x0};
+let data = [_]u8{0xff, 0xff, 0xff, 0x0}; // array length can be deduced
+```
+
+Arrays can be of _variable length_.
+
+<div class="warning">
+    Variable-length arrays are allocated on the stack, which has a limited size.
+    If the array size is too large, this can result in a stack overflow.
+</div>
+
+```cent
+mut n: usize = 16;
+n = 1024;
+mut data: [n]u8;
+```
+
 ### Strings?
 
 In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
 
 ```cent
 let language: [4]u8 = "Cent";
-let language: [4]u8 = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
+let language = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
 ```
 
 ## `with` statements
@@ -370,7 +392,7 @@ fn main() {
 
 _Exclusive_ ranges are created by using the `x..y` syntax:
 
-```
+```cent
 with std::io;
 
 fn main() {
@@ -383,7 +405,7 @@ fn main() {
 
 To create an _inclusive_ range, use the `x..=y` syntax:
 
-```
+```cent
 with std::io;
 
 fn main() {

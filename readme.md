@@ -25,7 +25,7 @@ Build the website:
 ```sh
 $ cd frontend
 $ pip install -r requirements.txt
-$ python3 build.py
+$ python build.py
 $ cd ..
 ```
 
