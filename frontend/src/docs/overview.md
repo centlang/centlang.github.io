@@ -167,6 +167,17 @@ let language: [4]u8 = "Cent";
 let language: [4]u8 = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
 ```
 
+## `with` statements
+
+You can use the `with` statement to import an external module.
+
+```cent
+with std::io;
+with std::fs;
+
+with std::posix as os; // import under a different name
+```
+
 ## Functions
 
 Functions are defined by using the `fn` keyword. The `main` function is the
