@@ -352,3 +352,33 @@ fn main() {
     // sum = 25
 }
 ```
+
+### `for` loops
+
+`for` loops allow you to iterate through a range or a sequence.
+
+_Exclusive_ ranges are created by using the `x..y` syntax:
+
+```
+with std::io;
+
+fn main() {
+    for i in 1..10 {
+        io::print_int(i);
+        io::print_rune('\n');
+    }
+}
+```
+
+To create an _inclusive_ range, use the `x..=y` syntax:
+
+```
+with std::io;
+
+fn main() {
+    for i in 1..=10 {
+        io::print_int(i);
+        io::print_rune('\n');
+    }
+}
+```
