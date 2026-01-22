@@ -348,6 +348,8 @@ fn is_weekend(day: u8) {
 A `while` loop will run as long as the condition is `true`.
 
 ```cent
+with std::io;
+
 fn main() {
     mut i = 0;
 
@@ -355,7 +357,8 @@ fn main() {
         i += 1;
     }
 
-    // i = 10
+    io::print_int(i); // 10
+    io::print_rune('\n');
 }
 ```
 
@@ -363,6 +366,8 @@ You can use `while true` to create an infinite loop. To exit a loop, use the
 `break` keyword.
 
 ```cent
+with std::io;
+
 fn main() {
     mut i = 0;
 
@@ -374,13 +379,16 @@ fn main() {
         i += 2;
     }
 
-    // i = 100
+    io::print_int(i); // 100
+    io::print_rune('\n');
 }
 ```
 
 To skip an iteration, use the `continue` keyword:
 
 ```cent
+with std::io;
+
 fn main() {
     mut i = 0;
     mut sum = 0;
@@ -395,7 +403,8 @@ fn main() {
         sum += i;
     }
 
-    // sum = 25
+    io::print_int(sum); // 25
+    io::print_rune('\n');
 }
 ```
 
