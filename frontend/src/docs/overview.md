@@ -180,6 +180,19 @@ n = 1024;
 mut data: [n]u8;
 ```
 
+### Slice types
+
+Slice types represent a view into a sequence of elements. They consist of a
+pointer and a length.
+
+```cent
+mut data: [1024]u8;
+let slice: []u8 = data;
+
+let len = slice.len;
+let ptr = &slice[0];
+```
+
 ### Strings?
 
 In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
