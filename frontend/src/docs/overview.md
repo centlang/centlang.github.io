@@ -96,52 +96,66 @@ const GOLDEN_RATIO = 1.618;
 const SECONDS_IN_A_DAY = 60 * 60 * 24;
 ```
 
-It is a convention to name constants all uppercase with underscores between
-words.
-
-## Primitive types
+## Data types
 
 ### Integer types
 
 Integer types start with either `i` or `u`. Integer types starting with `u` are
-_unsigned_, meaning they can't be negative. After that, the size in bits is
-specified:
+_unsigned_. After that, the size in bits is specified:
 
 ```cent
 i8 i16 i32 i64 // signed
 u8 u16 u32 u64 // unsigned
 ```
 
-Unsigned integer types can represent larger positive values than their signed
-counterparts.
+```cent
+let a: u64 = 3;
+let b: i8 = -128;
+```
 
-### Size types
-
-You can use `usize` and `isize`. They have the size of the pointer type on the
-current architecture and are commonly used for indexing.
+There are special `usize` and `isize` types. They have the size of the pointer
+type and are usually used for indexing.
 
 ### Floating-point types
 
 Floating-point types are used to store numbers with decimal points. In Cent,
 there are two such types: `f32` and `f64`.
 
+```cent
+let a: f32 = 3.5;
+let b: f64 = 1.2345678;
+```
+
 ### The `bool` type
 
-A `bool` value is either `true` or `false`.
+A `bool` value is either `true` or `false`:
+
+```cent
+mut raining: bool = false;
+raining = true;
+```
 
 ### The `rune` type
 
-The `rune` type represents a Unicode code point.
+The `rune` type represents a Unicode code point and is 4 bytes long.
+
+```cent
+let the_letter_h: rune = 'h';
+```
 
 ### Strings?
 
-"What about the string type?" you may ask. In Cent, strings are actually just
-arrays of bytes. We'll talk about them later.
+In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
+
+```cent
+let language: [4]u8 = "Cent";
+let language: [4]u8 = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
+```
 
 ## Functions
 
 Functions are defined by using the `fn` keyword. The `main` function is the
-entry point of the program. Functions can be used _before_ they're defined.
+entry point of the program. Functions can be used before they're defined.
 
 ```cent
 with std::io;
@@ -191,21 +205,6 @@ fn main() {
 
 fn add(a: i32, b: i32, c: i32 = 0, d: i32 = 0) i32 {
     return a + b + c + d;
-}
-```
-
-### Inner functions
-
-Functions can be defined inside other functions. Inner functions are only
-visible within the function where they are defined.
-
-```cent
-fn main() {
-    fn square(x: i32) i32 {
-        return x * x;
-    }
-
-    let a = square(7); // a = 49
 }
 ```
 
@@ -299,7 +298,8 @@ fn main() {
 }
 ```
 
-You can use `while true` to create an infinite loop. To exit a loop, use the `break` keyword.
+You can use `while true` to create an infinite loop. To exit a loop, use the
+`break` keyword.
 
 ```cent
 fn main() {
