@@ -46,6 +46,8 @@
 <li><a href="#floating-point-types">Floating-point types</a></li>
 <li><a href="#the-bool-type">The bool type</a></li>
 <li><a href="#the-rune-type">The rune type</a></li>
+<li><a href="#array-types">Array types</a></li>
+<li><a href="#slice-types">Slice types</a></li>
 <li><a href="#strings">Strings?</a></li>
 </ul>
 </li>
@@ -145,10 +147,31 @@ there are two such types: <code translate="no">f32</code> and <code translate="n
 <h3 id="the-rune-type"><a href="#the-rune-type">The <code translate="no">rune</code> type</a></h3>
 <p>The <code translate="no">rune</code> type represents a Unicode code point and is 4 bytes long.</p>
 <pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Identifier">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre>
+<h3 id="array-types"><a href="#array-types">Array types</a></h3>
+<p>Arrays hold multiple values of the same type:</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Constant">4</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>};
+<span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>}; <span class="Comment">// array length can be deduced</span></pre>
+<p>Arrays can be of <em>variable length</em>.</p>
+<div class="warning">
+    Variable-length arrays are allocated on the stack, which has a limited size.
+    If the array size is too large, this can result in a stack overflow.
+</div>
+
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">n</span>: <span class="Type">usize</span> <span class="Operator">=</span> <span class="Constant">16</span>;
+<span class="Identifier">n</span> <span class="Operator">=</span> <span class="Constant">1024</span>;
+<span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Identifier">n</span>]<span class="Type">u8</span>;</pre>
+<h3 id="slice-types"><a href="#slice-types">Slice types</a></h3>
+<p>Slice types represent a view into a sequence of elements. They consist of a
+pointer and a length.</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
+
+<span class="Statement">let</span> <span class="Identifier">len</span> <span class="Operator">=</span> <span class="Identifier">slice</span>.<span class="Identifier">len</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">slice</span>[<span class="Constant">0</span>];</pre>
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
 <p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
 <pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
-<span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>}</pre>
+<span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>}</pre>
 <h2 id="with-statements"><a href="#with-statements"><code translate="no">with</code> statements</a></h2>
 <p>You can use the <code translate="no">with</code> statement to import an external module.</p>
 <pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
@@ -294,21 +317,21 @@ cases:</p>
 <h3 id="for-loops"><a href="#for-loops"><code translate="no">for</code> loops</a></h3>
 <p><code translate="no">for</code> loops allow you to iterate through a range or a sequence.</p>
 <p><em>Exclusive</em> ranges are created by using the <code translate="no">x..y</code> syntax:</p>
-<pre translate="no">with std::io;
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
-fn main() {
-    for i in 1..10 {
-        io::print_int(i);
-        io::print_rune('\n');
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Constant">10</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>);
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
     }
 }</pre>
 <p>To create an <em>inclusive</em> range, use the <code translate="no">x..=y</code> syntax:</p>
-<pre translate="no">with std::io;
+<pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
-fn main() {
-    for i in 1..=10 {
-        io::print_int(i);
-        io::print_rune('\n');
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Operator">=</span><span class="Constant">10</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>);
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
     }
 }</pre></div>
 </div>
