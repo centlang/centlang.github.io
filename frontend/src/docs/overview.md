@@ -222,6 +222,31 @@ mut optional: ?i32 = 32;
 let value = optional.!;
 ```
 
+### Pointer types
+
+Pointers reference a value in memory. To create a pointer type, use the `*T`
+syntax.
+
+```cent
+mut x = 42;
+let ptr: *i32 = &x; // *ptr = 42
+x = 422; // *ptr = 422
+```
+
+Pointers can be mutable:
+
+```cent
+mut x = 42;
+let ptr: *mut i32 = &x;
+*ptr = 422; // x = 422
+```
+
+<div class="note">
+    In Cent, pointers can't be `null`. If you need a nullable pointer, use an
+    <em>optional pointer type</em>. An optional pointer has the same size as a
+    regular pointer.
+</div>
+
 ### Strings?
 
 In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
