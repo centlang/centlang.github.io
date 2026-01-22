@@ -160,7 +160,8 @@ let the_letter_h: rune = 'h';
 
 ### Array types
 
-Arrays hold multiple values of the same type:
+Array types are created by using the `[N]T` syntax. Arrays hold multiple values
+of the same type:
 
 ```cent
 let data = [4]u8{0xff, 0xff, 0xff, 0x0};
@@ -182,8 +183,8 @@ mut data: [n]u8;
 
 ### Slice types
 
-Slice types represent a view into a sequence of elements. They consist of a
-pointer and a length.
+Slice types are created by using the `[]T` syntax. Slices represent a view into
+a sequence of elements. They consist of a pointer and a length.
 
 ```cent
 mut data: [1024]u8;
@@ -191,6 +192,15 @@ let slice: []u8 = data;
 
 let len = slice.len;
 let ptr = &slice[0];
+```
+
+Slices can be mutable:
+
+```cent
+mut data: [1024]u8;
+let slice: []mut u8 = data;
+
+slice[10] = 42;
 ```
 
 ### Strings?
