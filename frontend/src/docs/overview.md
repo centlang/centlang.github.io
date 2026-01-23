@@ -242,9 +242,9 @@ let ptr: *mut i32 = &x;
 ```
 
 <div class="note">
-    In Cent, pointers can't be `null`. If you need a nullable pointer, use an
-    <em>optional pointer type</em>. An optional pointer has the same size as a
-    regular pointer.
+    In Cent, pointers can't be <code>null</code>. If you need a nullable
+    pointer, use an <em>optional pointer type</em>. An optional pointer has the
+    same size as a regular pointer.
 </div>
 
 ### Strings?
