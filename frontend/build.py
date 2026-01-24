@@ -132,6 +132,7 @@ def render_page(
                 extensions=[
                     "toc",
                     "fenced_code",
+                    "tables",
                     HeaderLinkExtension(),
                     DisableTranslateExtension(),
                 ]

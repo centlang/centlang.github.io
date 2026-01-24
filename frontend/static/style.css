@@ -142,6 +142,20 @@ li::marker {
     color: var(--muted);
 }
 
+table {
+    border-radius: var(--radius);
+    width: 100%;
+}
+
+th,
+td {
+    padding: 0.5rem;
+}
+
+tbody {
+    background-color: var(--bg);
+}
+
 .nav-link {
     color: var(--text);
 }
@@ -251,7 +265,8 @@ li::marker {
 code,
 pre,
 button,
-select {
+select,
+table {
     border: 1px solid var(--muted-border);
     background-color: var(--panel);
 }
