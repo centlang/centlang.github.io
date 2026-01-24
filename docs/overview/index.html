@@ -48,9 +48,10 @@
 <li><a href="#the-rune-type">The rune type</a></li>
 <li><a href="#array-types">Array types</a></li>
 <li><a href="#slice-types">Slice types</a></li>
+<li><a href="#strings">Strings?</a></li>
 <li><a href="#optional-types">Optional types</a></li>
 <li><a href="#pointer-types">Pointer types</a></li>
-<li><a href="#strings">Strings?</a></li>
+<li><a href="#tuple-types">Tuple types</a></li>
 </ul>
 </li>
 <li><a href="#with-statements">with statements</a></li>
@@ -63,6 +64,11 @@
 <li><a href="#switch-statements">switch statements</a></li>
 <li><a href="#while-loops">while loops</a></li>
 <li><a href="#for-loops">for loops</a></li>
+</ul>
+</li>
+<li><a href="#expressions">Expressions</a><ul>
+<li><a href="#binary-expressions">Binary expressions</a></li>
+<li><a href="#unary-expressions">Unary expressions</a></li>
 </ul>
 </li>
 </ul>
@@ -176,6 +182,12 @@ a sequence of elements. They consist of a pointer and a length.</p>
 <span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Statement">mut</span> <span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
 
 <span class="Identifier">slice</span>[<span class="Constant">10</span>] <span class="Operator">=</span> <span class="Constant">42</span>;</pre>
+<h3 id="strings"><a href="#strings">Strings?</a></h3>
+<p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
+<span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>};
+
+<span class="Statement">let</span> <span class="Identifier">null_terminated</span> <span class="Operator">=</span> <span class="String">&quot;Hello, world!</span><span class="Special">\0</span><span class="String">&quot;</span>;</pre>
 <h3 id="optional-types"><a href="#optional-types">Optional types</a></h3>
 <p>Optional values can either be <code translate="no">null</code> or contain a value. To create an optional
 type, use the <code translate="no">?T</code> syntax:</p>
@@ -197,15 +209,17 @@ syntax.</p>
 <span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Statement">mut</span> <span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>;
 <span class="Operator">*</span><span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// x = 422</span></pre>
 <div class="note">
-    In Cent, pointers can't be `null`. If you need a nullable pointer, use an
-    <em>optional pointer type</em>. An optional pointer has the same size as a
-    regular pointer.
+    In Cent, pointers can't be <code>null</code>. If you need a nullable
+    pointer, use an <em>optional pointer type</em>. An optional pointer has the
+    same size as a regular pointer.
 </div>
 
-<h3 id="strings"><a href="#strings">Strings?</a></h3>
-<p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
-<pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
-<span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>}</pre>
+<h3 id="tuple-types"><a href="#tuple-types">Tuple types</a></h3>
+<p>Tuple types are created by using the <code translate="no">(T1, T2, T3, ...)</code> syntax. Tuples hold
+multiple values of different types:</p>
+<pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: (<span class="Type">i32</span>, <span class="Type">f32</span>, <span class="Type">bool</span>, [<span class="Constant">6</span>]<span class="Type">u8</span>) <span class="Operator">=</span> (<span class="Constant">10</span>, <span class="Constant">42.42</span>, <span class="Constant">true</span>, <span class="String">&quot;Hello!&quot;</span>);
+<span class="Identifier">data</span>.<span class="Constant">0</span> <span class="Operator">+=</span> <span class="Constant">32</span>; <span class="Comment">// data.0 = 42</span>
+<span class="Identifier">data</span>.<span class="Constant">1</span> <span class="Operator">=</span> <span class="Identifier">data</span>.<span class="Constant">0</span>; <span class="Comment">// data.1 = 42</span></pre>
 <h2 id="with-statements"><a href="#with-statements"><code translate="no">with</code> statements</a></h2>
 <p>You can use the <code translate="no">with</code> statement to import an external module.</p>
 <pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
@@ -376,11 +390,70 @@ cases:</p>
         <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>);
         <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
     }
-}</pre></div>
+}</pre>
+<h2 id="expressions"><a href="#expressions">Expressions</a></h2>
+<h3 id="binary-expressions"><a href="#binary-expressions">Binary expressions</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Precedence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code translate="no">*</code> <code translate="no">/</code> <code translate="no">%</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code translate="no">+</code> <code translate="no">-</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td><code translate="no">&lt;&lt;</code> <code translate="no">&gt;&gt;</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><code translate="no">&lt;</code> <code translate="no">&gt;</code> <code translate="no">==</code> <code translate="no">!=</code> <code translate="no">&gt;=</code> <code translate="no">&lt;=</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code translate="no">&amp;</code></td>
+<td>5</td>
+</tr>
+<tr>
+<td><code translate="no">^</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code translate="no">|</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><code translate="no">&amp;&amp;</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code translate="no">||</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code translate="no">??</code></td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">2</span> <span class="Operator">+</span> <span class="Constant">3</span> <span class="Operator">*</span> <span class="Constant">6</span>; <span class="Comment">// a = 20</span></pre>
+<h3 id="unary-expressions"><a href="#unary-expressions">Unary expressions</a></h3>
+<pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">5</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span> <span class="Operator">=</span> <span class="Operator">!</span><span class="Constant">true</span>; <span class="Comment">// b = false</span>
+<span class="Statement">mut</span> <span class="Identifier">c</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Identifier">a</span>; <span class="Comment">// c = -5</span>
+<span class="Statement">let</span> <span class="Identifier">p</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">c</span>;
+<span class="Operator">*</span><span class="Identifier">p</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Identifier">c</span>; <span class="Comment">// c = 5</span></pre></div>
 </div>
 </main>
         <footer>
-            <p class="muted">© 2025 lnkrr</p>
+            <p class="muted">© 2026 lnkrr</p>
         </footer>
     </body>
 </html>
