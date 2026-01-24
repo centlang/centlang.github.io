@@ -209,7 +209,9 @@ In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
 
 ```cent
 let language: [4]u8 = "Cent";
-let language = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
+let language = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8};
+
+let null_terminated = "Hello, world!\0";
 ```
 
 ### Optional types
