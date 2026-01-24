@@ -203,6 +203,15 @@ let slice: []mut u8 = data;
 slice[10] = 42;
 ```
 
+### Strings?
+
+In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
+
+```cent
+let language: [4]u8 = "Cent";
+let language = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
+```
+
 ### Optional types
 
 Optional values can either be `null` or contain a value. To create an optional
@@ -247,13 +256,15 @@ let ptr: *mut i32 = &x;
     same size as a regular pointer.
 </div>
 
-### Strings?
+### Tuple types
 
-In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
+Tuple types are created by using the `(T1, T2, T3, ...)` syntax. Tuples hold
+multiple values of different types:
 
 ```cent
-let language: [4]u8 = "Cent";
-let language = [_]u8{'C' as u8, 'e' as u8, 'n' as u8, 't' as u8}
+mut data: (i32, f32, bool, [6]u8) = (10, 42.42, true, "Hello!");
+data.0 += 32; // data.0 = 42
+data.1 = data.0; // data.1 = 42
 ```
 
 ## `with` statements
