@@ -525,3 +525,13 @@ fn main() {
 ```cent
 let a = 2 + 3 * 6; // a = 20
 ```
+
+### Unary expressions
+
+```cent
+let a = 5;
+let b = !true; // b = false
+mut c = -a; // c = -5
+let p = &c;
+*p = -c; // c = 5
+```
