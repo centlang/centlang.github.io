@@ -42,6 +42,12 @@
 <li><a href="#3-verify">3. Verify</a></li>
 </ul>
 </li>
+<li><a href="#windows">Windows</a><ul>
+<li><a href="#1-download">1. Download</a></li>
+<li><a href="#2-install">2. Install</a></li>
+<li><a href="#3-verify">3. Verify</a></li>
+</ul>
+</li>
 <li><a href="#next-steps">Next steps</a></li>
 </ul>
 </li>
@@ -74,6 +80,24 @@ $ tar <span class="Special">-xJf</span> cent-linux-x86_64.tar.xz <span class="Sp
 <p>Verify the installation:</p>
 <pre translate="no">$ centc <span class="Special">--version</span>
 Cent v0.<span class="Constant">1</span></pre>
+<h2 id="windows"><a href="#windows">Windows</a></h2>
+<div class="warning">
+    Windows is NOT supported, yet. Bugs WILL happen. Windows version of the
+    compiler is only able to produce object files.
+</div>
+
+<h3 id="1-download"><a href="#1-download">1. Download</a></h3>
+<p>Download the latest Cent release:</p>
+<ul>
+<li><a href="https://github.com/centlang/cent/releases/latest/download/cent-windows-x86_64.zip">x86_64</a></li>
+</ul>
+<h3 id="2-install"><a href="#2-install">2. Install</a></h3>
+<p>Extract the archive to <code translate="no">C:\cent</code>, then add <code translate="no">C:\cent\bin</code> to your <code translate="no">PATH</code>:</p>
+<pre translate="no">$ setx /M PATH &quot;%PATH%;C:\cent\bin&quot;</pre>
+<h3 id="3-verify"><a href="#3-verify">3. Verify</a></h3>
+<p>Open a new terminal and verify the installation:</p>
+<pre translate="no">$ centc --version
+Cent v0.1</pre>
 <h2 id="next-steps"><a href="#next-steps">Next steps</a></h2>
 <p>When you're ready, go to the <a href="/docs/overview/">Language Overview</a> to learn more
 about Cent.</p></div>
