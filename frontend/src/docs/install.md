@@ -47,6 +47,36 @@ $ centc --version
 Cent v0.1
 ```
 
+## Windows
+
+<div class="warning">
+    Windows is NOT supported, yet. Bugs WILL happen. Windows version of the
+    compiler is only able to produce object files.
+</div>
+
+### 1. Download
+
+Download the latest Cent release:
+
+- [x86_64](https://github.com/centlang/cent/releases/latest/download/cent-windows-x86_64.zip)
+
+### 2. Install
+
+Extract the archive to `C:\cent`, then add `C:\cent\bin` to your `PATH`:
+
+```bat
+$ setx /M PATH "%PATH%;C:\cent\bin"
+```
+
+### 3. Verify
+
+Open a new terminal and verify the installation:
+
+```bat
+$ centc --version
+Cent v0.1
+```
+
 ## Next steps
 
 When you're ready, go to the [Language Overview](/docs/overview/) to learn more
