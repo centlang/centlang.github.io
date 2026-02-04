@@ -111,7 +111,7 @@ button,
 select,
 textarea,
 .lines {
-    font-family: inherit;
+    font: inherit;
     color: inherit;
     line-height: inherit;
 }
@@ -453,6 +453,34 @@ table {
     margin-top: 0.5rem;
     animation: spin 1s linear infinite;
     display: none;
+}
+
+.code-block {
+    position: relative;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: var(--bg);
+    font-size: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.code-block:hover .copy-button {
+    opacity: 0.6;
+}
+
+.code-block:hover .copy-button:hover {
+    opacity: 1;
+}
+
+.copy-icon {
+    width: 1rem;
 }
 
 @keyframes spin {

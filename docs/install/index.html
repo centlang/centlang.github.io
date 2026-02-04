@@ -70,16 +70,16 @@
 </ul>
 <h3 id="2-install"><a href="#2-install">2. Install</a></h3>
 <p>Extract the archive to <code translate="no">~/cent</code>:</p>
-<pre translate="no">$ <span class="Statement">mkdir</span> <span class="Special">-p</span> ~/cent
-$ tar <span class="Special">-xJf</span> cent-linux-x86_64.tar.xz <span class="Special">-C</span> ~/cent</pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ <span class="Statement">mkdir</span> <span class="Special">-p</span> ~/cent
+$ tar <span class="Special">-xJf</span> cent-linux-x86_64.tar.xz <span class="Special">-C</span> ~/cent</pre></div>
 <p>Add <code translate="no">~/cent/bin</code> to your <code translate="no">$PATH</code> by adding this line to your <code translate="no">~/.bashrc</code> (for Bash):</p>
-<pre translate="no"><span class="Statement">export</span> <span class="Identifier">PATH</span><span class="shVarAssign">=</span><span class="Operator">&quot;</span><span class="PreProc">$PATH</span><span class="String">:</span><span class="PreProc">$HOME</span><span class="String">/cent/bin</span><span class="Operator">&quot;</span></pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">export</span> <span class="Identifier">PATH</span><span class="shVarAssign">=</span><span class="Operator">&quot;</span><span class="PreProc">$PATH</span><span class="String">:</span><span class="PreProc">$HOME</span><span class="String">/cent/bin</span><span class="Operator">&quot;</span></pre></div>
 <p>Apply the changes:</p>
-<pre translate="no">$ <span class="Statement">source</span> ~/.bashrc</pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ <span class="Statement">source</span> ~/.bashrc</pre></div>
 <h3 id="3-verify"><a href="#3-verify">3. Verify</a></h3>
 <p>Verify the installation:</p>
-<pre translate="no">$ centc <span class="Special">--version</span>
-Cent v0.<span class="Constant">1</span></pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc <span class="Special">--version</span>
+Cent v0.<span class="Constant">1</span></pre></div>
 <h2 id="windows"><a href="#windows">Windows</a></h2>
 <div class="warning">
     Windows is NOT supported, yet. Bugs WILL happen. Windows version of the
@@ -93,11 +93,11 @@ Cent v0.<span class="Constant">1</span></pre>
 </ul>
 <h3 id="2-install"><a href="#2-install">2. Install</a></h3>
 <p>Extract the archive to <code translate="no">C:\cent</code>, then add <code translate="no">C:\cent\bin</code> to your <code translate="no">PATH</code>:</p>
-<pre translate="no">$ setx /M PATH &quot;%PATH%;C:\cent\bin&quot;</pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ setx /M PATH &quot;%PATH%;C:\cent\bin&quot;</pre></div>
 <h3 id="3-verify"><a href="#3-verify">3. Verify</a></h3>
 <p>Open a new terminal and verify the installation:</p>
-<pre translate="no">$ centc --version
-Cent v0.1</pre>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc --version
+Cent v0.1</pre></div>
 <h2 id="next-steps"><a href="#next-steps">Next steps</a></h2>
 <p>When you're ready, go to the <a href="/docs/overview/">Language Overview</a> to learn more
 about Cent.</p></div>
@@ -106,5 +106,6 @@ about Cent.</p></div>
         <footer>
             <p class="muted">© 2026 lnkrr</p>
         </footer>
+        <script src="/static/main.js"></script>
     </body>
 </html>
