@@ -19,7 +19,7 @@
             },
             "fast": {
                 "title": "Fast",
-                "content": "In Cent, the most obvious way to write code is also the fastest."
+                "content": "Programs written in Cent run fast, without compromising clarity."
             },
             "modern": {
                 "title": "Modern",
@@ -28,5 +28,35 @@
         },
         "run": "Run",
         "output": "Output"
+    },
+    "ru": {
+        "title": "Язык программирования Cent",
+        "docs": "Документация",
+        "playground": "Песочница",
+        "news": "Новости",
+        "tagline": "Язык программирования, который можно <span class=\"accent\">быстро изучить</span> и <span class=\"accent\">запускать быстрее.</span>",
+        "overview": "Обзор",
+        "download": "Скачать",
+        "run-in-playground": "Запустить в песочнице >",
+        "principles": {
+            "simple": {
+                "title": "Простой",
+                "content": "Никто не любит тратить время на отладку странностей языка. Cent спроектирован так, чтобы не мешать вам."
+            },
+            "explicit": {
+                "title": "Явный",
+                "content": "Всегда должно быть понятно, что сделает ваша программа. Cent создан так, чтобы никогда не быть двусмысленным."
+            },
+            "fast": {
+                "title": "Быстрый",
+                "content": "Программы, написанные на Cent, работают быстро, оставаясь простыми."
+            },
+            "modern": {
+                "title": "Modern",
+                "content": "Cent включает современные возможности языков программирования с практически нулевым влиянием на производительность."
+            }
+        },
+        "run": "Запустить",
+        "output": "Вывод"
     }
 }
