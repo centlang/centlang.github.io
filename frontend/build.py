@@ -25,7 +25,7 @@ nvim = pynvim.attach("child", argv=["nvim", "--embed", "--headless"])
 nvim.command("syntax on")
 nvim.command("runtime! plugin/tohtml.lua")
 
-def nvim_to_html(code: str, lang: str) -> str:
+def process_code_block(code: str, lang: str) -> str:
     with NamedTemporaryFile("w", delete=False) as tmp_input:
         tmp_input_path = tmp_input.name
         tmp_input.write(code)
@@ -46,7 +46,16 @@ def nvim_to_html(code: str, lang: str) -> str:
     os.remove(tmp_input_path)
     os.remove(tmp_output_path)
 
-    return f'<pre translate="no">{(match.group(1) if match else code).strip()}</pre>'
+    return (
+        '<div class="code-block">'
+        '<button class="copy-button">'
+        '<img class="copy-icon" src="/static/copy.svg" />'
+        '</button>'
+        '<pre translate="no">'
+        f'{(match.group(1) if match else code).strip()}'
+        '</pre>'
+        '</div>'
+    )
 
 def slugify(value: str) -> str:
     return re.sub(r"[\W_]+", "-", value.lower()).strip("-")
@@ -90,7 +99,7 @@ class DisableTranslateExtension(Extension):
 def highlight_html(code: str) -> str:
     return re.sub(
         r'<pre><code(?:\s+class="language-(\w+)")?>(.*?)</code></pre>',
-        lambda m: nvim_to_html(html.unescape(m.group(2)), m.group(1)),
+        lambda m: process_code_block(html.unescape(m.group(2)), m.group(1)),
         code,
         flags=re.DOTALL,
     )
