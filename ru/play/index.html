@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Язык программирования Cent</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/ru/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/ru/docs/"
+                    >Документация</a
+                >
+                <a class="nav-link" href="/ru/play/"
+                    >Песочница</a
+                >
+                <a class="nav-link" href="/ru/news/"
+                    >Новости</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="playground-wrapper">
+    <div class="toolbar">
+        <div class="toolbar-left">
+            <select id="compilation-mode">
+                <option value="debug">Debug</option>
+                <option value="release">Release</option>
+            </select>
+            <select>
+                <option>centc v0.1</option>
+            </select>
+        </div>
+        <button onclick="runCode();">Запустить</button>
+    </div>
+    <div class="editor-wrapper panel">
+        <div class="lines" id="lines" translate="no">1</div>
+        <div class="editor">
+            <textarea
+                class="editor-textarea"
+                id="editor-textarea"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                spellcheck="false"
+                translate="no"
+            ></textarea>
+            <pre class="editor-pre" id="editor-pre" translate="no"></pre>
+        </div>
+    </div>
+    <div class="output-wrapper panel">
+        <img class="loading" id="loading" src="/static/loading.svg" />
+        <div translate="no">
+            <p id="stderr"></p>
+            <p id="stdout">Вывод</p>
+        </div>
+        <p class="muted" id="system"></p>
+    </div>
+</div>
+<script src="/static/playground.js"></script>
+</main>
+        <footer>
+            <p class="muted">© 2026 lnkrr</p>
+        </footer>
+        <script src="/static/main.js"></script>
+    </body>
+</html>

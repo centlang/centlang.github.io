@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Язык программирования Cent</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/ru/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/ru/docs/"
+                    >Документация</a
+                >
+                <a class="nav-link" href="/ru/play/"
+                    >Песочница</a
+                >
+                <a class="nav-link" href="/ru/news/"
+                    >Новости</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="content-wrapper">
+    <div class="toc">
+<ul>
+<li><a href="#обзор-языка">Обзор языка</a><ul>
+<li><a href="#введение">Введение</a></li>
+<li><a href="#hello-world">Hello, world!</a></li>
+<li><a href="#переменные">Переменные</a></li>
+<li><a href="#комментарии">Комментарии</a></li>
+<li><a href="#константы">Константы</a></li>
+<li><a href="#типы-данных">Типы данных</a><ul>
+<li><a href="#целые-числа">Целые числа</a></li>
+<li><a href="#числа-с-плавающей-запятой">Числа с плавающей запятой</a></li>
+<li><a href="#тип-bool">Тип bool</a></li>
+<li><a href="#тип-rune">Тип rune</a></li>
+<li><a href="#массивы">Массивы</a></li>
+<li><a href="#срезы">Срезы</a></li>
+<li><a href="#строки">Строки</a></li>
+<li><a href="#опциональные-типы">Опциональные типы</a></li>
+<li><a href="#указатели">Указатели</a></li>
+<li><a href="#кортежи">Кортежи</a></li>
+</ul>
+</li>
+<li><a href="#оператор-with">Оператор with</a></li>
+<li><a href="#функции">Функции</a><ul>
+<li><a href="#параметры-по-умолчанию">Параметры по умолчанию</a></li>
+</ul>
+</li>
+<li><a href="#управляющие-конструкции">Управляющие конструкции</a><ul>
+<li><a href="#if-выражения">if выражения</a></li>
+<li><a href="#switch-выражения">switch выражения</a></li>
+<li><a href="#цикл-while">Цикл while</a></li>
+<li><a href="#цикл-for">Цикл for</a></li>
+</ul>
+</li>
+<li><a href="#выражения">Выражения</a><ul>
+<li><a href="#бинарные-выражения">Бинарные выражения</a></li>
+<li><a href="#унарные-выражения">Унарные выражения</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <div class="content"><h1 id="обзор-языка"><a href="#обзор-языка">Обзор языка</a></h1>
+<div class="note">
+    Если вы ещё не установили Cent, обратитесь к
+    <a href="/ru/docs/install/">Руководству по установке</a> или используйте
+    <a href="/ru/play/">Песочницу Cent</a>, чтобы запускать код прямо в
+    браузере.
+</div>
+
+<h2 id="введение"><a href="#введение">Введение</a></h2>
+<p>В этом руководстве предполагается, что вы знакомы с базовыми концепциями
+программирования и уже использовали другой язык программирования.</p>
+<h2 id="hello-world"><a href="#hello-world">Hello, world!</a></h2>
+<p>Мы напишем простую программу, которая выводит <code translate="no">Hello, world!</code> на экран. Создайте
+новый файл с именем <code translate="no">main.cn</code> со следующим содержимым:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
+}</pre></div>
+<p>Теперь выполните эти команды, чтобы скомпилировать и запустить программу:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc main.cn
+$ ./main
+Hello, world!</pre></div>
+<p>Вы также можете использовать опцию <code translate="no">--run</code>, чтобы автоматически выполнить
+скомпилированный файл:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc main.cn <span class="Special">--run</span>
+Hello, world!</pre></div>
+<h2 id="переменные"><a href="#переменные">Переменные</a></h2>
+<p>Оператор <code translate="no">let</code> создаёт <em>неизменяемую</em> переменную.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre></div>
+<p>Чтобы создать <em>изменяемую</em> переменную, используйте ключевое слово <code translate="no">mut</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;</pre></div>
+<p>Тип переменной можно указать явно:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre></div>
+<p>Если значение не задано, переменные инициализируются нулём.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre></div>
+<p>Cent статически типизирован, поэтому нельзя изменить тип переменной.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// ошибка!</span></pre></div>
+<p>Однако можно <em>затенить</em> переменную, создав новую переменную с тем же именем:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>;
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7.3</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<span class="Statement">let</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Identifier">score</span>; <span class="Comment">// score больше не изменяемая</span>
+<span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7</span>; <span class="Comment">// ошибка!</span></pre></div>
+<h2 id="комментарии"><a href="#комментарии">Комментарии</a></h2>
+<p>Комментарии помогают объяснять части кода. Они начинаются с <code translate="no">//</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">variable</span> <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// это переменная</span></pre></div>
+<h2 id="константы"><a href="#константы">Константы</a></h2>
+<p>Для создания констант используйте ключевое слово <code translate="no">const</code>. Константы вычисляются
+на этапе компиляции.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
+<span class="Statement">const</span> <span class="Identifier">GOLDEN_RATIO</span> <span class="Operator">=</span> <span class="Constant">1.618</span>;
+<span class="Statement">const</span> <span class="Identifier">SECONDS_IN_A_DAY</span> <span class="Operator">=</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">24</span>;</pre></div>
+<h2 id="типы-данных"><a href="#типы-данных">Типы данных</a></h2>
+<h3 id="целые-числа"><a href="#целые-числа">Целые числа</a></h3>
+<p>Целочисленные типы начинаются с <code translate="no">i</code> или <code translate="no">u</code>. Типы, начинающиеся с <code translate="no">u</code>, —
+<em>беззнаковые</em>. Далее указывается размер в битах:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// знаковые</span>
+<span class="Type">u8</span> <span class="Type">u16</span> <span class="Type">u32</span> <span class="Type">u64</span> <span class="Comment">// беззнаковые</span></pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">u64</span> <span class="Operator">=</span> <span class="Constant">3</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">i8</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Constant">128</span>;</pre></div>
+<p>Существуют специальные типы <code translate="no">usize</code> и <code translate="no">isize</code>. Они имеют размер указателя и
+обычно используются для индексации.</p>
+<h3 id="числа-с-плавающей-запятой"><a href="#числа-с-плавающей-запятой">Числа с плавающей запятой</a></h3>
+<p>Используются для хранения чисел с плавающей точкой. В Cent есть два таких типа:
+<code translate="no">f32</code> и <code translate="no">f64</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">f32</span> <span class="Operator">=</span> <span class="Constant">3.5</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">f64</span> <span class="Operator">=</span> <span class="Constant">1.2345678</span>;</pre></div>
+<h3 id="тип-bool"><a href="#тип-bool">Тип <code translate="no">bool</code></a></h3>
+<p>Значение <code translate="no">bool</code> может быть <code translate="no">true</code> или <code translate="no">false</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">raining</span>: <span class="Type">bool</span> <span class="Operator">=</span> <span class="Constant">false</span>;
+<span class="Identifier">raining</span> <span class="Operator">=</span> <span class="Constant">true</span>;</pre></div>
+<h3 id="тип-rune"><a href="#тип-rune">Тип <code translate="no">rune</code></a></h3>
+<p>Тип <code translate="no">rune</code> представляет собой символ Unicode и занимает 4 байта.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Type">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre></div>
+<h3 id="массивы"><a href="#массивы">Массивы</a></h3>
+<p>Массивы создаются с помощью синтаксиса <code translate="no">[N]T</code>. Они хранят несколько значений
+одного типа:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Constant">4</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>};
+<span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>}; <span class="Comment">// длина массива может быть выведена</span></pre></div>
+<p>Массивы могут иметь <em>переменную длину</em>.</p>
+<div class="warning">
+    Массивы переменной длины размещаются в стеке, размер которого ограничен.
+    Если массив слишком большой, это может привести к переполнению стека.
+</div>
+
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">n</span>: <span class="Type">usize</span> <span class="Operator">=</span> <span class="Constant">16</span>;
+<span class="Identifier">n</span> <span class="Operator">=</span> <span class="Constant">1024</span>;
+<span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Identifier">n</span>]<span class="Type">u8</span>;</pre></div>
+<h3 id="срезы"><a href="#срезы">Срезы</a></h3>
+<p>Срезы создаются с помощью синтаксиса <code translate="no">[]T</code>. Срезы представляют собой вид на
+последовательность элементов и состоят из указателя и длины.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
+
+<span class="Statement">let</span> <span class="Identifier">len</span> <span class="Operator">=</span> <span class="Identifier">slice</span>.<span class="Identifier">len</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">slice</span>[<span class="Constant">0</span>];</pre></div>
+<p>Срезы могут быть изменяемыми:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Statement">mut</span> <span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
+
+<span class="Identifier">slice</span>[<span class="Constant">10</span>] <span class="Operator">=</span> <span class="Constant">42</span>;</pre></div>
+<h3 id="строки"><a href="#строки">Строки</a></h3>
+<p>В Cent строки — это просто массивы байт. Строки <strong>не</strong> оканчиваются нулём.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
+<span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>};
+
+<span class="Statement">let</span> <span class="Identifier">null_terminated</span> <span class="Operator">=</span> <span class="String">&quot;Hello, world!</span><span class="Special">\0</span><span class="String">&quot;</span>;</pre></div>
+<h3 id="опциональные-типы"><a href="#опциональные-типы">Опциональные типы</a></h3>
+<p>Опциональные значения могут быть <code translate="no">null</code> или содержать значение. Для создания
+опционального типа используйте <code translate="no">?T</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>; <span class="Comment">// optional != null</span>
+
+<span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">null</span>; <span class="Comment">// optional == null</span></pre></div>
+<p>Чтобы получить значение без проверки, используйте синтаксис <code translate="no">.!</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>;
+<span class="Statement">let</span> <span class="Identifier">value</span> <span class="Operator">=</span> <span class="Identifier">optional</span>.<span class="Operator">!</span>;</pre></div>
+<h3 id="указатели"><a href="#указатели">Указатели</a></h3>
+<p>Указатели ссылаются на значение в памяти. Для создания указателя используется
+синтаксис <code translate="no">*T</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>; <span class="Comment">// *ptr = 42</span>
+<span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// *ptr = 422</span></pre></div>
+<p>Указатели могут быть изменяемыми:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Statement">mut</span> <span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>;
+<span class="Operator">*</span><span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// x = 422</span></pre></div>
+<div class="note">
+    В Cent указатели не могут быть <code>null</code>. Если нужен такой указатель, используйте <em>опциональный указатель</em>. Опциональный указатель имеет тот же размер, что и обычный.
+</div>
+
+<h3 id="кортежи"><a href="#кортежи">Кортежи</a></h3>
+<p>Кортежи создаются с помощью <code translate="no">(T1, T2, T3, ...)</code>. Они хранят несколько значений
+разных типов:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: (<span class="Type">i32</span>, <span class="Type">f32</span>, <span class="Type">bool</span>, [<span class="Constant">6</span>]<span class="Type">u8</span>) <span class="Operator">=</span> (<span class="Constant">10</span>, <span class="Constant">42.42</span>, <span class="Constant">true</span>, <span class="String">&quot;Hello!&quot;</span>);
+<span class="Identifier">data</span>.<span class="Constant">0</span> <span class="Operator">+=</span> <span class="Constant">32</span>; <span class="Comment">// data.0 = 42</span>
+<span class="Identifier">data</span>.<span class="Constant">1</span> <span class="Operator">=</span> <span class="Identifier">data</span>.<span class="Constant">0</span>; <span class="Comment">// data.1 = 42</span></pre></div>
+<h2 id="оператор-with"><a href="#оператор-with">Оператор <code translate="no">with</code></a></h2>
+<p>С помощью <code translate="no">with</code> можно импортировать модули.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">fs</span>;
+
+<span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">posix</span> <span class="Operator">as</span> <span class="Identifier">os</span>; <span class="Comment">// импорт под другим именем</span></pre></div>
+<h2 id="функции"><a href="#функции">Функции</a></h2>
+<p>Функции определяются с помощью ключевого слова <code translate="no">fn</code>. Функция <code translate="no">main</code> является
+входной точкой. Функции можно вызывать до их определения.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Function">hello_world</span>();
+}
+
+<span class="Statement">fn</span> <span class="Function">hello_world</span>() {
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
+}</pre></div>
+<p>Можно указать тип возвращаемого значения после скобок. Если тип не указан,
+функция ничего не возвращает. Для возврата значения используется <code translate="no">return</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">get_magic_number</span>() <span class="Type">i32</span> {
+    <span class="Statement">return</span> <span class="Constant">42</span>;
+}</pre></div>
+<p>Функции могут принимать параметры:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">4</span>); <span class="Comment">// a = 7</span>
+}
+
+<span class="Statement">fn</span> <span class="Function">add</span>(<span class="Identifier">a</span>: <span class="Type">i32</span>, <span class="Identifier">b</span>: <span class="Type">i32</span>) <span class="Type">i32</span> {
+    <span class="Statement">return</span> <span class="Identifier">a</span> <span class="Operator">+</span> <span class="Identifier">b</span>;
+}</pre></div>
+<h3 id="параметры-по-умолчанию"><a href="#параметры-по-умолчанию">Параметры по умолчанию</a></h3>
+<p>Можно задавать <em>параметры по умолчанию</em>. Если аргументы не переданы,
+используются значения по умолчанию.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">let</span> <span class="Identifier">ten</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">7</span>);
+    <span class="Statement">let</span> <span class="Identifier">nine</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">3</span>, <span class="Constant">3</span>);
+    <span class="Statement">let</span> <span class="Identifier">one</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">1</span>, <span class="Operator">-</span><span class="Constant">1</span>, <span class="Constant">1</span>, <span class="Constant">0</span>);
+}
+
+<span class="Statement">fn</span> <span class="Function">add</span>(<span class="Identifier">a</span>: <span class="Type">i32</span>, <span class="Identifier">b</span>: <span class="Type">i32</span>, <span class="Identifier">c</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>, <span class="Identifier">d</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>) <span class="Type">i32</span> {
+    <span class="Statement">return</span> <span class="Identifier">a</span> <span class="Operator">+</span> <span class="Identifier">b</span> <span class="Operator">+</span> <span class="Identifier">c</span> <span class="Operator">+</span> <span class="Identifier">d</span>;
+}</pre></div>
+<h2 id="управляющие-конструкции"><a href="#управляющие-конструкции">Управляющие конструкции</a></h2>
+<h3 id="if-выражения"><a href="#if-выражения"><code translate="no">if</code> выражения</a></h3>
+<p><code translate="no">if</code> используется для ветвления кода в зависимости от условия.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Function">print_is_even</span>(<span class="Constant">3</span>); <span class="Comment">// x нечётный</span>
+    <span class="Function">print_is_even</span>(<span class="Constant">4</span>); <span class="Comment">// x чётный</span>
+}
+
+<span class="Statement">fn</span> <span class="Function">print_is_even</span>(<span class="Identifier">x</span>: <span class="Type">i32</span>) {
+    <span class="Statement">if</span> <span class="Identifier">x</span> <span class="Operator">%</span> <span class="Constant">2</span> <span class="Operator">==</span> <span class="Constant">0</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;x чётный!&quot;</span>);
+    } <span class="Statement">else</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;x нечётный!&quot;</span>);
+    }
+}</pre></div>
+<p>Можно использовать <code translate="no">else if</code> для проверки дополнительных условий.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">greet</span>(<span class="Identifier">hour</span>: <span class="Type">u8</span>) {
+    <span class="Statement">if</span> <span class="Identifier">hour</span> <span class="Operator">&lt;</span> <span class="Constant">12</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Доброе утро!&quot;</span>);
+    } <span class="Statement">else</span> <span class="Statement">if</span> <span class="Identifier">hour</span> <span class="Operator">&lt;</span> <span class="Constant">18</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Здравствуйте!&quot;</span>);
+    } <span class="Statement">else</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Добрый вечер!&quot;</span>);
+    }
+}</pre></div>
+<h3 id="switch-выражения"><a href="#switch-выражения"><code translate="no">switch</code> выражения</a></h3>
+<p><code translate="no">switch</code> позволяет сравнивать значение с несколькими возможными вариантами:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">day_of_week</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
+    <span class="Statement">switch</span> <span class="Identifier">day</span> {
+        <span class="Constant">1</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Понедельник&quot;</span>); }
+        <span class="Constant">2</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Вторник&quot;</span>); }
+        <span class="Constant">3</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Среда&quot;</span>); }
+        <span class="Constant">4</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Четверг&quot;</span>); }
+        <span class="Constant">5</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Пятница&quot;</span>); }
+        <span class="Constant">6</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Суббота&quot;</span>); }
+        <span class="Constant">7</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Воскресенье&quot;</span>); }
+        <span class="Statement">else</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Неверный день недели!&quot;</span>); }
+    }
+}</pre></div>
+<p>Можно объединять несколько значений в одном "кейсе":</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">is_weekend</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
+    <span class="Statement">switch</span> <span class="Identifier">day</span> {
+        <span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>, <span class="Constant">5</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Будний день&quot;</span>); }
+        <span class="Constant">6</span>, <span class="Constant">7</span> { <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Выходной!&quot;</span>); }
+    }
+}</pre></div>
+<h3 id="цикл-while"><a href="#цикл-while">Цикл <code translate="no">while</code></a></h3>
+<p>Цикл выполняется, пока условие <code translate="no">true</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+
+    <span class="Statement">while</span> <span class="Identifier">i</span> <span class="Operator">&lt;</span> <span class="Constant">10</span> {
+        <span class="Identifier">i</span> <span class="Operator">+=</span> <span class="Constant">1</span>;
+    }
+
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>); <span class="Comment">// 10</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
+}</pre></div>
+<p>Для бесконечного цикла используйте <code translate="no">while true</code>. Для выхода из цикла
+используется ключевое слово <code translate="no">break</code>.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+
+    <span class="Statement">while</span> <span class="Constant">true</span> {
+        <span class="Statement">if</span> <span class="Identifier">i</span> <span class="Operator">==</span> <span class="Constant">100</span> {
+            <span class="Statement">break</span>;
+        }
+
+        <span class="Identifier">i</span> <span class="Operator">+=</span> <span class="Constant">2</span>;
+    }
+
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>); <span class="Comment">// 100</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
+}</pre></div>
+<p>Для пропуска итерации используйте <code translate="no">continue</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+    <span class="Statement">mut</span> <span class="Identifier">sum</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+
+    <span class="Statement">while</span> <span class="Identifier">i</span> <span class="Operator">&lt;</span> <span class="Constant">10</span> {
+        <span class="Identifier">i</span> <span class="Operator">+=</span> <span class="Constant">1</span>;
+
+        <span class="Statement">if</span> <span class="Identifier">i</span> <span class="Operator">%</span> <span class="Constant">2</span> <span class="Operator">==</span> <span class="Constant">0</span> {
+            <span class="Statement">continue</span>;
+        }
+
+        <span class="Identifier">sum</span> <span class="Operator">+=</span> <span class="Identifier">i</span>;
+    }
+
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">sum</span>); <span class="Comment">// 25</span>
+    <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
+}</pre></div>
+<h3 id="цикл-for"><a href="#цикл-for">Цикл <code translate="no">for</code></a></h3>
+<p><code translate="no">for</code> позволяет итерировать диапазоны или последовательности.</p>
+<p><em>Исключающий диапазон</em> создаётся с помощью <code translate="no">x..y</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Constant">10</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>);
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
+    }
+}</pre></div>
+<p><em>Включающий диапазон</em> создаётся с помощью <code translate="no">x..=y</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+
+<span class="Statement">fn</span> <span class="Function">main</span>() {
+    <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Operator">=</span><span class="Constant">10</span> {
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_int</span>(<span class="Identifier">i</span>);
+        <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
+    }
+}</pre></div>
+<h2 id="выражения"><a href="#выражения">Выражения</a></h2>
+<h3 id="бинарные-выражения"><a href="#бинарные-выражения">Бинарные выражения</a></h3>
+<table>
+<thead>
+<tr>
+<th>Оператор</th>
+<th>Приоритет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code translate="no">*</code> <code translate="no">/</code> <code translate="no">%</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code translate="no">+</code> <code translate="no">-</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td><code translate="no">&lt;&lt;</code> <code translate="no">&gt;&gt;</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td><code translate="no">&lt;</code> <code translate="no">&gt;</code> <code translate="no">==</code> <code translate="no">!=</code> <code translate="no">&gt;=</code> <code translate="no">&lt;=</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code translate="no">&amp;</code></td>
+<td>5</td>
+</tr>
+<tr>
+<td><code translate="no">^</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td><code translate="no">|</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td><code translate="no">&amp;&amp;</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code translate="no">||</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td><code translate="no">??</code></td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">2</span> <span class="Operator">+</span> <span class="Constant">3</span> <span class="Operator">*</span> <span class="Constant">6</span>; <span class="Comment">// a = 20</span></pre></div>
+<h3 id="унарные-выражения"><a href="#унарные-выражения">Унарные выражения</a></h3>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">5</span>;
+<span class="Statement">let</span> <span class="Identifier">b</span> <span class="Operator">=</span> <span class="Operator">!</span><span class="Constant">true</span>; <span class="Comment">// b = false</span>
+<span class="Statement">mut</span> <span class="Identifier">c</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Identifier">a</span>; <span class="Comment">// c = -5</span>
+<span class="Statement">let</span> <span class="Identifier">p</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">c</span>;
+<span class="Operator">*</span><span class="Identifier">p</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Identifier">c</span>; <span class="Comment">// c = 5</span></pre></div></div>
+</div>
+</main>
+        <footer>
+            <p class="muted">© 2026 lnkrr</p>
+        </footer>
+        <script src="/static/main.js"></script>
+    </body>
+</html>

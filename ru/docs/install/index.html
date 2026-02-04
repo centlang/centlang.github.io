@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Язык программирования Cent</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/ru/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/ru/docs/"
+                    >Документация</a
+                >
+                <a class="nav-link" href="/ru/play/"
+                    >Песочница</a
+                >
+                <a class="nav-link" href="/ru/news/"
+                    >Новости</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="content-wrapper">
+    <div class="toc">
+<ul>
+<li><a href="#руководство-по-установке">Руководство по установке</a><ul>
+<li><a href="#linux">Linux</a><ul>
+<li><a href="#1-загрузка">1. Загрузка</a></li>
+<li><a href="#2-установка">2. Установка</a></li>
+<li><a href="#3-проверка">3. Проверка</a></li>
+</ul>
+</li>
+<li><a href="#windows">Windows</a><ul>
+<li><a href="#1-загрузка">1. Загрузка</a></li>
+<li><a href="#2-установка">2. Установка</a></li>
+<li><a href="#3-проверка">3. Проверка</a></li>
+</ul>
+</li>
+<li><a href="#следующие-шаги">Следующие шаги</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <div class="content"><h1 id="руководство-по-установке"><a href="#руководство-по-установке">Руководство по установке</a></h1>
+<div class="note">
+    Если вы хотите установить Cent из исходников, перейдите в раздел
+    <a href="/ru/docs/install/source/">Установка из исходников</a>.
+</div>
+
+<h2 id="linux"><a href="#linux">Linux</a></h2>
+<h3 id="1-загрузка"><a href="#1-загрузка">1. Загрузка</a></h3>
+<p>Скачайте последнюю версию Cent для вашей архитектуры:</p>
+<ul>
+<li><a href="https://github.com/centlang/cent/releases/latest/download/cent-linux-x86_64.tar.xz">x86_64</a></li>
+<li><a href="https://github.com/centlang/cent/releases/latest/download/cent-linux-aarch64.tar.xz">aarch64</a></li>
+<li><a href="https://github.com/centlang/cent/releases/latest/download/cent-linux-riscv64.tar.xz">riscv64</a></li>
+</ul>
+<h3 id="2-установка"><a href="#2-установка">2. Установка</a></h3>
+<p>Распакуйте архив в <code translate="no">~/cent</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ <span class="Statement">mkdir</span> <span class="Special">-p</span> ~/cent
+$ tar <span class="Special">-xJf</span> cent-linux-x86_64.tar.xz <span class="Special">-C</span> ~/cent</pre></div>
+<p>Добавьте <code translate="no">~/cent/bin</code> в ваш <code translate="no">$PATH</code>, добавив эту строку в <code translate="no">~/.bashrc</code> (для
+Bash):</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">export</span> <span class="Identifier">PATH</span><span class="shVarAssign">=</span><span class="Operator">&quot;</span><span class="PreProc">$PATH</span><span class="String">:</span><span class="PreProc">$HOME</span><span class="String">/cent/bin</span><span class="Operator">&quot;</span></pre></div>
+<p>Примените изменения:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ <span class="Statement">source</span> ~/.bashrc</pre></div>
+<h3 id="3-проверка"><a href="#3-проверка">3. Проверка</a></h3>
+<p>Проверьте установку:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc <span class="Special">--version</span>
+Cent v0.<span class="Constant">1</span></pre></div>
+<h2 id="windows"><a href="#windows">Windows</a></h2>
+<div class="warning">
+    Поддержка Windows ещё НЕ реализована. Будут ошибки. Версия компилятора для
+    Windows может только создавать объектные файлы.
+</div>
+
+<h3 id="1-загрузка"><a href="#1-загрузка">1. Загрузка</a></h3>
+<p>Скачайте последнюю версию Cent:</p>
+<ul>
+<li><a href="https://github.com/centlang/cent/releases/latest/download/cent-windows-x86_64.zip">x86_64</a></li>
+</ul>
+<h3 id="2-установка"><a href="#2-установка">2. Установка</a></h3>
+<p>Распакуйте архив в <code translate="no">C:\cent</code>, затем добавьте <code translate="no">C:\cent\bin</code> в переменную
+окружения <code translate="no">PATH</code>:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ setx /M PATH &quot;%PATH%;C:\cent\bin&quot;</pre></div>
+<h3 id="3-проверка"><a href="#3-проверка">3. Проверка</a></h3>
+<p>Откройте новый терминал и проверьте установку:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc --version
+Cent v0.1</pre></div>
+<h2 id="следующие-шаги"><a href="#следующие-шаги">Следующие шаги</a></h2>
+<p>Когда будете готовы, перейдите в раздел <a href="/docs/overview/">Обзор языка</a>, чтобы
+узнать больше о Cent.</p></div>
+</div>
+</main>
+        <footer>
+            <p class="muted">© 2026 lnkrr</p>
+        </footer>
+        <script src="/static/main.js"></script>
+    </body>
+</html>

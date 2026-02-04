@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <title>Язык программирования Cent</title>
+        <link rel="stylesheet" href="/static/style.css" />
+        <link
+            href="https://fonts.googleapis.com/css?family=JetBrains Mono"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="panel">
+            <a href="/ru/">
+                <img class="icon" src="/static/icon.svg" />
+            </a>
+            <nav>
+                <a class="nav-link" href="/ru/docs/"
+                    >Документация</a
+                >
+                <a class="nav-link" href="/ru/play/"
+                    >Песочница</a
+                >
+                <a class="nav-link" href="/ru/news/"
+                    >Новости</a
+                >
+                <a class="nav-link" href="https://github.com/centlang/cent"
+                    >GitHub</a
+                >
+            </nav>
+        </header>
+        <main>
+
+<div class="content-wrapper">
+    <div class="toc">
+<ul>
+<li><a href="#установка-из-исходников">Установка из исходников</a><ul>
+<li><a href="#linux">Linux</a><ul>
+<li><a href="#1-установка-зависимостей-для-сборки">1. Установка зависимостей для сборки</a></li>
+<li><a href="#2-клонирование">2. Клонирование</a></li>
+<li><a href="#3-сборка-и-установка">3. Сборка и установка</a></li>
+<li><a href="#4-проверка">4. Проверка</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <div class="content"><h1 id="установка-из-исходников"><a href="#установка-из-исходников">Установка из исходников</a></h1>
+<h2 id="linux"><a href="#linux">Linux</a></h2>
+<h3 id="1-установка-зависимостей-для-сборки"><a href="#1-установка-зависимостей-для-сборки">1. Установка зависимостей для сборки</a></h3>
+<p>Debian/Ubuntu:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ sudo apt-get install <span class="Special">-y</span> build-essential cmake ninja-build git</pre></div>
+<p>Arch Linux:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ sudo pacman <span class="Special">-Syu</span> cmake ninja gcc git</pre></div>
+<p>Void Linux:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ sudo xbps-install <span class="Special">-Syu</span> cmake ninja gcc git</pre></div>
+<h3 id="2-клонирование"><a href="#2-клонирование">2. Клонирование</a></h3>
+<p>Клонируйте репозиторий:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ git clone https://github.com/centlang/cent &amp;&amp; <span class="Statement">cd</span> cent</pre></div>
+<h3 id="3-сборка-и-установка"><a href="#3-сборка-и-установка">3. Сборка и установка</a></h3>
+<p>Соберите:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ <span class="Statement">mkdir</span> build &amp;&amp; <span class="Statement">cd</span> build
+$ cmake .. <span class="Special">-DCMAKE_BUILD_TYPE</span><span class="Operator">=</span>Release <span class="Special">-GNinja</span>
+$ ninja</pre></div>
+<p>Установите:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ sudo ninja install</pre></div>
+<h3 id="4-проверка"><a href="#4-проверка">4. Проверка</a></h3>
+<p>Проверьте установку:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc <span class="Special">--version</span>
+Cent v0.<span class="Constant">1</span></pre></div></div>
+</div>
+</main>
+        <footer>
+            <p class="muted">© 2026 lnkrr</p>
+        </footer>
+        <script src="/static/main.js"></script>
+    </body>
+</html>
