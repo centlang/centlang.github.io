@@ -217,6 +217,11 @@ def main():
         os.path.join(BUILD_DIR, "favicon.ico"),
     )
 
+    shutil.copyfile(
+        os.path.join(STATIC_DIR, "cname"),
+        os.path.join(BUILD_DIR, "CNAME"),
+    )
+
     for language in TRANSLATIONS:
         if language == "default":
             build_files(SRC_DIR, BUILD_DIR, language)
