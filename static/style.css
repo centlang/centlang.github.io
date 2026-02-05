@@ -156,6 +156,11 @@ tbody {
     background-color: var(--bg);
 }
 
+hr {
+    color: var(--muted-border);
+    margin: 2rem 0;
+}
+
 .nav-link {
     color: var(--text);
 }
@@ -302,12 +307,12 @@ table {
     line-height: 1.6;
 }
 
-.content h1 a::before,
-.content h2 a::before,
-.content h3 a::before,
-.content h4 a::before,
-.content h5 a::before,
-.content h6 a::before {
+.content h1 > a:first-child::before,
+.content h2 > a:first-child::before,
+.content h3 > a:first-child::before,
+.content h4 > a:first-child::before,
+.content h5 > a:first-child::before,
+.content h6 > a:first-child::before {
     content: "# ";
 }
 
