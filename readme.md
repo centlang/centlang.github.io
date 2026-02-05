@@ -1,4 +1,4 @@
-# centlang.github.io
+# centlang.org
 
 Website for Cent programming language, built completely from scratch.
 
@@ -16,8 +16,8 @@ Requirements:
 Clone the repository:
 
 ```sh
-$ git clone https://github.com/centlang/centlang.github.io
-$ cd centlang.github.io
+$ git clone https://github.com/centlang/centlang.org
+$ cd centlang.org
 ```
 
 Build the website:
