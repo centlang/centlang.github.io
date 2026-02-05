@@ -3,8 +3,6 @@ import subprocess
 import tempfile
 
 from fastapi import FastAPI, HTTPException, status
-from fastapi.staticfiles import StaticFiles
-
 from pydantic import BaseModel
 
 TIMEOUT_SECONDS = 5
@@ -15,7 +13,7 @@ class RunRequest(BaseModel):
     code: str
     mode: str
 
-@app.post("/api/run")
+@app.post("/run")
 async def run_code(request: RunRequest):
     tmp_dir = tempfile.mkdtemp()
     extra_flags = []
@@ -61,5 +59,3 @@ async def run_code(request: RunRequest):
     except subprocess.TimeoutExpired:
         process.terminate()
         raise HTTPException(status.HTTP_504_GATEWAY_TIMEOUT, "Time limit exceeded")
-
-app.mount("/", StaticFiles(directory="frontend/build", html=True))
