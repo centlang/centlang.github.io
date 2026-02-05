@@ -48,6 +48,8 @@ $ centc --version
 Cent v0.1
 ```
 
+---
+
 ## Windows
 
 <div class="warning">
