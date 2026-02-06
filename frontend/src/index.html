@@ -1,7 +1,7 @@
 {% extends default %}
 
 <div class="hero">
-    <img class="logo" src="/static/logo.svg" />
+    <img class="logo" src="/static/logo.svg" alt="Cent logo" />
     <div class="panel">
         <div class="tagline">{{ t.tagline }}</div>
     </div>
@@ -13,24 +13,24 @@
             >{{ t.download }}</a
         >
     </div>
-    <img class="puzzle" src="/static/puzzle.png" />
+    <img class="puzzle" src="/static/puzzle.png" alt="Puzzle graphic" />
 </div>
 <div class="principles panel">
     <div class="principles-left">
         <div>
-            <h1 class="accent">{{ t.principles.simple.title }}</h1>
+            <h2 class="accent">{{ t.principles.simple.title }}</h2>
             <p>{{ t.principles.simple.content }}</p>
         </div>
         <div>
-            <h1 class="accent">{{ t.principles.explicit.title }}</h1>
+            <h2 class="accent">{{ t.principles.explicit.title }}</h2>
             <p>{{ t.principles.explicit.content }}</p>
         </div>
         <div>
-            <h1 class="accent">{{ t.principles.fast.title }}</h1>
+            <h2 class="accent">{{ t.principles.fast.title }}</h2>
             <p>{{ t.principles.fast.content }}</p>
         </div>
         <div>
-            <h1 class="accent">{{ t.principles.modern.title }}</h1>
+            <h2 class="accent">{{ t.principles.modern.title }}</h2>
             <p>{{ t.principles.modern.content }}</p>
         </div>
     </div>

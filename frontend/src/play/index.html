@@ -11,7 +11,7 @@
                 <option>centc v0.1</option>
             </select>
         </div>
-        <button onclick="runCode();">{{ t.run }}</button>
+        <button onclick="runCode()">{{ t.run }}</button>
     </div>
     <div class="editor-wrapper panel">
         <div class="lines" id="lines" translate="no">1</div>
@@ -29,7 +29,12 @@
         </div>
     </div>
     <div class="output-wrapper panel">
-        <img class="loading" id="loading" src="/static/loading.svg" />
+        <img
+            class="loading"
+            id="loading"
+            src="/static/loading.svg"
+            alt="Loading icon"
+        />
         <div translate="no">
             <p id="stderr"></p>
             <p id="stdout">{{ t.output }}</p>

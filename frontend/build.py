@@ -49,7 +49,7 @@ def process_code_block(code: str, lang: str) -> str:
     return (
         '<div class="code-block">'
         '<button class="copy-button">'
-        '<img class="copy-icon" src="/static/copy.svg" />'
+        '<img class="copy-icon" src="/static/copy.svg" alt="Copy icon" />'
         '</button>'
         '<pre translate="no">'
         f'{(match.group(1) if match else code).strip()}'
