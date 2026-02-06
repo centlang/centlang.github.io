@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Язык программирования Cent</title>
         <link rel="stylesheet" href="/static/style.css" />
         <link
@@ -13,7 +13,7 @@
     <body>
         <header class="panel">
             <a href="/ru/">
-                <img class="icon" src="/static/icon.svg" />
+                <img class="icon" src="/static/icon.svg" alt="Cent icon" />
             </a>
             <nav>
                 <a class="nav-link" href="/ru/docs/"
@@ -43,7 +43,7 @@
                 <option>centc v0.1</option>
             </select>
         </div>
-        <button onclick="runCode();">Запустить</button>
+        <button onclick="runCode()">Запустить</button>
     </div>
     <div class="editor-wrapper panel">
         <div class="lines" id="lines" translate="no">1</div>
@@ -61,7 +61,12 @@
         </div>
     </div>
     <div class="output-wrapper panel">
-        <img class="loading" id="loading" src="/static/loading.svg" />
+        <img
+            class="loading"
+            id="loading"
+            src="/static/loading.svg"
+            alt="Loading icon"
+        />
         <div translate="no">
             <p id="stderr"></p>
             <p id="stdout">Вывод</p>

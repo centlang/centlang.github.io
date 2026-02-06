@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=0.6" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Cent Programming Language</title>
         <link rel="stylesheet" href="/static/style.css" />
         <link
@@ -13,7 +13,7 @@
     <body>
         <header class="panel">
             <a href="/">
-                <img class="icon" src="/static/icon.svg" />
+                <img class="icon" src="/static/icon.svg" alt="Cent icon" />
             </a>
             <nav>
                 <a class="nav-link" href="/docs/"
@@ -89,76 +89,76 @@ used another programming language before.</p>
 <h2 id="hello-world"><a href="#hello-world">Hello, world!</a></h2>
 <p>We'll write a simple program that prints <code translate="no">Hello, world!</code> to the screen. Create a
 new file named <code translate="no">main.cn</code> with the following content:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">println</span>(<span class="String">&quot;Hello, world!&quot;</span>);
 }</pre></div>
 <p>Now, run these commands to compile and execute the program:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc main.cn
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no">$ centc main.cn
 $ ./main
 Hello, world!</pre></div>
 <p>You can also use the <code translate="no">--run</code> option to automatically run the compiled
 executable:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no">$ centc main.cn <span class="Special">--run</span>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no">$ centc main.cn <span class="Special">--run</span>
 Hello, world!</pre></div>
 <h2 id="variables"><a href="#variables">Variables</a></h2>
 <p>The <code translate="no">let</code> statement creates an <em>immutable</em> variable.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;</pre></div>
 <p>To create a <em>mutable</em> variable, use the <code translate="no">mut</code> keyword.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">0</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;</pre></div>
 <p>A variable's type can be specified explicitly:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">0</span>;</pre></div>
 <p>Variables are zero-initialized if no value is given.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span>: <span class="Type">i32</span>;</pre></div>
 <p>Cent is statically typed, so you cannot change the type of a variable.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>; <span class="Comment">// invalid!</span></pre></div>
 <p>You can, however, <em>shadow</em> a variable, meaning to create a new variable with the
 same name:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
 <span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">4.5</span>;
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7.3</span>;</pre></div>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">10</span>;
 <span class="Statement">let</span> <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Identifier">score</span>; <span class="Comment">// score is no longer mutable</span>
 <span class="Identifier">score</span> <span class="Operator">=</span> <span class="Constant">7</span>; <span class="Comment">// invalid!</span></pre></div>
 <h2 id="comments"><a href="#comments">Comments</a></h2>
 <p>You can use comments to explain certain parts of your code. Comments start with
 <code translate="no">//</code>.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">variable</span> <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// this is a variable</span></pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">variable</span> <span class="Operator">=</span> <span class="Constant">10</span>; <span class="Comment">// this is a variable</span></pre></div>
 <h2 id="constants"><a href="#constants">Constants</a></h2>
 <p>To create a constant, use the <code translate="no">const</code> keyword. Constants are computed at compile
 time.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">const</span> <span class="Identifier">PI</span> <span class="Operator">=</span> <span class="Constant">3.14</span>;
 <span class="Statement">const</span> <span class="Identifier">GOLDEN_RATIO</span> <span class="Operator">=</span> <span class="Constant">1.618</span>;
 <span class="Statement">const</span> <span class="Identifier">SECONDS_IN_A_DAY</span> <span class="Operator">=</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">60</span> <span class="Operator">*</span> <span class="Constant">24</span>;</pre></div>
 <h2 id="data-types"><a href="#data-types">Data types</a></h2>
 <h3 id="integer-types"><a href="#integer-types">Integer types</a></h3>
 <p>Integer types start with either <code translate="no">i</code> or <code translate="no">u</code>. Integer types starting with <code translate="no">u</code> are
 <em>unsigned</em>. After that, the size in bits is specified:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Type">i8</span> <span class="Type">i16</span> <span class="Type">i32</span> <span class="Type">i64</span> <span class="Comment">// signed</span>
 <span class="Type">u8</span> <span class="Type">u16</span> <span class="Type">u32</span> <span class="Type">u64</span> <span class="Comment">// unsigned</span></pre></div>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">u64</span> <span class="Operator">=</span> <span class="Constant">3</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">u64</span> <span class="Operator">=</span> <span class="Constant">3</span>;
 <span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">i8</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Constant">128</span>;</pre></div>
 <p>There are special <code translate="no">usize</code> and <code translate="no">isize</code> types. They have the size of the pointer
 type and are usually used for indexing.</p>
 <h3 id="floating-point-types"><a href="#floating-point-types">Floating-point types</a></h3>
 <p>Floating-point types are used to store numbers with decimal points. In Cent,
 there are two such types: <code translate="no">f32</code> and <code translate="no">f64</code>.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">f32</span> <span class="Operator">=</span> <span class="Constant">3.5</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span>: <span class="Type">f32</span> <span class="Operator">=</span> <span class="Constant">3.5</span>;
 <span class="Statement">let</span> <span class="Identifier">b</span>: <span class="Type">f64</span> <span class="Operator">=</span> <span class="Constant">1.2345678</span>;</pre></div>
 <h3 id="the-bool-type"><a href="#the-bool-type">The <code translate="no">bool</code> type</a></h3>
 <p>A <code translate="no">bool</code> value is either <code translate="no">true</code> or <code translate="no">false</code>:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">raining</span>: <span class="Type">bool</span> <span class="Operator">=</span> <span class="Constant">false</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">raining</span>: <span class="Type">bool</span> <span class="Operator">=</span> <span class="Constant">false</span>;
 <span class="Identifier">raining</span> <span class="Operator">=</span> <span class="Constant">true</span>;</pre></div>
 <h3 id="the-rune-type"><a href="#the-rune-type">The <code translate="no">rune</code> type</a></h3>
 <p>The <code translate="no">rune</code> type represents a Unicode code point and is 4 bytes long.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Type">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Type">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre></div>
 <h3 id="array-types"><a href="#array-types">Array types</a></h3>
 <p>Array types are created by using the <code translate="no">[N]T</code> syntax. Arrays hold multiple values
 of the same type:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Constant">4</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>};
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Constant">4</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>};
 <span class="Statement">let</span> <span class="Identifier">data</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0xff</span>, <span class="Constant">0x0</span>}; <span class="Comment">// array length can be deduced</span></pre></div>
 <p>Arrays can be of <em>variable length</em>.</p>
 <div class="warning">
@@ -166,46 +166,46 @@ of the same type:</p>
     If the array size is too large, this can result in a stack overflow.
 </div>
 
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">n</span>: <span class="Type">usize</span> <span class="Operator">=</span> <span class="Constant">16</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">n</span>: <span class="Type">usize</span> <span class="Operator">=</span> <span class="Constant">16</span>;
 <span class="Identifier">n</span> <span class="Operator">=</span> <span class="Constant">1024</span>;
 <span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Identifier">n</span>]<span class="Type">u8</span>;</pre></div>
 <h3 id="slice-types"><a href="#slice-types">Slice types</a></h3>
 <p>Slice types are created by using the <code translate="no">[]T</code> syntax. Slices represent a view into
 a sequence of elements. They consist of a pointer and a length.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
 <span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
 
 <span class="Statement">let</span> <span class="Identifier">len</span> <span class="Operator">=</span> <span class="Identifier">slice</span>.<span class="Identifier">len</span>;
 <span class="Statement">let</span> <span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">slice</span>[<span class="Constant">0</span>];</pre></div>
 <p>Slices can be mutable:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: [<span class="Constant">1024</span>]<span class="Type">u8</span>;
 <span class="Statement">let</span> <span class="Identifier">slice</span>: []<span class="Statement">mut</span> <span class="Type">u8</span> <span class="Operator">=</span> <span class="Identifier">data</span>;
 
 <span class="Identifier">slice</span>[<span class="Constant">10</span>] <span class="Operator">=</span> <span class="Constant">42</span>;</pre></div>
 <h3 id="strings"><a href="#strings">Strings?</a></h3>
 <p>In Cent, strings are just arrays of bytes. Strings are <strong>not</strong> null-terminated.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">language</span>: [<span class="Constant">4</span>]<span class="Type">u8</span> <span class="Operator">=</span> <span class="String">&quot;Cent&quot;</span>;
 <span class="Statement">let</span> <span class="Identifier">language</span> <span class="Operator">=</span> [<span class="Normal">_</span>]<span class="Type">u8</span>{<span class="Constant">'C'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'e'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'n'</span> <span class="Operator">as</span> <span class="Type">u8</span>, <span class="Constant">'t'</span> <span class="Operator">as</span> <span class="Type">u8</span>};
 
 <span class="Statement">let</span> <span class="Identifier">null_terminated</span> <span class="Operator">=</span> <span class="String">&quot;Hello, world!</span><span class="Special">\0</span><span class="String">&quot;</span>;</pre></div>
 <h3 id="optional-types"><a href="#optional-types">Optional types</a></h3>
 <p>Optional values can either be <code translate="no">null</code> or contain a value. To create an optional
 type, use the <code translate="no">?T</code> syntax:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>; <span class="Comment">// optional != null</span>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>; <span class="Comment">// optional != null</span>
 
 <span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">42</span>;
 <span class="Identifier">optional</span> <span class="Operator">=</span> <span class="Constant">null</span>; <span class="Comment">// optional == null</span></pre></div>
 <p>To access the contained value without any checks, use the <code translate="no">.!</code> syntax:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">optional</span>: ?<span class="Type">i32</span> <span class="Operator">=</span> <span class="Constant">32</span>;
 <span class="Statement">let</span> <span class="Identifier">value</span> <span class="Operator">=</span> <span class="Identifier">optional</span>.<span class="Operator">!</span>;</pre></div>
 <h3 id="pointer-types"><a href="#pointer-types">Pointer types</a></h3>
 <p>Pointers reference a value in memory. To create a pointer type, use the <code translate="no">*T</code>
 syntax.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
 <span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>; <span class="Comment">// *ptr = 42</span>
 <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// *ptr = 422</span></pre></div>
 <p>Pointers can be mutable:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">x</span> <span class="Operator">=</span> <span class="Constant">42</span>;
 <span class="Statement">let</span> <span class="Identifier">ptr</span>: <span class="Operator">*</span><span class="Statement">mut</span> <span class="Type">i32</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">x</span>;
 <span class="Operator">*</span><span class="Identifier">ptr</span> <span class="Operator">=</span> <span class="Constant">422</span>; <span class="Comment">// x = 422</span></pre></div>
 <div class="note">
@@ -217,19 +217,19 @@ syntax.</p>
 <h3 id="tuple-types"><a href="#tuple-types">Tuple types</a></h3>
 <p>Tuple types are created by using the <code translate="no">(T1, T2, T3, ...)</code> syntax. Tuples hold
 multiple values of different types:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: (<span class="Type">i32</span>, <span class="Type">f32</span>, <span class="Type">bool</span>, [<span class="Constant">6</span>]<span class="Type">u8</span>) <span class="Operator">=</span> (<span class="Constant">10</span>, <span class="Constant">42.42</span>, <span class="Constant">true</span>, <span class="String">&quot;Hello!&quot;</span>);
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">mut</span> <span class="Identifier">data</span>: (<span class="Type">i32</span>, <span class="Type">f32</span>, <span class="Type">bool</span>, [<span class="Constant">6</span>]<span class="Type">u8</span>) <span class="Operator">=</span> (<span class="Constant">10</span>, <span class="Constant">42.42</span>, <span class="Constant">true</span>, <span class="String">&quot;Hello!&quot;</span>);
 <span class="Identifier">data</span>.<span class="Constant">0</span> <span class="Operator">+=</span> <span class="Constant">32</span>; <span class="Comment">// data.0 = 42</span>
 <span class="Identifier">data</span>.<span class="Constant">1</span> <span class="Operator">=</span> <span class="Identifier">data</span>.<span class="Constant">0</span>; <span class="Comment">// data.1 = 42</span></pre></div>
 <h2 id="with-statements"><a href="#with-statements"><code translate="no">with</code> statements</a></h2>
 <p>You can use the <code translate="no">with</code> statement to import an external module.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 <span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">fs</span>;
 
 <span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">posix</span> <span class="Operator">as</span> <span class="Identifier">os</span>; <span class="Comment">// import under a different name</span></pre></div>
 <h2 id="functions"><a href="#functions">Functions</a></h2>
 <p>Functions are defined by using the <code translate="no">fn</code> keyword. The <code translate="no">main</code> function is the
 entry point of the program. Functions can be used before they're defined.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Function">hello_world</span>();
@@ -241,11 +241,11 @@ entry point of the program. Functions can be used before they're defined.</p>
 <p>You can specify the return type after the parentheses. If no return type is
 specified, the function is assumed to return nothing. To return a value from a
 function, use the <code translate="no">return</code> statement:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">get_magic_number</span>() <span class="Type">i32</span> {
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">get_magic_number</span>() <span class="Type">i32</span> {
     <span class="Statement">return</span> <span class="Constant">42</span>;
 }</pre></div>
 <p>Functions can take parameters.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">4</span>); <span class="Comment">// a = 7</span>
 }
 
@@ -255,7 +255,7 @@ function, use the <code translate="no">return</code> statement:</p>
 <h3 id="default-parameters"><a href="#default-parameters">Default parameters</a></h3>
 <p>You can define <em>default</em> parameters. If arguments aren't provided, the default
 values are used.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">let</span> <span class="Identifier">ten</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">7</span>);
     <span class="Statement">let</span> <span class="Identifier">nine</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">3</span>, <span class="Constant">3</span>, <span class="Constant">3</span>);
     <span class="Statement">let</span> <span class="Identifier">one</span> <span class="Operator">=</span> <span class="Function">add</span>(<span class="Constant">1</span>, <span class="Operator">-</span><span class="Constant">1</span>, <span class="Constant">1</span>, <span class="Constant">0</span>);
@@ -267,7 +267,7 @@ values are used.</p>
 <h2 id="control-flow"><a href="#control-flow">Control flow</a></h2>
 <h3 id="if-statements"><a href="#if-statements"><code translate="no">if</code> statements</a></h3>
 <p>Use the <code translate="no">if</code> statement to branch your code depending on a condition.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Function">print_is_even</span>(<span class="Constant">3</span>); <span class="Comment">// x is odd</span>
@@ -282,7 +282,7 @@ values are used.</p>
     }
 }</pre></div>
 <p>You can use <code translate="no">else if</code> to check additional conditions.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">greet</span>(<span class="Identifier">hour</span>: <span class="Type">u8</span>) {
     <span class="Statement">if</span> <span class="Identifier">hour</span> <span class="Operator">&lt;</span> <span class="Constant">12</span> {
@@ -296,7 +296,7 @@ values are used.</p>
 <h3 id="switch-statements"><a href="#switch-statements"><code translate="no">switch</code> statements</a></h3>
 <p>The <code translate="no">switch</code> statement allows you to compare a value against several possible
 cases:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">day_of_week</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
     <span class="Statement">switch</span> <span class="Identifier">day</span> {
@@ -311,7 +311,7 @@ cases:</p>
     }
 }</pre></div>
 <p>You can match multiple values in a single case.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">is_weekend</span>(<span class="Identifier">day</span>: <span class="Type">u8</span>) {
     <span class="Statement">switch</span> <span class="Identifier">day</span> {
@@ -321,7 +321,7 @@ cases:</p>
 }</pre></div>
 <h3 id="while-loops"><a href="#while-loops"><code translate="no">while</code> loops</a></h3>
 <p>A <code translate="no">while</code> loop will run as long as the condition is <code translate="no">true</code>.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
@@ -335,7 +335,7 @@ cases:</p>
 }</pre></div>
 <p>You can use <code translate="no">while true</code> to create an infinite loop. To exit a loop, use the
 <code translate="no">break</code> keyword.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
@@ -352,7 +352,7 @@ cases:</p>
     <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
 }</pre></div>
 <p>To skip an iteration, use the <code translate="no">continue</code> keyword:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">mut</span> <span class="Identifier">i</span> <span class="Operator">=</span> <span class="Constant">0</span>;
@@ -374,7 +374,7 @@ cases:</p>
 <h3 id="for-loops"><a href="#for-loops"><code translate="no">for</code> loops</a></h3>
 <p><code translate="no">for</code> loops allow you to iterate through a range or a sequence.</p>
 <p><em>Exclusive</em> ranges are created by using the <code translate="no">x..y</code> syntax:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Constant">10</span> {
@@ -383,7 +383,7 @@ cases:</p>
     }
 }</pre></div>
 <p>To create an <em>inclusive</em> range, use the <code translate="no">x..=y</code> syntax:</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">with</span> <span class="PreProc">std</span><span class="Delimiter">::</span><span class="PreProc">io</span>;
 
 <span class="Statement">fn</span> <span class="Function">main</span>() {
     <span class="Statement">for</span> <span class="Identifier">i</span> <span class="Statement">in</span> <span class="Constant">1</span>..<span class="Operator">=</span><span class="Constant">10</span> {
@@ -443,9 +443,9 @@ cases:</p>
 </tr>
 </tbody>
 </table>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">2</span> <span class="Operator">+</span> <span class="Constant">3</span> <span class="Operator">*</span> <span class="Constant">6</span>; <span class="Comment">// a = 20</span></pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">2</span> <span class="Operator">+</span> <span class="Constant">3</span> <span class="Operator">*</span> <span class="Constant">6</span>; <span class="Comment">// a = 20</span></pre></div>
 <h3 id="unary-expressions"><a href="#unary-expressions">Unary expressions</a></h3>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">5</span>;
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">a</span> <span class="Operator">=</span> <span class="Constant">5</span>;
 <span class="Statement">let</span> <span class="Identifier">b</span> <span class="Operator">=</span> <span class="Operator">!</span><span class="Constant">true</span>; <span class="Comment">// b = false</span>
 <span class="Statement">mut</span> <span class="Identifier">c</span> <span class="Operator">=</span> <span class="Operator">-</span><span class="Identifier">a</span>; <span class="Comment">// c = -5</span>
 <span class="Statement">let</span> <span class="Identifier">p</span> <span class="Operator">=</span> <span class="Operator">&amp;</span><span class="Identifier">c</span>;
