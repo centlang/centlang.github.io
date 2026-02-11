@@ -157,7 +157,7 @@ tbody {
 }
 
 hr {
-    color: var(--muted-border);
+    border-color: var(--muted-border);
     margin: 2rem 0;
 }
 
