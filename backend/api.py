@@ -13,7 +13,6 @@ TIMEOUT_SECONDS = 5
 
 OS_USAGE_MB = 700
 CONTAINER_LIMIT_MB = 256
-CONTAINERS_PER_CPU = 2
 
 app = FastAPI()
 
@@ -26,9 +25,7 @@ def get_container_limit():
         psutil.virtual_memory().available - OS_USAGE_MB * 1024 * 1024
     ) // (CONTAINER_LIMIT_MB * 1024 * 1024)
 
-    cpu_limit = (psutil.cpu_count() or 1) * CONTAINERS_PER_CPU
-
-    return min(max(1, ram_limit), cpu_limit)
+    return max(1, ram_limit)
 
 semaphore = asyncio.Semaphore(get_container_limit())
 
@@ -57,6 +54,7 @@ async def run_code(request: RunRequest):
             "--rm",
             "--init",
             "--network=none",
+            f'-m="{CONTAINER_LIMIT_MB}m"',
             "-v",
             f"{tmp_dir}:/play:rw",
             "centc",
