@@ -2,8 +2,10 @@ import os
 import subprocess
 import tempfile
 
-from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
+
+from fastapi import FastAPI, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 
 TIMEOUT_SECONDS = 5
 
@@ -59,3 +61,10 @@ async def run_code(request: RunRequest):
     except subprocess.TimeoutExpired:
         process.terminate()
         raise HTTPException(status.HTTP_504_GATEWAY_TIMEOUT, "Time limit exceeded")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["centlang.org", "www.centlang.org"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)

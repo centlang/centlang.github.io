@@ -4,7 +4,7 @@ fn main() {
     io::println("Hello, world!");
 }`;
 
-const API_URL = "/api";
+const API_URL = "https://api.centlang.org";
 
 const editorTextarea = document.getElementById("editor-textarea");
 const editorPre = document.getElementById("editor-pre");
