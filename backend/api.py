@@ -10,8 +10,6 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
 TIMEOUT_SECONDS = 5
-
-OS_USAGE_MB = 700
 CONTAINER_LIMIT_MB = 256
 
 app = FastAPI()
@@ -21,9 +19,9 @@ class RunRequest(BaseModel):
     mode: str
 
 def get_container_limit():
-    ram_limit = (
-        psutil.virtual_memory().available - OS_USAGE_MB * 1024 * 1024
-    ) // (CONTAINER_LIMIT_MB * 1024 * 1024)
+    ram_limit = psutil.virtual_memory().available // (
+        CONTAINER_LIMIT_MB * 1024 * 1024
+    )
 
     return max(1, ram_limit)
 
