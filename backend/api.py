@@ -64,7 +64,7 @@ async def run_code(request: RunRequest):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["centlang.org", "www.centlang.org"],
+    allow_origins=["https://centlang.org", "https://www.centlang.org"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
