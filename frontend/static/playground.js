@@ -263,8 +263,8 @@ async function shareSnippet() {
     if (snippetQr === null) {
         snippetQr = new QRCode(snippetQrDiv, {
             text: url,
-            width: 330,
-            height: 330,
+            width: 370,
+            height: 370,
         });
     } else {
         snippetQr.clear();
