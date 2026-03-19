@@ -15,8 +15,23 @@
             <div class="share-wrapper">
                 <button onclick="shareSnippet()">{{ t.share }}</button>
                 <div class="panel share-menu" id="share-menu">
-                    <div class="snippet-qr" id="snippet-qr"></div>
-                    <a id="snippet-url" target="_blank"></a>
+                    <div class="share-menu-title-bar">
+                        <button
+                            onclick="closeShareMenu()"
+                            class="share-menu-close"
+                            id="share-menu-close"
+                        >
+                            <img
+                                class="share-menu-close-icon"
+                                src="/static/close.svg"
+                                alt="Close icon"
+                            />
+                        </button>
+                    </div>
+                    <div class="share-menu-content">
+                        <div class="snippet-qr" id="snippet-qr"></div>
+                        <a id="snippet-url" target="_blank"></a>
+                    </div>
                 </div>
             </div>
             <button onclick="runCode()">{{ t.run }}</button>

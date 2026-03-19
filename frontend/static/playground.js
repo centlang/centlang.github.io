@@ -274,6 +274,10 @@ async function shareSnippet() {
     shareMenu.style.opacity = "1";
 }
 
+function closeShareMenu() {
+    shareMenu.style.opacity = "0";
+}
+
 function fetchSnippet(snippetId) {
     return fetch(`${API_URL}/s/${snippetId}`)
         .then((response) => response.json())
