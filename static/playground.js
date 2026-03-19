@@ -5,6 +5,7 @@ fn main() {
 }`;
 
 const API_URL = "https://api.centlang.org";
+const QR_CODE_REM = 23;
 
 const editorTextarea = document.getElementById("editor-textarea");
 const editorPre = document.getElementById("editor-pre");
@@ -23,6 +24,9 @@ const snippetUrl = document.getElementById("snippet-url");
 const snippetQrDiv = document.getElementById("snippet-qr");
 
 let snippetQr = null;
+
+let currentQrUrl = "";
+let currentQrPxSize = 0;
 
 editorTextarea.addEventListener("input", () => {
     updateLineNumbers();
@@ -236,6 +240,40 @@ async function runCode() {
     }
 }
 
+function updateSnippetQr(url) {
+    const pxSize =
+        QR_CODE_REM *
+        parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+    const options = {
+        text: url,
+        width: pxSize,
+        height: pxSize,
+    };
+
+    if (!snippetQr) {
+        snippetQr = new QRCode(snippetQrDiv, options);
+        currentQrPxSize = pxSize;
+        currentQrUrl = url;
+        return;
+    }
+
+    if (currentQrPxSize === pxSize && currentQrUrl === url) {
+        return;
+    }
+
+    snippetQrDiv.innerHTML = "";
+
+    snippetQr = new QRCode(snippetQrDiv, {
+        text: url,
+        width: pxSize,
+        height: pxSize,
+    });
+
+    currentQrPxSize = pxSize;
+    currentQrUrl = url;
+}
+
 async function shareSnippet() {
     const response = await fetch(`${API_URL}/s`, {
         method: "POST",
@@ -260,17 +298,7 @@ async function shareSnippet() {
     snippetUrl.href = url;
     snippetUrl.textContent = url;
 
-    if (snippetQr === null) {
-        snippetQr = new QRCode(snippetQrDiv, {
-            text: url,
-            width: 370,
-            height: 370,
-        });
-    } else {
-        snippetQr.clear();
-        snippetQr.makeCode(url);
-    }
-
+    updateSnippetQr(url);
     shareMenu.style.opacity = "1";
 }
 
@@ -360,3 +388,14 @@ if (paramsCode !== null) {
     editorTextarea.value = localStorage.getItem("code") ?? DEFAULT_CODE;
     updateEditor();
 }
+
+let resizeTimeout;
+
+const observer = new ResizeObserver(() => {
+    if (!snippetUrl.href) return;
+
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => updateSnippetQr(snippetUrl.href), 100);
+});
+
+observer.observe(snippetQrDiv.parentNode);
