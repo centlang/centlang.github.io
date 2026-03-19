@@ -43,7 +43,16 @@
                 <option>centc v0.1</option>
             </select>
         </div>
-        <button onclick="runCode()">Запустить</button>
+        <div class="toolbar-right">
+            <div class="share-wrapper">
+                <button onclick="shareSnippet()">Поделиться</button>
+                <div class="panel share-menu" id="share-menu">
+                    <div class="snippet-qr" id="snippet-qr"></div>
+                    <a id="snippet-url" target="_blank"></a>
+                </div>
+            </div>
+            <button onclick="runCode()">Запустить</button>
+        </div>
     </div>
     <div class="editor-wrapper panel">
         <div class="lines" id="lines" translate="no">1</div>
@@ -74,6 +83,8 @@
         <p class="muted" id="system"></p>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="/static/playground.js"></script>
 </main>
         <footer>

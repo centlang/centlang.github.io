@@ -18,6 +18,12 @@ const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
 
+const shareMenu = document.getElementById("share-menu");
+const snippetUrl = document.getElementById("snippet-url");
+const snippetQrDiv = document.getElementById("snippet-qr");
+
+let snippetQr = null;
+
 editorTextarea.addEventListener("input", () => {
     updateLineNumbers();
     updateHighlight();
@@ -60,6 +66,11 @@ function updateLineNumbers() {
 
 function updateHighlight() {
     editorPre.innerHTML = highlightCent(editorTextarea.value) + " ";
+}
+
+function updateEditor() {
+    updateLineNumbers();
+    updateHighlight();
 }
 
 function escapeHtml(input) {
@@ -225,6 +236,50 @@ async function runCode() {
     }
 }
 
+async function shareSnippet() {
+    const response = await fetch(`${API_URL}/s`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            code: editorTextarea.value,
+        }),
+    });
+
+    const result = await response.json();
+
+    let url = `${location.origin + location.pathname}`;
+
+    if (url.endsWith("/")) {
+        url = url.slice(0, -1);
+    }
+
+    url += `/?s=${result.id}`;
+
+    snippetUrl.href = url;
+    snippetUrl.textContent = url;
+
+    if (snippetQr === null) {
+        snippetQr = new QRCode(snippetQrDiv, {
+            text: url,
+            width: 330,
+            height: 330,
+        });
+    } else {
+        snippetQr.clear();
+        snippetQr.makeCode(url);
+    }
+
+    shareMenu.style.opacity = "1";
+}
+
+function fetchSnippet(snippetId) {
+    return fetch(`${API_URL}/s/${snippetId}`)
+        .then((response) => response.json())
+        .then((result) => result.code);
+}
+
 function highlightCent(input) {
     const TOKENS = [
         { className: "Comment", regex: /\/\/.*/y },
@@ -284,10 +339,20 @@ function highlightCent(input) {
     return result;
 }
 
-editorTextarea.value =
-    new URL(document.URL).searchParams.get("code") ??
-    localStorage.getItem("code") ??
-    DEFAULT_CODE;
+const url = new URL(document.URL);
 
-updateHighlight();
-updateLineNumbers();
+const paramsCode = url.searchParams.get("code");
+const snippetId = url.searchParams.get("s");
+
+if (paramsCode !== null) {
+    editorTextarea.value = paramsCode;
+    updateEditor();
+} else if (snippetId !== null) {
+    fetchSnippet(snippetId).then((code) => {
+        editorTextarea.value = code;
+        updateEditor();
+    });
+} else {
+    editorTextarea.value = localStorage.getItem("code") ?? DEFAULT_CODE;
+    updateEditor();
+}
