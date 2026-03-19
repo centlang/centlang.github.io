@@ -11,7 +11,15 @@
                 <option>centc v0.1</option>
             </select>
         </div>
-        <button onclick="runCode()">{{ t.run }}</button>
+        <div class="toolbar-right">
+            <div class="share-wrapper">
+                <button onclick="shareSnippet()">{{ t.share }}</button>
+                <div class="panel share-menu" id="share-menu">
+                    <a id="snippet-url" target="_blank"></a>
+                </div>
+            </div>
+            <button onclick="runCode()">{{ t.run }}</button>
+        </div>
     </div>
     <div class="editor-wrapper panel">
         <div class="lines" id="lines" translate="no">1</div>

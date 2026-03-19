@@ -18,6 +18,9 @@ const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
 
+const shareMenu = document.getElementById("share-menu");
+const snippetUrl = document.getElementById("snippet-url");
+
 editorTextarea.addEventListener("input", () => {
     updateLineNumbers();
     updateHighlight();
@@ -223,6 +226,33 @@ async function runCode() {
         stdout.innerHTML = "";
         system.textContent = `Failed to run code: ${error.message}`;
     }
+}
+
+async function shareSnippet() {
+    const response = await fetch(`${API_URL}/s`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            code: editorTextarea.value,
+        }),
+    });
+
+    const result = await response.json();
+
+    let url = `${location.origin + location.pathname}`;
+
+    if (url.endsWith("/")) {
+        url = url.slice(0, -1);
+    }
+
+    url += `/?s=${result.id}`;
+
+    snippetUrl.href = url;
+    snippetUrl.textContent = url;
+
+    shareMenu.style.opacity = "1";
 }
 
 function highlightCent(input) {

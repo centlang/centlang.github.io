@@ -1,4 +1,4 @@
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
     const button = e.target.closest(".copy-button");
 
     if (!button) {
