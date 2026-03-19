@@ -342,7 +342,6 @@ table {
     transition: opacity 0.2s;
     align-items: center;
     z-index: 100;
-
 }
 .share-menu-title-bar {
     background-color: var(--panel);
