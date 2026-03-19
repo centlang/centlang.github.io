@@ -330,20 +330,44 @@ table {
 }
 
 .share-menu {
+    background-color: var(--bg);
     position: absolute;
-    padding: 1rem;
     margin-top: 0.5rem;
     right: 0;
     width: 32rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
     border-radius: var(--radius);
     opacity: 0;
     transition: opacity 0.2s;
+    align-items: center;
     z-index: 100;
+
+}
+.share-menu-title-bar {
+    background-color: var(--panel);
+    width: 100%;
+    border-bottom: 1px solid var(--muted-border);
+    display: flex;
+    justify-content: right;
+}
+
+.share-menu-close {
+    background-color: transparent;
+    border: none;
+}
+
+.share-menu-close-icon {
+    width: 16px;
+}
+
+.share-menu-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .snippet-qr {
