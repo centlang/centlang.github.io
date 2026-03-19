@@ -20,6 +20,9 @@ const compilationMode = document.getElementById("compilation-mode");
 
 const shareMenu = document.getElementById("share-menu");
 const snippetUrl = document.getElementById("snippet-url");
+const snippetQrDiv = document.getElementById("snippet-qr");
+
+let snippetQr = null;
 
 editorTextarea.addEventListener("input", () => {
     updateLineNumbers();
@@ -257,6 +260,17 @@ async function shareSnippet() {
     snippetUrl.href = url;
     snippetUrl.textContent = url;
 
+    if (snippetQr === null) {
+        snippetQr = new QRCode(snippetQrDiv, {
+            text: url,
+            width: 330,
+            height: 330,
+        });
+    } else {
+        snippetQr.clear();
+        snippetQr.makeCode(url);
+    }
+
     shareMenu.style.opacity = "1";
 }
 
@@ -327,8 +341,8 @@ function highlightCent(input) {
 
 const url = new URL(document.URL);
 
-let paramsCode = url.searchParams.get("code");
-let snippetId = url.searchParams.get("s");
+const paramsCode = url.searchParams.get("code");
+const snippetId = url.searchParams.get("s");
 
 if (paramsCode !== null) {
     editorTextarea.value = paramsCode;

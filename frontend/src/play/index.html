@@ -15,6 +15,7 @@
             <div class="share-wrapper">
                 <button onclick="shareSnippet()">{{ t.share }}</button>
                 <div class="panel share-menu" id="share-menu">
+                    <div class="snippet-qr" id="snippet-qr"></div>
                     <a id="snippet-url" target="_blank"></a>
                 </div>
             </div>
@@ -50,4 +51,6 @@
         <p class="muted" id="system"></p>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="/static/playground.js"></script>
