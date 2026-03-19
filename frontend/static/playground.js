@@ -65,6 +65,11 @@ function updateHighlight() {
     editorPre.innerHTML = highlightCent(editorTextarea.value) + " ";
 }
 
+function updateEditor() {
+    updateLineNumbers();
+    updateHighlight();
+}
+
 function escapeHtml(input) {
     return input
         .replace(/&/g, "&amp;")
@@ -255,6 +260,12 @@ async function shareSnippet() {
     shareMenu.style.opacity = "1";
 }
 
+function fetchSnippet(snippetId) {
+    return fetch(`${API_URL}/s/${snippetId}`)
+        .then((response) => response.json())
+        .then((result) => result.code);
+}
+
 function highlightCent(input) {
     const TOKENS = [
         { className: "Comment", regex: /\/\/.*/y },
@@ -314,10 +325,20 @@ function highlightCent(input) {
     return result;
 }
 
-editorTextarea.value =
-    new URL(document.URL).searchParams.get("code") ??
-    localStorage.getItem("code") ??
-    DEFAULT_CODE;
+const url = new URL(document.URL);
 
-updateHighlight();
-updateLineNumbers();
+let paramsCode = url.searchParams.get("code");
+let snippetId = url.searchParams.get("s");
+
+if (paramsCode !== null) {
+    editorTextarea.value = paramsCode;
+    updateEditor();
+} else if (snippetId !== null) {
+    fetchSnippet(snippetId).then((code) => {
+        editorTextarea.value = code;
+        updateEditor();
+    });
+} else {
+    editorTextarea.value = localStorage.getItem("code") ?? DEFAULT_CODE;
+    updateEditor();
+}
