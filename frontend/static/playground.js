@@ -245,6 +245,8 @@ async function runCodeOnServer(token) {
 }
 
 async function runCode() {
+    cfTurnstile.style.display = "block";
+
     if (!turnstileWidget) {
         turnstileWidget = turnstile.render(cfTurnstile, {
             sitekey: "0x4AAAAAACtStz2DeaTLIcwN",
@@ -253,6 +255,8 @@ async function runCode() {
                 runCodeOnServer(token);
             },
         });
+    } else {
+        turnstile.reset(turnstileWidget);
     }
 
     turnstile.execute(turnstileWidget);
