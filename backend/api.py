@@ -11,6 +11,8 @@ from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
+from httpx import AsyncClient
+
 TIMEOUT_SECONDS = 5
 CONTAINER_LIMIT_MB = 256
 
@@ -20,6 +22,8 @@ NANOID_FS_SPLIT = 2
 
 SNIPPET_LIMIT_KB = 64
 SNIPPETS_DIR = "snippets"
+
+CF_TURNSTILE_KEY = os.getenv("CF_TURNSTILE_KEY")
 
 app = FastAPI()
 
@@ -35,6 +39,7 @@ semaphore = asyncio.Semaphore(get_container_limit())
 class RunRequest(BaseModel):
     code: str
     mode: str
+    token: str
 
 async def run_code(request: RunRequest) -> dict:
     tmp_dir = tempfile.mkdtemp()
@@ -93,8 +98,25 @@ async def run_code(request: RunRequest) -> dict:
     finally:
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
+async def verify_turnstile(token: str) -> bool:
+    async with AsyncClient() as client:
+        response = await client.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={"secret": CF_TURNSTILE_KEY, "response": token},
+        )
+
+        result = response.json()
+
+        return result.get("success", False)
+
 @app.post("/run")
 async def run_route(request: RunRequest) -> dict:
+    if not await verify_turnstile(request.token):
+        raise HTTPException(
+            status.HTTP_403_FORBIDDEN,
+            "Cloudflare Turnstile verification failed",
+        )
+
     async with semaphore:
         return await run_code(request)
 
