@@ -53,6 +53,7 @@
         </div>
     </div>
     <div class="output-wrapper panel">
+        <div id="cf-turnstile"></div>
         <img
             class="loading"
             id="loading"
@@ -66,6 +67,9 @@
         <p class="muted" id="system"></p>
     </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+    defer
+></script>
 <script src="/static/playground.js"></script>

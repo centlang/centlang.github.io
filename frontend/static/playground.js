@@ -18,6 +18,7 @@ const stderr = document.getElementById("stderr");
 const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
+let turnstileWidget;
 
 const shareMenu = document.getElementById("share-menu");
 const snippetUrl = document.getElementById("snippet-url");
@@ -156,7 +157,7 @@ function ansiToHtml(input) {
     let state = Object.assign({}, RESET_STATE);
     let result = "";
 
-    while (match !== null) {
+    while (match) {
         result += `<span style="${ansiStateToStyle(state)}">${escapeHtml(input.substring(lastIndex, match.index))}</span>`;
 
         for (const c of match[1].split(";").map(Number)) {
@@ -204,7 +205,7 @@ function ansiToHtml(input) {
     return result + input.substring(lastIndex);
 }
 
-async function runCode() {
+async function runCodeOnServer(token) {
     try {
         loading.style.display = "block";
         stderr.textContent = "";
@@ -219,6 +220,7 @@ async function runCode() {
             body: JSON.stringify({
                 code: editorTextarea.value,
                 mode: compilationMode.value,
+                token,
             }),
         });
 
@@ -238,6 +240,17 @@ async function runCode() {
         stdout.innerHTML = "";
         system.textContent = `Failed to run code: ${error.message}`;
     }
+}
+
+async function runCode() {
+    if (!turnstileWidget) {
+        turnstileWidget = turnstile.render("#cf-turnstile", {
+            sitekey: "0x4AAAAAACtStz2DeaTLIcwN",
+            callback: runCodeOnServer,
+        });
+    }
+
+    turnstile.execute(turnstileWidget);
 }
 
 function updateSnippetQr(url) {
@@ -354,7 +367,7 @@ function highlightCent(input) {
             t.regex.lastIndex = index;
             const match = t.regex.exec(input);
 
-            if (match !== null) {
+            if (match) {
                 result += `<span class="${t.className}">${escapeHtml(match[0])}</span>`;
                 index = t.regex.lastIndex;
                 matched = true;
@@ -376,10 +389,10 @@ const url = new URL(document.URL);
 const paramsCode = url.searchParams.get("code");
 const snippetId = url.searchParams.get("s");
 
-if (paramsCode !== null) {
+if (paramsCode) {
     editorTextarea.value = paramsCode;
     updateEditor();
-} else if (snippetId !== null) {
+} else if (snippetId) {
     fetchSnippet(snippetId).then((code) => {
         editorTextarea.value = code;
         updateEditor();
