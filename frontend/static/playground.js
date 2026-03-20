@@ -18,6 +18,8 @@ const stderr = document.getElementById("stderr");
 const system = document.getElementById("system");
 
 const compilationMode = document.getElementById("compilation-mode");
+
+const cfTurnstile = document.getElementById("cf-turnstile");
 let turnstileWidget;
 
 const shareMenu = document.getElementById("share-menu");
@@ -244,9 +246,12 @@ async function runCodeOnServer(token) {
 
 async function runCode() {
     if (!turnstileWidget) {
-        turnstileWidget = turnstile.render("#cf-turnstile", {
+        turnstileWidget = turnstile.render(cfTurnstile, {
             sitekey: "0x4AAAAAACtStz2DeaTLIcwN",
-            callback: runCodeOnServer,
+            callback: (token) => {
+                cfTurnstile.style.display = "none";
+                runCodeOnServer(token);
+            },
         });
     }
 
