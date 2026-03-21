@@ -8,8 +8,12 @@ import string
 
 from pydantic import BaseModel
 
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
 
 from httpx import AsyncClient
 
@@ -25,7 +29,10 @@ SNIPPETS_DIR = "snippets"
 
 CF_TURNSTILE_KEY = os.getenv("CF_TURNSTILE_KEY")
 
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 def get_container_limit() -> int:
     ram_limit = psutil.virtual_memory().available // (
@@ -110,15 +117,16 @@ async def verify_turnstile(token: str) -> bool:
         return result.get("success", False)
 
 @app.post("/run")
-async def run_route(request: RunRequest) -> dict:
-    if not await verify_turnstile(request.token):
+@limiter.limit("10/10seconds")
+async def run_route(request: Request, data: RunRequest) -> dict:
+    if not await verify_turnstile(data.token):
         raise HTTPException(
             status.HTTP_403_FORBIDDEN,
             "Cloudflare Turnstile verification failed",
         )
 
     async with semaphore:
-        return await run_code(request)
+        return await run_code(data)
 
 def nanoid() -> str:
     return "".join(
@@ -142,8 +150,9 @@ class SnippetCreate(BaseModel):
     code: str
 
 @app.post("/s")
-async def snippets_post(request: SnippetCreate) -> dict:
-    if len(request.code.encode("utf-8")) > SNIPPET_LIMIT_KB * 1024:
+@limiter.limit("30/12seconds")
+async def snippets_post(request: Request, data: SnippetCreate) -> dict:
+    if len(data.code.encode("utf-8")) > SNIPPET_LIMIT_KB * 1024:
         raise HTTPException(
             status.HTTP_413_CONTENT_TOO_LARGE, "Snippet too large"
         )
@@ -164,12 +173,13 @@ async def snippets_post(request: SnippetCreate) -> dict:
         path = os.path.join(dir, snippet)
 
     with open(path, "w") as file:
-        file.write(request.code)
+        file.write(data.code)
 
     return {"id": snippet}
 
 @app.get("/s/{snippet}")
-async def snippets_get(snippet: str) -> dict:
+@limiter.limit("5/second")
+async def snippets_get(request: Request, snippet: str) -> dict:
     if not is_nanoid(snippet):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "Invalid snippet ID")
 
