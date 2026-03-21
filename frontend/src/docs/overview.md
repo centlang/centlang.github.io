@@ -155,7 +155,7 @@ raining = true;
 The `rune` type represents a Unicode code point and is 4 bytes long.
 
 ```cent
-let the_letter_h: rune = 'h';
+let fire: rune = '🔥';
 ```
 
 ### Array types
@@ -503,6 +503,33 @@ fn main() {
         io::print_rune('\n');
     }
 }
+```
+
+## Literals
+
+### Numeric literals
+
+Integers starting with the `0x` prefix represent a hexadecimal integer literal.
+The `0o` and `0b` prefixes represent octal and binary literals, respectively.
+
+```cent
+let hex = 0xff; // hex = 255
+let oct = 0o777; // oct = 511
+let bin = 0b101010; // bin = 42
+```
+
+You can insert underscores for better readability:
+
+```cent
+let big_number = 1_000_000_000; // big_number = 1000000000
+```
+
+### String literals
+
+String literals generate a UTF-8 encoded sequence of bytes.
+
+```cent
+let string = "𝒰𝓃𝒾𝒸ℴ𝒹ℯ 💎";
 ```
 
 ## Expressions
