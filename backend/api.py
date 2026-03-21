@@ -24,7 +24,7 @@ NANOID_LENGTH = 6
 NANOID_ALPHABET = string.ascii_letters + string.digits + "_-"
 NANOID_FS_SPLIT = 2
 
-SNIPPET_LIMIT_KB = 64
+SNIPPET_LIMIT_KB = 32
 SNIPPETS_DIR = "snippets"
 
 CF_TURNSTILE_KEY = os.getenv("CF_TURNSTILE_KEY")
@@ -150,7 +150,8 @@ class SnippetCreate(BaseModel):
     code: str
 
 @app.post("/s")
-@limiter.limit("30/12seconds")
+@limiter.limit("10/10seconds")
+@limiter.limit("100/40minutes")
 async def snippets_post(request: Request, data: SnippetCreate) -> dict:
     if len(data.code.encode("utf-8")) > SNIPPET_LIMIT_KB * 1024:
         raise HTTPException(
