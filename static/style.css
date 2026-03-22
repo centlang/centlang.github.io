@@ -14,6 +14,8 @@
     --ansi-magenta: #f5c2e7;
     --ansi-cyan: #94e2d5;
     --ansi-white: #bac2de;
+    --error-bg: #370f0f;
+    --error-border: #aa3b3b;
     --warning-bg: #2b2213;
     --warning-border: #aa823b;
     --note-bg: #0c0e2b;
@@ -455,6 +457,17 @@ table {
     caret-color: var(--text);
 }
 
+.error-container {
+    position: absolute;
+    bottom: 5rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 30rem;
+}
+
 .lines,
 .editor-textarea,
 .editor-pre,
@@ -473,17 +486,29 @@ table {
     list-style-type: none;
 }
 
+.error,
 .warning,
 .note {
     border-radius: var(--radius);
     padding: 0.75rem 1rem;
 }
 
+.error::before,
 .warning::before,
 .note::before {
     display: block;
     font-weight: 700;
     margin-bottom: 0.5rem;
+}
+
+.error {
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    animation: fade-in 0.3s ease-out;
+}
+
+.error.fade-out {
+    animation: fade-out 0.3s ease-out forwards;
 }
 
 .warning {
@@ -494,6 +519,10 @@ table {
 .note {
     background-color: var(--note-bg);
     border: 1px solid var(--note-border);
+}
+
+.error::before {
+    content: "ERROR!";
 }
 
 .warning::before {
@@ -545,6 +574,28 @@ table {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateX(-2rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-6rem);
     }
 }
 
