@@ -71,6 +71,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 3rem;
+    border-bottom: 1px solid var(--muted-border);
+    background-color: var(--panel);
 }
 
 footer {
@@ -89,7 +91,6 @@ nav {
 }
 
 pre {
-    border-radius: var(--radius);
     margin: 1rem 0;
     overflow-x: auto;
 }
@@ -102,7 +103,6 @@ pre,
 
 code {
     padding: 0.2rem;
-    border-radius: var(--radius);
 }
 
 pre,
@@ -143,7 +143,6 @@ li::marker {
 }
 
 table {
-    border-radius: var(--radius);
     width: 100%;
 }
 
@@ -213,11 +212,10 @@ hr {
 .code-snippet {
     font-size: 1.5rem;
     padding: 2rem;
-    background-color: var(--bg);
+    background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--muted-border);
     margin: 0;
-    border-radius: 0;
 }
 
 .run-in-playground {
@@ -274,6 +272,13 @@ select,
 table {
     border: 1px solid var(--muted-border);
     background-color: var(--panel);
+    border-radius: var(--radius);
+}
+
+.bg-panel {
+    border-top: 1px solid var(--muted-border);
+    border-bottom: 1px solid var(--muted-border);
+    background-color: var(--panel);
 }
 
 .muted {
@@ -296,7 +301,6 @@ table {
     overflow: auto;
     padding: 1rem;
     padding-right: 2rem;
-    border-radius: var(--radius);
     min-width: 18rem;
 }
 
@@ -337,12 +341,12 @@ table {
     width: 32rem;
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius);
     opacity: 0;
     transition: opacity 0.2s;
     align-items: center;
     z-index: 100;
 }
+
 .share-menu-title-bar {
     background-color: var(--panel);
     width: 100%;
@@ -387,12 +391,10 @@ table {
 .toolbar button,
 .toolbar select {
     padding: 0 1rem;
-    border-radius: var(--radius);
 }
 
 .editor-wrapper,
 .output-wrapper {
-    border-radius: var(--radius);
     flex-grow: 1;
 }
 

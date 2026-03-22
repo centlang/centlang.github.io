@@ -11,7 +11,7 @@
         />
     </head>
     <body>
-        <header class="panel">
+        <header>
             <a href="/">
                 <img class="icon" src="/static/icon.svg" alt="Cent icon" />
             </a>
@@ -64,6 +64,11 @@
 <li><a href="#switch-statements">switch statements</a></li>
 <li><a href="#while-loops">while loops</a></li>
 <li><a href="#for-loops">for loops</a></li>
+</ul>
+</li>
+<li><a href="#literals">Literals</a><ul>
+<li><a href="#numeric-literals">Numeric literals</a></li>
+<li><a href="#string-literals">String literals</a></li>
 </ul>
 </li>
 <li><a href="#expressions">Expressions</a><ul>
@@ -154,7 +159,7 @@ there are two such types: <code translate="no">f32</code> and <code translate="n
 <span class="Identifier">raining</span> <span class="Operator">=</span> <span class="Constant">true</span>;</pre></div>
 <h3 id="the-rune-type"><a href="#the-rune-type">The <code translate="no">rune</code> type</a></h3>
 <p>The <code translate="no">rune</code> type represents a Unicode code point and is 4 bytes long.</p>
-<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">the_letter_h</span>: <span class="Type">rune</span> <span class="Operator">=</span> <span class="Constant">'h'</span>;</pre></div>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">fire</span>: <span class="Type">rune</span> <span class="Operator">=</span> <span class="Constant">'🔥'</span>;</pre></div>
 <h3 id="array-types"><a href="#array-types">Array types</a></h3>
 <p>Array types are created by using the <code translate="no">[N]T</code> syntax. Arrays hold multiple values
 of the same type:</p>
@@ -391,6 +396,18 @@ cases:</p>
         <span class="Identifier">io</span><span class="Delimiter">::</span><span class="Function">print_rune</span>(<span class="Constant">'</span><span class="Special">\n</span><span class="Constant">'</span>);
     }
 }</pre></div>
+<h2 id="literals"><a href="#literals">Literals</a></h2>
+<h3 id="numeric-literals"><a href="#numeric-literals">Numeric literals</a></h3>
+<p>Integers starting with the <code translate="no">0x</code> prefix represent a hexadecimal integer literal.
+The <code translate="no">0o</code> and <code translate="no">0b</code> prefixes represent octal and binary literals, respectively.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">hex</span> <span class="Operator">=</span> <span class="Constant">0xff</span>; <span class="Comment">// hex = 255</span>
+<span class="Statement">let</span> <span class="Identifier">oct</span> <span class="Operator">=</span> <span class="Constant">0o777</span>; <span class="Comment">// oct = 511</span>
+<span class="Statement">let</span> <span class="Identifier">bin</span> <span class="Operator">=</span> <span class="Constant">0b101010</span>; <span class="Comment">// bin = 42</span></pre></div>
+<p>You can insert underscores for better readability:</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">big_number</span> <span class="Operator">=</span> <span class="Constant">1_000_000_000</span>; <span class="Comment">// big_number = 1000000000</span></pre></div>
+<h3 id="string-literals"><a href="#string-literals">String literals</a></h3>
+<p>String literals generate a UTF-8 encoded sequence of bytes.</p>
+<div class="code-block"><button class="copy-button"><img class="copy-icon" src="/static/copy.svg" alt="Copy icon" /></button><pre translate="no"><span class="Statement">let</span> <span class="Identifier">string</span> <span class="Operator">=</span> <span class="String">&quot;𝒰𝓃𝒾𝒸ℴ𝒹ℯ 💎&quot;</span>;</pre></div>
 <h2 id="expressions"><a href="#expressions">Expressions</a></h2>
 <h3 id="binary-expressions"><a href="#binary-expressions">Binary expressions</a></h3>
 <table>
