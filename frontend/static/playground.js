@@ -232,7 +232,7 @@ async function runCodeOnServer(token) {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.detail);
+            throw new Error(`${response.status}: ${result.detail}`);
         }
 
         loading.style.display = "none";
@@ -243,7 +243,8 @@ async function runCodeOnServer(token) {
         loading.style.display = "none";
         stderr.innerHTML = "";
         stdout.innerHTML = "";
-        system.textContent = `Failed to run code: ${error.message}`;
+        system.textContent = "Failed to run code";
+        showError(error.message);
     }
 }
 
@@ -312,6 +313,11 @@ async function shareSnippet() {
 
     const result = await response.json();
 
+    if (!response.ok) {
+        showError(`${response.status}: ${result.error}`);
+        return;
+    }
+
     let url = `${location.origin + location.pathname}`;
 
     if (url.endsWith("/")) {
@@ -331,10 +337,58 @@ function closeShareMenu() {
     shareMenu.style.opacity = "0";
 }
 
-function fetchSnippet(snippetId) {
-    return fetch(`${API_URL}/s/${snippetId}`)
-        .then((response) => response.json())
-        .then((result) => result.code);
+async function fetchSnippet(snippetId) {
+    const response = await fetch(`${API_URL}/s/${snippetId}`);
+    const result = await response.json();
+
+    if (!response.ok) {
+        throw new Error(`${response.status}: ${result.detail}`);
+    }
+
+    return result.code;
+}
+
+function getStorageOrDefaultCode() {
+    return localStorage.getItem("code") ?? DEFAULT_CODE;
+}
+
+function removeError(element) {
+    if (!element.isConnected) {
+        return;
+    }
+
+    if (element.classList.contains("fade-out")) {
+        return;
+    }
+
+    element.classList.add("fade-out");
+
+    element.addEventListener(
+        "animationend",
+        () => {
+            element.remove();
+        },
+        { once: true },
+    );
+}
+
+function showError(message) {
+    const error = document.createElement("div");
+
+    error.className = "error";
+    error.textContent = message;
+
+    errorContainer.appendChild(error);
+
+    const errors = errorContainer.querySelectorAll(".error:not(.fade-out)");
+
+    if (errors.length > MAX_ERRORS) {
+        removeError(errors[0]);
+    }
+
+    setTimeout(() => {
+        removeError(error);
+    }, ERROR_DURATION_MS);
 }
 
 function highlightCent(input) {
@@ -405,12 +459,18 @@ if (paramsCode) {
     editorTextarea.value = paramsCode;
     updateEditor();
 } else if (snippetId) {
-    fetchSnippet(snippetId).then((code) => {
-        editorTextarea.value = code;
-        updateEditor();
-    });
+    fetchSnippet(snippetId)
+        .then((code) => {
+            editorTextarea.value = code;
+            updateEditor();
+        })
+        .catch((error) => {
+            editorTextarea.value = getStorageOrDefaultCode();
+            updateEditor();
+            showError(error.message);
+        });
 } else {
-    editorTextarea.value = localStorage.getItem("code") ?? DEFAULT_CODE;
+    editorTextarea.value = getStorageOrDefaultCode();
     updateEditor();
 }
 
@@ -424,42 +484,3 @@ const observer = new ResizeObserver(() => {
 });
 
 observer.observe(snippetQrDiv.parentNode);
-
-function removeError(element) {
-    if (!element.isConnected) {
-        return;
-    }
-
-    if (element.classList.contains("fade-out")) {
-        return;
-    }
-
-    element.classList.add("fade-out");
-
-    element.addEventListener(
-        "animationend",
-        () => {
-            element.remove();
-        },
-        { once: true },
-    );
-}
-
-function showError(message) {
-    const error = document.createElement("div");
-
-    error.className = "error";
-    error.textContent = message;
-
-    errorContainer.appendChild(error);
-
-    const errors = errorContainer.querySelectorAll(".error:not(.fade-out)");
-
-    if (errors.length > MAX_ERRORS) {
-        removeError(errors[0]);
-    }
-
-    setTimeout(() => {
-        removeError(error);
-    }, ERROR_DURATION_MS);
-}
