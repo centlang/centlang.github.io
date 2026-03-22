@@ -210,13 +210,17 @@ function ansiToHtml(input) {
     return result + input.substring(lastIndex);
 }
 
-async function runCodeOnServer(token) {
-    try {
-        loading.style.display = "block";
-        stderr.textContent = "";
-        stdout.textContent = "";
-        system.textContent = "";
+function formatError(response, result) {
+    return `${response.status}: ${result.detail ?? result.error}`;
+}
 
+async function runCodeOnServer(token) {
+    loading.style.display = "block";
+    stderr.textContent = "";
+    stdout.textContent = "";
+    system.textContent = "";
+
+    try {
         const response = await fetch(`${API_URL}/run`, {
             method: "POST",
             headers: {
@@ -232,20 +236,20 @@ async function runCodeOnServer(token) {
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(`${response.status}: ${result.detail}`);
+            throw new Error(formatError(response, result));
         }
 
-        loading.style.display = "none";
         stderr.innerHTML = ansiToHtml(result.stderr).trim();
         stdout.innerHTML = ansiToHtml(result.stdout).trim();
         system.textContent = `Program returned ${result.exit}`;
     } catch (error) {
-        loading.style.display = "none";
         stderr.innerHTML = "";
         stdout.innerHTML = "";
         system.textContent = "Failed to run code";
         showError(error.message);
     }
+
+    loading.style.display = "none";
 }
 
 async function runCode() {
@@ -301,21 +305,24 @@ function updateSnippetQr(url) {
 }
 
 async function shareSnippet() {
-    const response = await fetch(`${API_URL}/s`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            code: editorTextarea.value,
-        }),
-    });
+    try {
+        const response = await fetch(`${API_URL}/s`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                code: editorTextarea.value,
+            }),
+        });
 
-    const result = await response.json();
+        const result = await response.json();
 
-    if (!response.ok) {
-        showError(`${response.status}: ${result.error}`);
-        return;
+        if (!response.ok) {
+            throw new Error(formatError(response, result));
+        }
+    } catch (error) {
+        showError(error.message);
     }
 
     let url = `${location.origin + location.pathname}`;
@@ -342,7 +349,7 @@ async function fetchSnippet(snippetId) {
     const result = await response.json();
 
     if (!response.ok) {
-        throw new Error(`${response.status}: ${result.detail}`);
+        throw new Error(formatError(response, result));
     }
 
     return result.code;
