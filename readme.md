@@ -40,6 +40,6 @@ $ cd ..
 
 Run the server:
 
-```
+```sh
 $ uvicorn main:app --app-dir backend
 ```

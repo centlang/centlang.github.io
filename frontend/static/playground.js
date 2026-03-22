@@ -6,6 +6,8 @@ fn main() {
 
 const API_URL = "https://api.centlang.org";
 const QR_CODE_REM = 23;
+const ERROR_DURATION_MS = 5000;
+const MAX_ERRORS = 5;
 
 const editorTextarea = document.getElementById("editor-textarea");
 const editorPre = document.getElementById("editor-pre");
@@ -16,6 +18,7 @@ const loading = document.getElementById("loading");
 const stdout = document.getElementById("stdout");
 const stderr = document.getElementById("stderr");
 const system = document.getElementById("system");
+const errorContainer = document.getElementById("error-container");
 
 const compilationMode = document.getElementById("compilation-mode");
 
@@ -421,3 +424,42 @@ const observer = new ResizeObserver(() => {
 });
 
 observer.observe(snippetQrDiv.parentNode);
+
+function removeError(element) {
+    if (!element.isConnected) {
+        return;
+    }
+
+    if (element.classList.contains("fade-out")) {
+        return;
+    }
+
+    element.classList.add("fade-out");
+
+    element.addEventListener(
+        "animationend",
+        () => {
+            element.remove();
+        },
+        { once: true },
+    );
+}
+
+function showError(message) {
+    const error = document.createElement("div");
+
+    error.className = "error";
+    error.textContent = message;
+
+    errorContainer.appendChild(error);
+
+    const errors = errorContainer.querySelectorAll(".error:not(.fade-out)");
+
+    if (errors.length > MAX_ERRORS) {
+        removeError(errors[0]);
+    }
+
+    setTimeout(() => {
+        removeError(error);
+    }, ERROR_DURATION_MS);
+}
