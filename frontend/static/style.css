@@ -336,6 +336,10 @@ table {
     position: relative;
 }
 
+.share-button {
+    height: 100%;
+}
+
 .share-menu {
     background-color: var(--bg);
     position: absolute;
