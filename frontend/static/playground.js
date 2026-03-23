@@ -321,23 +321,23 @@ async function shareSnippet() {
         if (!response.ok) {
             throw new Error(formatError(response, result));
         }
+
+        let url = `${location.origin + location.pathname}`;
+
+        if (url.endsWith("/")) {
+            url = url.slice(0, -1);
+        }
+
+        url += `/?s=${result.id}`;
+
+        snippetUrl.href = url;
+        snippetUrl.textContent = url;
+
+        updateSnippetQr(url);
+        shareMenu.style.opacity = "1";
     } catch (error) {
         showError(error.message);
     }
-
-    let url = `${location.origin + location.pathname}`;
-
-    if (url.endsWith("/")) {
-        url = url.slice(0, -1);
-    }
-
-    url += `/?s=${result.id}`;
-
-    snippetUrl.href = url;
-    snippetUrl.textContent = url;
-
-    updateSnippetQr(url);
-    shareMenu.style.opacity = "1";
 }
 
 function closeShareMenu() {
