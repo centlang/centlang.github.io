@@ -20,6 +20,7 @@
     --warning-border: #aa823b;
     --note-bg: #0c0e2b;
     --note-border: #294bae;
+    color-scheme: dark;
 }
 
 * {
@@ -335,6 +336,10 @@ table {
     position: relative;
 }
 
+.share-button {
+    height: 100%;
+}
+
 .share-menu {
     background-color: var(--bg);
     position: absolute;
@@ -449,7 +454,7 @@ table {
     border: none;
     overflow: auto;
     resize: none;
-    white-space: nowrap;
+    white-space: pre;
     max-height: calc(100vh - 12rem);
     color: transparent;
     background-color: transparent;
