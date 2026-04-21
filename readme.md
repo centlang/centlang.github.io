@@ -41,7 +41,7 @@ $ cd ..
 Run the backend:
 
 ```sh
-$ uvicorn api:app --app-dir backend
+$ CF_TURNSTILE_KEY=YOUR_KEY uvicorn api:app --app-dir backend
 ```
 
 Serve the frontend:
