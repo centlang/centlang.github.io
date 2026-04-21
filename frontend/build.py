@@ -23,7 +23,7 @@ TRANSLATIONS = json.load(open("translations.json"))
 nvim = pynvim.attach("child", argv=["nvim", "--embed", "--headless"])
 
 nvim.command("syntax on")
-nvim.command("runtime! plugin/tohtml.lua")
+nvim.command("packadd nvim.tohtml")
 
 def process_code_block(code: str, lang: str) -> str:
     with NamedTemporaryFile("w", delete=False) as tmp_input:
