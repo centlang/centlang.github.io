@@ -47,5 +47,5 @@ $ uvicorn api:app --app-dir backend
 Serve the frontend:
 
 ```sh
-$ python -m http.server 8000
+$ python -m http.server -d frontend/build 8000
 ```
