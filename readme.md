@@ -38,8 +38,14 @@ $ pip install -r requirements.txt
 $ cd ..
 ```
 
-Run the server:
+Run the backend:
 
 ```sh
-$ uvicorn main:app --app-dir backend
+$ uvicorn api:app --app-dir backend
+```
+
+Serve the frontend:
+
+```sh
+$ python -m http.server 8000
 ```
