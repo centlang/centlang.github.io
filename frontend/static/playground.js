@@ -410,7 +410,7 @@ function highlightCent(input) {
         { className: "Number", regex: /\b[0-9][0-9_]*\.[0-9_]\+\b/y },
         {
             className: "Keyword",
-            regex: /\b(pub|fn|type|union|enum|in|let|mut|const)\b/y,
+            regex: /\b(pub|fn|type|union|enum|in|let|mut|const|defer)\b/y,
         },
         { className: "Keyword", regex: /\b(extern|distinct|untagged)\b/y },
         {
