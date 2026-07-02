@@ -412,7 +412,10 @@ function highlightCent(input) {
             className: "Keyword",
             regex: /\b(pub|fn|type|union|enum|in|let|mut|const|defer)\b/y,
         },
-        { className: "Keyword", regex: /\b(extern|distinct|untagged)\b/y },
+        {
+            className: "Keyword",
+            regex: /\b(extern|distinct|untagged|symbol)\b/y,
+        },
         {
             className: "Statement",
             regex: /\b(if|else|switch|return|break|continue|unreachable|while|for)\b/y,
