@@ -73,6 +73,7 @@ async def run_code(request: RunRequest) -> dict:
             "--rm",
             "--init",
             "--cap-drop=ALL",
+            "--security-opt=no-new-privileges:true",
             "--network=none",
             "-m",
             f"{CONTAINER_LIMIT_MB}m",
