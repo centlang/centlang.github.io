@@ -50,6 +50,7 @@ class RunRequest(BaseModel):
 
 async def run_code(request: RunRequest) -> dict:
     tmp_dir = tempfile.mkdtemp()
+    os.chmod(tmp_dir, 0o755)
 
     try:
         extra_flags = []
@@ -64,8 +65,12 @@ async def run_code(request: RunRequest) -> dict:
                     status.HTTP_400_BAD_REQUEST, "Invalid compilation mode"
                 )
 
-        with open(os.path.join(tmp_dir, "main.cn"), "w") as file:
+        main_cn = os.path.join(tmp_dir, "main.cn")
+
+        with open(main_cn, "w") as file:
             file.write(request.code)
+
+        os.chmod(main_cn, 0o644)
 
         process = await asyncio.create_subprocess_exec(
             "docker",
