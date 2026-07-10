@@ -50,7 +50,7 @@ class RunRequest(BaseModel):
 
 async def run_code(request: RunRequest) -> dict:
     tmp_dir = tempfile.mkdtemp()
-    os.chmod(tmp_dir, 0o755)
+    os.chmod(tmp_dir, 0o777)
 
     try:
         extra_flags = []
