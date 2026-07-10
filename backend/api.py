@@ -72,6 +72,7 @@ async def run_code(request: RunRequest) -> dict:
             "run",
             "--rm",
             "--init",
+            "--cap-drop=ALL",
             "--network=none",
             "-m",
             f"{CONTAINER_LIMIT_MB}m",
