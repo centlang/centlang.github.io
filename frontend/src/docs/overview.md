@@ -851,3 +851,21 @@ enum Color u8 {
     blue,
 }
 ```
+
+## Attributes
+
+Attributes use the `#(...)` syntax:
+
+```cent
+#(extern, posix)
+fn fork() pid_t;
+```
+
+You can apply attributes to multiple declarations at once:
+
+```cent
+#(extern, posix) {
+    fn fork() pid_t;
+    fn getpid() pid_t;
+}
+```
