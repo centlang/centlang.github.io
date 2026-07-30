@@ -963,3 +963,19 @@ fn main() {
     defer file.close();
 }
 ```
+
+## `unreachable` statements
+
+`unreachable` indicates that a code path should never be reached at runtime:
+
+```cent
+fn divide(a: i32, b: i32) i32 {
+    if b != 0 {
+        return a / b;
+    }
+
+    unreachable;
+}
+```
+
+Reaching `unreachable` is undefined behavior.
