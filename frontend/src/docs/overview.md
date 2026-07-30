@@ -932,3 +932,18 @@ for Vec2 {
     }
 }
 ```
+
+## Function pointers
+
+Function pointer types use the `*fn(a: T, b: U, ...) R` syntax:
+
+```cent
+fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+
+fn main() {
+    let fn_ptr: *fn(a: i32, b: i32) i32 = &add;
+    let seven = fn_ptr(3, 4);
+}
+```
