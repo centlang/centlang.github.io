@@ -44,13 +44,13 @@ Hello, world!
 
 ## Variables
 
-The `let` statement creates an _immutable_ variable.
+The `let` statement creates an immutable variable.
 
 ```cent
 let language = "Cent";
 ```
 
-To create a _mutable_ variable, use the `mut` keyword.
+To create a mutable variable, use the `mut` keyword.
 
 ```cent
 mut score = 0;
@@ -63,7 +63,7 @@ A variable's type can be specified explicitly:
 mut score: i32 = 0;
 ```
 
-Variables are zero-initialized if no value is given.
+If no initial value is given, the variable is zero-initialized.
 
 ```cent
 mut score: i32;
@@ -76,8 +76,7 @@ mut score = 10;
 score = 4.5; // invalid!
 ```
 
-You can, however, _shadow_ a variable, meaning to create a new variable with the
-same name:
+You can _shadow_ a variable by declaring a new one with the same name:
 
 ```cent
 mut score = 10;
@@ -115,8 +114,8 @@ const SECONDS_IN_A_DAY = 60 * 60 * 24;
 
 ### Integer types
 
-Integer types start with either `i` or `u`. Integer types starting with `u` are
-_unsigned_. After that, the size in bits is specified:
+Integer type names start with `i` (signed) or `u` (unsigned), followed by the
+size in bits:
 
 ```cent
 i8 i16 i32 i64 // signed
@@ -160,8 +159,7 @@ let fire: rune = '🔥';
 
 ### Array types
 
-Array types are created by using the `[N]T` syntax. Arrays hold multiple values
-of the same type:
+Arrays use the `[N]T` syntax and hold multiple values of the same type:
 
 ```cent
 let data = [4]u8{0xff, 0xff, 0xff, 0x0};
@@ -183,15 +181,15 @@ mut data: [n]u8;
 
 ### Slice types
 
-Slice types are created by using the `[]T` syntax. Slices represent a view into
-a sequence of elements. They consist of a pointer and a length.
+Slices use the `[]T` syntax and represent a view into a sequence of elements.
+Slices have a pointer and a length.
 
 ```cent
 mut data: [1024]u8;
 let slice: []u8 = data;
 
 let len = slice.len;
-let ptr = &slice[0];
+let ptr = slice.ptr;
 ```
 
 Slices can be mutable:
@@ -203,9 +201,10 @@ let slice: []mut u8 = data;
 slice[10] = 42;
 ```
 
-### Strings?
+### Strings
 
-In Cent, strings are just arrays of bytes. Strings are **not** null-terminated.
+In Cent, strings are just arrays of bytes. By default, strings are **not**
+null-terminated.
 
 ```cent
 let language: [4]u8 = "Cent";
@@ -235,8 +234,7 @@ let value = optional.!;
 
 ### Pointer types
 
-Pointers reference a value in memory. To create a pointer type, use the `*T`
-syntax.
+A pointer references a value in memory. Pointer types use the `*T` syntax.
 
 ```cent
 mut x = 42;
@@ -254,14 +252,14 @@ let ptr: *mut i32 = &x;
 
 <div class="note">
     In Cent, pointers can't be <code>null</code>. If you need a nullable
-    pointer, use an <em>optional pointer type</em>. An optional pointer has the
+    pointer, use an <b>optional</b> pointer type. An optional pointer has the
     same size as a regular pointer.
 </div>
 
 ### Tuple types
 
-Tuple types are created by using the `(T1, T2, T3, ...)` syntax. Tuples hold
-multiple values of different types:
+Tuples use the `(T1, T2, T3, ...)` syntax and hold multiple values of different
+types:
 
 ```cent
 mut data: (i32, f32, bool, [6]u8) = (10, 42.42, true, "Hello!");
@@ -271,7 +269,7 @@ data.1 = data.0; // data.1 = 42
 
 ## `with` statements
 
-You can use the `with` statement to import an external module.
+Use `with` to import an external module.
 
 ```cent
 with std::io;
@@ -282,8 +280,8 @@ with std::posix as os; // import under a different name
 
 ## Functions
 
-Functions are defined by using the `fn` keyword. The `main` function is the
-entry point of the program. Functions can be used before they're defined.
+Functions are defined using the `fn` keyword. The `main` function is the entry
+point of the program. Functions can be used before they're defined.
 
 ```cent
 with std::io;
@@ -297,9 +295,8 @@ fn hello_world() {
 }
 ```
 
-You can specify the return type after the parentheses. If no return type is
-specified, the function is assumed to return nothing. To return a value from a
-function, use the `return` statement:
+The return type goes after the parentheses. If omitted, the function returns
+nothing. Use `return` to send a value back:
 
 ```cent
 fn get_magic_number() i32 {
@@ -321,7 +318,7 @@ fn add(a: i32, b: i32) i32 {
 
 ### Default parameters
 
-You can define _default_ parameters. If arguments aren't provided, the default
+Functions can have default parameters. When arguments are omitted, the default
 values are used.
 
 ```cent
@@ -340,7 +337,7 @@ fn add(a: i32, b: i32, c: i32 = 0, d: i32 = 0) i32 {
 
 ### `if` statements
 
-Use the `if` statement to branch your code depending on a condition.
+Use `if` to run different code depending on a condition.
 
 ```cent
 with std::io;
@@ -412,7 +409,7 @@ fn is_weekend(day: u8) {
 
 ### `while` loops
 
-A `while` loop will run as long as the condition is `true`.
+A `while` loop runs as long as the condition is `true`.
 
 ```cent
 with std::io;
@@ -479,7 +476,7 @@ fn main() {
 
 `for` loops allow you to iterate through a range or a sequence.
 
-_Exclusive_ ranges are created by using the `x..y` syntax:
+Exclusive ranges are created by using the `x..y` syntax:
 
 ```cent
 with std::io;
@@ -492,7 +489,7 @@ fn main() {
 }
 ```
 
-To create an _inclusive_ range, use the `x..=y` syntax:
+To create an inclusive range, use the `x..=y` syntax:
 
 ```cent
 with std::io;
@@ -509,8 +506,8 @@ fn main() {
 
 ### Numeric literals
 
-Integers starting with the `0x` prefix represent a hexadecimal integer literal.
-The `0o` and `0b` prefixes represent octal and binary literals, respectively.
+The `0x` prefix creates a hexadecimal literal. Use `0o` for octal and `0b` for
+binary.
 
 ```cent
 let hex = 0xff; // hex = 255
