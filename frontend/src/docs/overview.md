@@ -869,3 +869,29 @@ You can apply attributes to multiple declarations at once:
     fn getpid() pid_t;
 }
 ```
+
+## Type aliases
+
+Use the `type` keyword to create a type alias:
+
+```cent
+type Age = i32;
+
+fn main() {
+    mut age: Age = 25;
+    age += 2;
+}
+```
+
+If you don't want an alias type to be treated exactly like the original type,
+mark it as `#(distinct)`:
+
+```cent
+#(distinct)
+type Id = i32;
+
+fn main() {
+    mut id = 123456 as Id;
+    id += 2; // invalid!
+}
+```
