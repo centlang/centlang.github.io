@@ -662,3 +662,14 @@ mut c = -a; // c = -5
 let p = &c;
 *p = -c; // c = 5
 ```
+
+### `as` expressions
+
+The `as` operator converts a value to a different type:
+
+```cent
+let x = 42;
+let y = x as f64; // y: f64 = 42.0
+let z = 3.9 as u8; // z: u8 = 3
+let c = 'A' as u8; // c: u8 = 65
+```
