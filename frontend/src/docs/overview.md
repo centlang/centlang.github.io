@@ -519,6 +519,35 @@ fn main() {
 }
 ```
 
+You can also iterate over arrays and slices:
+
+```cent
+with std::io;
+
+fn main() {
+    let data = [4]i32{10, 20, 30, 40};
+
+    for x in data {
+        io::print_int(x);
+        io::print_rune('\n');
+    }
+}
+```
+
+You can mutate elements:
+
+```cent
+with std::io;
+
+fn main() {
+    let data = [4]i32{10, 20, 30, 40};
+
+    for mut x in data {
+        x = 0;
+    }
+}
+```
+
 ## Literals
 
 ### Numeric literals
