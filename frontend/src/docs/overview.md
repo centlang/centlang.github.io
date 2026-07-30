@@ -809,3 +809,45 @@ union Pixel {
     raw: u32,
 }
 ```
+
+## Enums
+
+Enums represent a type with a fixed set of possible values:
+
+```cent
+enum Color {
+    red,
+    green,
+    blue,
+}
+
+enum Numbers {
+    one = 1,
+    two, // = 2
+    three, // = 3
+}
+```
+
+You can use `switch` on enum types.
+
+```cent
+fn main() {
+    let c = Color::red;
+
+    switch c {
+        Color::red { io::println("red"); }
+        Color::green { io::println("green"); }
+        Color::blue { io::println("blue"); }
+    }
+}
+```
+
+You can explicitly specify the underlying type.
+
+```cent
+enum Color u8 {
+    red,
+    green,
+    blue,
+}
+```
