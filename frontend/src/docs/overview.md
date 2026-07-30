@@ -719,3 +719,49 @@ fn main() {
     let b = other::private(); // invalid!
 }
 ```
+
+## Structs
+
+You can use structs to create custom types. To create a struct, use the `type`
+keyword.
+
+```cent
+type Vec3 {
+    x: f32,
+    y: f32,
+    z: f32,
+}
+
+fn main() {
+    let position = Vec3 { x: 10, y: 20, z: 30 };
+    let z = position.z; // z == 30
+
+    mut v = position;
+    v.x = 42.5; // position.x == 10, v.x == 42.5
+}
+```
+
+All struct fields are public. If some fields are not meant to be accessed,
+prefix them with `_`:
+
+```cent
+type Timer {
+    _seconds_left: f64,
+}
+```
+
+### Nested structs
+
+```cent
+type Color {
+    r: u8,
+    g: u8,
+    b: u8,
+    a: u8,
+}
+
+type Button {
+    text: []u8,
+    color: Color,
+}
+```
