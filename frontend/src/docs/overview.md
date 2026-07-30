@@ -567,6 +567,12 @@ You can insert underscores for better readability:
 let big_number = 1_000_000_000; // big_number = 1000000000
 ```
 
+Scientific notation is supported:
+
+```cent
+let one_million = 1e6;
+```
+
 ### String literals
 
 String literals generate a UTF-8 encoded sequence of bytes.
