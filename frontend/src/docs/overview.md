@@ -947,3 +947,19 @@ fn main() {
     let seven = fn_ptr(3, 4);
 }
 ```
+
+## `defer` statements
+
+The `defer` statement schedules a block of code to run when the current scope is
+exited.
+
+```cent
+with std::fs;
+
+fn main() {
+    let file = fs::open("text.txt", fs::Mode::read)
+        ?? core::panic("failed to open file");
+
+    defer file.close();
+}
+```
