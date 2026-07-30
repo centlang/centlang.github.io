@@ -673,3 +673,49 @@ let y = x as f64; // y: f64 = 42.0
 let z = 3.9 as u8; // z: u8 = 3
 let c = 'A' as u8; // c: u8 = 65
 ```
+
+## Module system
+
+Each source file is a module. Files in the same directory share a translation
+unit and can access each other's private items.
+
+To make an item publicly accessible, use the `pub` keyword:
+
+```cent
+// src/module.cn
+
+fn private() i32 {
+    return 42;
+}
+
+pub fn public() i32 {
+    return private() + 42;
+}
+```
+
+```cent
+// src/etc/other.cn
+
+fn private() i32 {
+    return 42;
+}
+
+pub fn public() i32 {
+    return private() + 42;
+}
+```
+
+```cent
+// src/main.cn
+
+with module;
+with etc::other;
+
+fn main() {
+    let a = module::public();
+    let b = other::public();
+
+    let a = module::private(); // valid, same translation unit
+    let b = other::private(); // invalid!
+}
+```
