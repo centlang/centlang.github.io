@@ -288,6 +288,13 @@ with std::fs;
 with std::posix as os; // import under a different name
 ```
 
+You can also only import the things you use:
+
+```cent
+with buf::{Vector as Vec};
+with io::{printf, eprintf};
+```
+
 ## Functions
 
 Functions are defined using the `fn` keyword. The `main` function is the entry
