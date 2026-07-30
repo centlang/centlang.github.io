@@ -573,9 +573,30 @@ Scientific notation is supported:
 let one_million = 1e6;
 ```
 
+### Character literals
+
+You can use escape sequences for special characters:
+
+```cent
+let apostrophe = '\'';
+let newline = '\n';
+let carriage_return = '\r';
+let tab = '\t';
+let nullbyte = '\0';
+```
+
+Unicode characters can also be represented using escape sequences:
+
+```cent
+let smiling_face = '\U0001f604';
+let omega = '\u03a9'; // '\u' for short codepoints
+```
+
+Character literals are of type `rune`.
+
 ### String literals
 
-String literals generate a UTF-8 encoded sequence of bytes.
+String literals are UTF-8 encoded sequences of bytes.
 
 ```cent
 let string = "𝒰𝓃𝒾𝒸ℴ𝒹ℯ 💎";
