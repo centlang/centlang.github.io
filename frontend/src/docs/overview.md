@@ -628,24 +628,32 @@ void main() {}";
 
 ### Binary expressions
 
-| Operator                    | Precedence |
-| --------------------------- | ---------- |
-| `*` `/` `%`                 | 1          |
-| `+` `-`                     | 2          |
-| `<<` `>>`                   | 3          |
-| `<` `>` `==` `!=` `>=` `<=` | 4          |
-| `&`                         | 5          |
-| `^`                         | 6          |
-| `\|`                        | 7          |
-| `&&`                        | 8          |
-| `\|\|`                      | 9          |
-| `??`                        | 10         |
+| Operator                    | Precedence | Meaning                                                                                                            |
+| --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `*` `/` `%`                 | 1          | `*` - multiplication, `/` - division, `%` - modulo                                                                 |
+| `+` `-`                     | 2          | `+` - addition, `-` - subtraction                                                                                  |
+| `<<` `>>`                   | 3          | `<<` - left bitwise shift, `>>` - right bitwise shift                                                              |
+| `<` `>` `==` `!=` `<=` `>=` | 4          | `<` - less than, `>` - greater than, `==` - equal, `!=` - not equal, `<=` - less or equal, `>=` - greater or equal |
+| `&`                         | 5          | bitwise and                                                                                                        |
+| `^`                         | 6          | exclusive or (XOR)                                                                                                 |
+| `\|`                        | 7          | bitwise or                                                                                                         |
+| `&&`                        | 8          | logical and                                                                                                        |
+| `\|\|`                      | 9          | logical or                                                                                                         |
+| `??`                        | 10         | null-coalescing                                                                                                    |
 
 ```cent
 let a = 2 + 3 * 6; // a = 20
 ```
 
 ### Unary expressions
+
+| Operator      | Meaning     |
+| ------------- | ----------- |
+| `-`           | negation    |
+| `!`           | logical not |
+| `*`           | dereference |
+| `&`           | address-of  |
+| `~`           | bitwise not |
 
 ```cent
 let a = 5;
