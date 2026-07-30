@@ -602,6 +602,28 @@ String literals are UTF-8 encoded sequences of bytes.
 let string = "𝒰𝓃𝒾𝒸ℴ𝒹ℯ 💎";
 ```
 
+You can use escape sequences in strings.
+
+```cent
+let message = "Hello\tworld\n";
+```
+
+Long string literals can be broken down to smaller ones:
+
+```cent
+let long_string = "this is a very "
+    "loooooooooooooooooooooooooooooooooooooooooooooooooooooooooong "
+    "striiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing";
+```
+
+String literals can span multiple lines.
+
+```cent
+let shader =
+"#version 330 core
+void main() {}";
+```
+
 ## Expressions
 
 ### Binary expressions
