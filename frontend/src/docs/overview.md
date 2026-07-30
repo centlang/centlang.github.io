@@ -895,3 +895,40 @@ fn main() {
     id += 2; // invalid!
 }
 ```
+
+## `for` blocks
+
+Methods and associated functions are defined inside `for` blocks.
+
+```cent
+type Vec2 {
+    x: f32,
+    y: f32,
+}
+
+for Vec2 {
+    fn right(length: f32) Self {
+        return Self { x: length, y: 0 };
+    }
+
+    fn length_squared(self: Self) f32 {
+        return self.x * self.x + self.y * self.y;
+    }
+}
+
+fn main() {
+    let v = Vec2::right();
+    let l = v.length_squared();
+}
+```
+
+Modifying methods take a mutable pointer to `self`.
+
+```cent
+for Vec2 {
+    fn reset(self: *mut Self) {
+        self.x = 0;
+        self.y = 0;
+    }
+}
+```
