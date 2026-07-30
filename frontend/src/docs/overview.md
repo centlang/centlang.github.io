@@ -232,6 +232,16 @@ mut optional: ?i32 = 32;
 let value = optional.!;
 ```
 
+To provide a default value when the optional is `null`, use the `??` operator:
+
+```cent
+let x: ?i32 = null;
+let y = x ?? 42; // y = 42
+
+let a: ?i32 = 10;
+let b = a ?? 42; // b = 10
+```
+
 ### Pointer types
 
 A pointer references a value in memory. Pointer types use the `*T` syntax.
