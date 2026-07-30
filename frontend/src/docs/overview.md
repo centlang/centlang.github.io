@@ -765,3 +765,47 @@ type Button {
     color: Color,
 }
 ```
+
+## Unions
+
+Unions are tagged by default. Tagged unions allow a value to be one of several
+types.
+
+```cent
+union Value {
+    int: i32,
+    float: f32,
+    string: []u8,
+}
+```
+
+You can use `switch` on tagged unions.
+
+```cent
+fn main() {
+    let v = Value { float: 42 };
+
+    switch v {
+        Value::int { io::print_int(v.int); }
+        Value::float { io::print_float(v.float); }
+        Value::string { io::print(v.string); }
+    }
+}
+```
+
+If you need a C-style union, mark it as `#(untagged)`:
+
+```cent
+type Rgb {
+    r: u8,
+    g: u8,
+    b: u8,
+    a: u8,
+}
+
+#(untagged)
+union Pixel {
+    colors: Rgb,
+    raw: u32,
+}
+```
