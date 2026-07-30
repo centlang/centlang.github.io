@@ -979,3 +979,15 @@ fn divide(a: i32, b: i32) i32 {
 ```
 
 Reaching `unreachable` is undefined behavior.
+
+## Global variables
+
+Variables can be declared at module level:
+
+```cent
+mut counter: i32 = 0;
+
+fn increment() {
+    counter += 1;
+}
+```
